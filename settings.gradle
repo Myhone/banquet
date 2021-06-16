@@ -1,0 +1,3 @@
+include ':okgo'
+include ':app'
+rootProject.name = "banquet"

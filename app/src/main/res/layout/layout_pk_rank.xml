@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fl_data_pk_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_pk_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="11dp"
+                android:layout_marginLeft="12dp"
+                android:background="@color/gold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text="PK榜"
+                android:textColor="#333333"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:background="#f7f7f7"
+            app:tabIndicatorColor="#333333"
+            app:tabIndicatorFullWidth="false"
+            app:tabSelectedTextColor="#333333"
+            app:tabMode="scrollable"
+            app:tabTextColor="#666666" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"
+            android:orientation="horizontal">
+
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10.5dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="2dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:background="#CBCBCA" />
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/civ_avatar_2"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="15dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_default_image" />
+
+                            <TextView
+                                android:id="@+id/tv_name_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:text=""
+                                android:textColor="#333333"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_count_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="15dp"
+                                android:text=""
+                                android:textColor="#333333"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:elevation="2dp"
+                        android:scaleType="center"
+                        android:src="@mipmap/ic_data_pk_2" />
+                </FrameLayout>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="2dp"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#ECC778" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/civ_avatar_1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="15dp"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/ic_default_image" />
+
+                        <TextView
+                            android:id="@+id/tv_name_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="张冯宏"
+                            android:textColor="#333333"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/tv_count_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="15dp"
+                            android:text="3000"
+                            android:textColor="#333333"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:elevation="2dp"
+                    android:scaleType="center"
+                    android:src="@mipmap/ic_data_pk_1" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginRight="10.5dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="2dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="3dp"
+                                android:background="#E3B59E" />
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/civ_avatar_3"
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginTop="15dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/ic_default_image" />
+
+                            <TextView
+                                android:id="@+id/tv_name_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="7dp"
+                                android:text="张冯宏"
+                                android:textColor="#333333"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:id="@+id/tv_count_3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="15dp"
+                                android:text="3000"
+                                android:textColor="#333333"
+                                android:textSize="12dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:elevation="2dp"
+                        android:scaleType="center"
+                        android:src="@mipmap/ic_data_pk_3" />
+                </FrameLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#f7f7f7" />
+
+        <LinearLayout
+            android:id="@+id/ll_look_list"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="查看完整榜单"
+                android:textColor="#333333"
+                android:textSize="13dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:src="@mipmap/ic_arrow_right_gray" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

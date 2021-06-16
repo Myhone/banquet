@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+
+            <include
+                android:id="@+id/ll_title_bar_root"
+                layout="@layout/layout_title_bar_no_bg_with_status_bar" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="11dp"
+            android:background="@drawable/shape_rect_white_corners_8"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingTop="20dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="反馈内容"
+                android:textColor="#858585"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="数据大屏内容显示不够清晰，影响阅读，希望能够将字体放大一些，方便阅读，增加易读性"
+                android:textColor="#333333"
+                android:textSize="13dp" />
+
+            <com.lingyan.banquet.views.ImageLayout
+                android:id="@+id/image_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/tv_create_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="2020-12-31 12:23:34"
+                android:textColor="#858585"
+                android:textSize="11dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="11dp"
+            android:background="@drawable/shape_rect_white_corners_8"
+            android:orientation="vertical"
+            android:paddingLeft="12dp"
+            android:paddingTop="20dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="反馈回复"
+                android:textColor="#858585"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_reply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="数据大屏内容显示不够清晰，影响阅读，希望能够将字体放大一些，方便阅读，增加易读性"
+                android:textColor="#333333"
+                android:textSize="13dp" />
+
+
+            <TextView
+                android:id="@+id/tv_reply_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="2020-12-31 12:23:34"
+                android:textColor="#858585"
+                android:textSize="11dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

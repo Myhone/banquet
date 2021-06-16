@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <include
+                android:id="@+id/ll_title_bar_root"
+                layout="@layout/layout_title_bar_no_bg_with_status_bar" />
+        </FrameLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="客户姓名："
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <RadioGroup
+                    android:id="@+id/rg_follow_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginEnd="15dp"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RadioButton
+                        android:id="@+id/rv_follow_type_face"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_radio_bg"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="当面跟进"
+                        android:textColor="@drawable/selector_radio_text_color"
+                        android:textSize="13sp" />
+
+                    <RadioButton
+                        android:id="@+id/rv_follow_type_call"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_radio_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="电话跟进"
+                        android:textColor="@drawable/selector_radio_text_color"
+                        android:textSize="13sp" />
+
+                    <RadioButton
+                        android:id="@+id/rv_follow_type_net"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/selector_radio_bg"
+                        android:button="@null"
+                        android:gravity="center"
+                        android:text="网络跟进"
+                        android:textColor="@drawable/selector_radio_text_color"
+                        android:textSize="13sp" />
+
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/textColorGray" />
+
+                <EditText
+                    android:id="@+id/et_content_follow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:background="@drawable/shape_rect_gray_corners_3"
+                    android:gravity="left|top"
+                    android:hint="请填写跟进内容..."
+                    android:lines="8"
+                    android:padding="10dp"
+                    android:textColorHint="#C4C4C4"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/shape_rect_white_corners_8"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginTop="17dp"
+                        android:text="上传照片(选填)"
+                        android:textColor="#333333"
+                        android:textSize="15dp" />
+
+                    <com.lingyan.banquet.views.ImageLayout
+                        android:id="@+id/image_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/textColorGray" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center_vertical"
+                        android:text="下次跟进提醒："
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <Switch
+                        android:id="@+id/switch_notice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:layout_alignParentEnd="true"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:thumb="@drawable/selector_thumb_check"
+                        android:track="@drawable/selector_track_check"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@color/textColorGray" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginEnd="15dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="提醒时间："
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tv_choice_time"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@mipmap/ic_arrow_right_gray"
+                            android:drawablePadding="5dp"
+                            android:gravity="end"
+                            android:text="选择提醒时间"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/et_content_notice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="12dp"
+                        android:background="@drawable/shape_rect_gray_corners_3"
+                        android:gravity="left|top"
+                        android:hint="请填写提醒内容..."
+                        android:lines="8"
+                        android:padding="10dp"
+                        android:textColorHint="#C4C4C4"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

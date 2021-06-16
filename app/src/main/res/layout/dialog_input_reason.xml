@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_rect_white_corners_8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="请输入解锁原因"
+            android:textColor="#333334"
+            android:textSize="16dp" />
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:background="@drawable/shape_rect_gray_corners_2"
+            android:gravity="start"
+            android:hint="请输入解锁原因..."
+            android:minLines="5"
+            android:padding="5dp"
+            android:textColor="#333333"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_rect_gradient_gold_corners_10"
+            android:gravity="center"
+            android:text="确认"
+            android:textColor="#603E11" />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/shape_rect_white_stroke_gray_corners_10"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#333334" />
+
+    </LinearLayout>
+</FrameLayout>

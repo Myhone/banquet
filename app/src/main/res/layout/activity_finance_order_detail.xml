@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/ll_title_bar_root"
+            layout="@layout/layout_title_bar_no_bg_with_status_bar" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:background="#2F2F2E"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_finance_confirmed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="完成"
+                            android:textColor="#F2DFC2"
+                            android:textSize="18dp" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:background="@drawable/shape_rect_white_top10_bottom0"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="20dp"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:id="@+id/tv_money"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="20dp"
+                                android:text="¥1000"
+                                android:textColor="#333333"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="订单ID："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_id"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="1.3"
+                                android:text="提交时间："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_pay_time"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="收据编号："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_code"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="支付方式："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_pay_type"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="付款人："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_pay_user"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_action_user_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="1.3"
+                                android:text="收款人："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_payee"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_action_time_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="收款时间："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_payee_time"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="是否收款："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_is_receive_money"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/bgColor" />
+
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+
+                            android:layout_weight="1.3"
+                            android:text="退款人："
+                            android:textColor="#333333"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/tv_refund_realname"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:text="生日宴"
+                            android:textColor="#333333"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+
+                            android:layout_weight="1.3"
+                            android:text="退款时间："
+                            android:textColor="#333333"
+                            android:textSize="13dp" />
+
+                        <TextView
+
+                            android:id="@+id/tv_refund_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:text="生日宴"
+                            android:textColor="#333333"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+
+                            android:layout_weight="1.3"
+                            android:text="是否退款："
+                            android:textColor="#333333"
+                            android:textSize="13dp" />
+
+                        <TextView
+                            android:id="@+id/tv_is_refund"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:text="生日宴"
+                            android:textColor="#333333"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/bgColor" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_status_chance_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_weight="1.3"
+                                android:text="订单状态："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_status"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="生日宴"
+                                    android:textColor="#333333"
+                                    android:textSize="13dp" />
+
+                                <Space
+                                    android:layout_width="0dp"
+                                    android:layout_height="1dp"
+                                    android:layout_weight="1" />
+
+                                <TextView
+                                    android:id="@+id/tv_look_qd"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="20dp"
+                                    android:background="@drawable/shape_rect_white_stroke_gray_corners_90"
+                                    android:paddingLeft="5dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="5dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="订单详情"
+                                    android:textColor="#333333"
+                                    android:textSize="13dp"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="主宾信息："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_customer"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.3"
+                                android:text="宴会时间："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/bgColor" />
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_action_receive_reject_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_action_reject"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/shape_rect_dark_gray_corners_10"
+                                android:gravity="center"
+                                android:text="驳回"
+                                android:textColor="@color/black2"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_action_receive"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/shape_rect_gradient_gold_corners_10"
+                                android:gravity="center"
+                                android:text="收定金"
+                                android:textColor="#603E11"
+                                android:textSize="14dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_action_refund"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_rect_gradient_gold_corners_10"
+                        android:gravity="center"
+                        android:text="退定金"
+                        android:textColor="#603E11"
+                        android:textSize="14dp" />
+
+
+                    <!--  <LinearLayout
+                          android:id="@+id/ll_status_complete_container"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical"
+                          android:visibility="visible">
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="场次："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="场次时间："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="宴会厅："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="桌数："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="套餐："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="合同编号："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+
+                          <View
+                              android:layout_width="match_parent"
+                              android:layout_height="10dp"
+                              android:layout_marginTop="10dp"
+                              android:background="@color/bgColor" />
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="锁台定金："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+                                  android:layout_weight="1.3"
+                                  android:text="签订定金："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+                                  android:layout_weight="1.3"
+                                  android:text="定金金额："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+
+                                  android:layout_weight="1.3"
+                                  android:text="尾款："
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:text="生日宴"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+                          </LinearLayout>
+
+                          <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:layout_marginTop="20dp"
+                              android:gravity="center_vertical"
+                              android:orientation="horizontal">
+
+                              <TextView
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginLeft="20dp"
+                                  android:layout_weight="1.3"
+                                  android:text="是否预定庆典:"
+                                  android:textColor="#333333"
+                                  android:textSize="13dp" />
+
+                              <LinearLayout
+                                  android:layout_width="0dp"
+                                  android:layout_height="wrap_content"
+                                  android:layout_weight="3"
+                                  android:gravity="center_vertical"
+                                  android:orientation="horizontal">
+
+                                  <TextView
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:text="是"
+                                      android:textColor="#333333"
+                                      android:textSize="13dp" />
+
+
+                                  <Space
+                                      android:layout_width="0dp"
+                                      android:layout_height="1dp"
+                                      android:layout_weight="1" />
+
+                                  <TextView
+                                      android:layout_width="wrap_content"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginRight="20dp"
+                                      android:background="@drawable/shape_rect_white_stroke_gray_corners_90"
+                                      android:paddingLeft="10dp"
+                                      android:paddingTop="2dp"
+                                      android:paddingRight="10dp"
+                                      android:paddingBottom="2dp"
+                                      android:text="查看庆典详情"
+                                      android:textColor="#666666"
+                                      android:textSize="13dp" />
+                              </LinearLayout>
+
+
+                          </LinearLayout>
+
+                          <View
+                              android:layout_width="match_parent"
+                              android:layout_height="20dp"
+                              android:layout_marginTop="10dp"
+                              android:background="@color/bgColor" />
+
+
+                      </LinearLayout>-->
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </LinearLayout>
+</FrameLayout>

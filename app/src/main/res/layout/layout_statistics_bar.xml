@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fl_st_bar_root"
+    android:background="#F9F9F9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_chance_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_chance_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商机"
+                android:textColor="#999999"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_chance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.5dp"
+                android:text="0"
+                android:textColor="#333333"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_intent_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_intent_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="意向"
+                android:textColor="#999999"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_intent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.5dp"
+                android:text="0"
+                android:textColor="#333333"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_lock_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_lock_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="锁台"
+                android:textColor="#999999"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.5dp"
+                android:text="0"
+                android:textColor="#333333"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_sign_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_sign_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="签订"
+                android:textColor="#999999"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_sign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.5dp"
+                android:text="0"
+                android:textColor="#333333"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_exec_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_exec_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="执行"
+                android:textColor="#999999"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_exec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.5dp"
+                android:text="0"
+                android:textColor="#333333"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_complete_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_complete_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="完成"
+                android:textColor="#999999"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7.5dp"
+                android:text="0"
+                android:textColor="#333333"
+                android:textSize="12dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

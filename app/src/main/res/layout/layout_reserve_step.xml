@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_selected_dot_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="27dp"
+            android:layout_height="27dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_reserve_step_selected"
+                android:visibility="visible" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_oval_dark_gold"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#DFBA80" />
+
+        <FrameLayout
+            android:layout_width="27dp"
+            android:layout_height="27dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_reserve_step_selected"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_oval_dark_gold" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#E0BB81" />
+
+        <FrameLayout
+            android:layout_width="27dp"
+            android:layout_height="27dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_reserve_step_selected"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_oval_dark_gold" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#E0BB81" />
+
+        <FrameLayout
+            android:layout_width="27dp"
+            android:layout_height="27dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_reserve_step_selected"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_oval_dark_gold" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#E0BB81" />
+
+        <FrameLayout
+            android:layout_width="27dp"
+            android:layout_height="27dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_reserve_step_selected"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_oval_dark_gold" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#E0BB81" />
+
+        <FrameLayout
+            android:layout_width="27dp"
+            android:layout_height="27dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@mipmap/ic_reserve_step_selected"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_oval_dark_gold" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_desc_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="27dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="商机"
+            android:textColor="#F2E0C2"
+            android:textSize="12dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="27dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="意向"
+            android:textColor="#F2E0C2"
+            android:textSize="12dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="27dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="锁台"
+            android:textColor="#F2E0C2"
+            android:textSize="12dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="27dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="签定"
+            android:textColor="#F2E0C2"
+            android:textSize="12dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="27dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="执行"
+            android:textColor="#F2E0C2"
+            android:textSize="12dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="27dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="结算"
+            android:textColor="#F2E0C2"
+            android:textSize="12dp" />
+
+    </LinearLayout>
+</LinearLayout>

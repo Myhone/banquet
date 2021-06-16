@@ -1,0 +1,819 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/ll_title_bar_root"
+            layout="@layout/layout_title_bar_no_bg_with_status_bar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_department_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="销售一组"
+                    android:textColor="#333333"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/ll_person_info_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- <com.makeramen.roundedimageview.RoundedImageView
+                         android:id="@+id/riv_avatar"
+                         android:layout_width="40dp"
+                         android:layout_height="40dp"
+                         android:layout_marginLeft="15dp" />-->
+
+                    <com.lingyan.banquet.views.WordImageLayout
+                        android:id="@+id/word_avatar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="15dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="张磊"
+                            android:textColor="#333333"
+                            android:textSize="14dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_user_depart_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="销售组一组"
+                            android:textColor="#999999"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/shape_rect_light_gray_stroke_dark_gray_corners_90"
+                android:drawableRight="@mipmap/ic_arrow_down_black"
+                android:drawablePadding="3dp"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="2020" />
+        </FrameLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:background="#f7f7f7"
+            app:tabIndicatorColor="#333333"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="#333333"
+            app:tabTextColor="#666666" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_year_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="2020全年"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+
+                    <EditText
+                        android:id="@+id/tv_yeartarget"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text=""
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="第一季度"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_first_target"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="1月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_january"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="2月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_february"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="3月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_march"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="第二季度"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_second_target"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="4月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_april"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="5月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_may"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="6月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_june"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="第三季度"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_third_target"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="7月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_july"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="8月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_august"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="9月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_september"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="第四季度"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_fourth_target"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="10月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_october"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="11月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_november"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="57dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="19.5dp"
+                        android:text="12月份"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+
+                    <EditText
+                        android:id="@+id/tv_december"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:gravity="right|center_vertical"
+                        android:hint="请设置目标"
+                        android:inputType="numberDecimal"
+                        android:lines="1"
+                        android:paddingRight="20.5dp"
+                        android:text="100000"
+                        android:textColor="#333333"
+                        android:textSize="14dp"
+                        android:visibility="visible" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#f7f7f7" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/ll_set_target"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_set_target"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_gradient_gold_corners_10"
+                android:gravity="center"
+                android:text="设置目标"
+                android:textColor="#603E11"
+                android:textSize="17dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_action_container"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_black_10_0"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="#D6C5B0"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_gradient_gold_0_10"
+                android:gravity="center"
+                android:text="确认"
+                android:textColor="#603E11"
+                android:textSize="17dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

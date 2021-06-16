@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/ll_title_bar_root"
+            layout="@layout/layout_title_bar_no_bg_with_status_bar" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="90dp"
+                        android:background="#2F2F2E"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
+
+                        <TextView
+                            android:id="@+id/tv_check_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="已驳回"
+                            android:textColor="#F2DFC2"
+                            android:textSize="18dp" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tv_order_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@mipmap/ic_arrow_right_gold"
+                            android:drawablePadding="5dp"
+                            android:text="订单详情"
+                            android:textColor="#F2DFC2"
+                            android:textSize="13dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:background="@drawable/shape_rect_white_top10_bottom0"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="张磊提交的宴会解锁申请"
+                            android:textColor="#333333"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.2"
+                                android:text="审批编号："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_code"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="FIISD8A88891U1DUIASJHLAF8O"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.2"
+                                android:text="申请原因："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_reason"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="20dp"
+                            android:background="@drawable/shape_rect_gray_corners_2"
+                            android:minLines="5"
+                            android:padding="4dp"
+                            android:text="受到疫情影响，道路封闭，婚期被迫延后"
+                            android:textColor="#333333"
+                            android:textSize="13dp" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/bgColor" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_status_chance_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.2"
+                                android:text="订单编号："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_contract_no"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.2"
+                                android:text="主宾姓名："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_real_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.2"
+                                android:text="场次时间："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:id="@+id/tv_date_r"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.2"
+                                android:text="宴会厅："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_hall_list"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+
+                                android:layout_weight="1.2"
+                                android:text="跟单人："
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+
+                            <TextView
+                                android:id="@+id/tv_intent_man_name"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:text="生日宴"
+                                android:textColor="#333333"
+                                android:textSize="13dp" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/bgColor" />
+
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="50dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginBottom="15dp"
+                                android:text="流程"
+                                android:textColor="#333333"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                            <LinearLayout
+                                android:id="@+id/ll_step_container"
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bgColor" />
+
+        <TextView
+            android:id="@+id/tv_remove_check"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/shape_rect_gradient_gold_corners_10"
+            android:gravity="center"
+            android:text="撤销申请"
+            android:textColor="#603E11"
+            android:textSize="14dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_bottom_action_container"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_examine_check_refuse"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_black_10_0"
+                android:gravity="center"
+                android:text="驳回"
+                android:textColor="#D6C5B0"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/tv_examine_check_pass"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_gradient_gold_0_10"
+                android:gravity="center"
+                android:text="同意"
+                android:textColor="#603E11"
+                android:textSize="14dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

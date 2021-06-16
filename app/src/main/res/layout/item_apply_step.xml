@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_top_line"
+            android:layout_width="2dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="18dp"
+            android:background="#E3E3E4" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+
+
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/riv_avatar"
+                    app:riv_corner_radius="2dp"
+                    android:scaleType="centerCrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.lingyan.banquet.views.WordImageLayout
+                    android:id="@+id/word_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/iv_ok_error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|bottom"
+                    android:src="@mipmap/ic_ok_green" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:includeFontPadding="false"
+                        android:text="发起审批"
+                        android:textColor="#333333"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:includeFontPadding="false"
+                        android:text="2021-01-12 12:23:23"
+                        android:textColor="#999999"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_real_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="8dp"
+                    android:includeFontPadding="false"
+                    android:text="张磊"
+                    android:textColor="#999999"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/tv_refuse_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/shape_rect_gray_corners_2"
+                    android:includeFontPadding="false"
+                    android:minLines="3"
+                    android:padding="5dp"
+                    android:text="驳回原因：受到疫情影响，道路封闭，婚期被迫延后"
+                    android:textColor="#999999"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_bottom_line"
+            android:layout_width="2dp"
+            android:layout_height="16dp"
+            android:layout_marginLeft="18dp"
+            android:background="#E3E3E4" />
+
+    </LinearLayout>
+</FrameLayout>

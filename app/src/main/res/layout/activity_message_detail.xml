@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/ll_title_bar_root"
+            layout="@layout/layout_title_bar_no_bg_with_status_bar" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:text="宴会订单签定全员推送"
+            android:textColor="#333333"
+            android:textSize="19dp" />
+
+        <TextView
+            android:id="@+id/tv_create_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:text="2021年1月11日 09:05:27"
+            android:textColor="#999999"
+            android:textSize="13dp" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:text="宴会厅1、宴会厅2已经被销售1签定宴会厅1、宴会厅2已经被销售1签定，宴会厅1、宴会厅2、宴会厅3已经被销售1签定。"
+            android:textColor="#333333"
+            android:lineSpacingMultiplier="1.5"
+            android:textSize="14dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_bottom_action"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/shape_rect_gradient_gold_corners_10"
+        android:gravity="center"
+        android:text="查看订单详情"
+        android:textSize="14dp" />
+</FrameLayout>

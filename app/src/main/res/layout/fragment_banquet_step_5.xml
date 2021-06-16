@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/shape_rect_gray_top10_bottom0"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="#00000000"
+                    app:tabIndicatorColor="#DFB97F"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="#DFB97F"
+                    app:tabTextColor="#333333" />
+
+
+            </LinearLayout>
+
+
+           <androidx.core.widget.NestedScrollView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:orientation="vertical"
+                   android:layout_height="wrap_content">
+                   <FrameLayout
+                       android:id="@+id/fl_session_container"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content" />
+
+                   <androidx.cardview.widget.CardView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="10dp"
+                       android:layout_marginBottom="100dp"
+                       app:cardCornerRadius="10dp"
+                       app:cardElevation="0dp">
+
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:background="@color/white"
+                           android:orientation="horizontal"
+                           android:padding="15dp">
+
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="start"
+                               android:layout_marginRight="15dp"
+                               android:text="备注"
+                               android:textColor="#666666"
+                               android:textSize="14dp" />
+
+                           <EditText
+                               android:id="@+id/et_remarks"
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:background="@null"
+                               android:gravity="start"
+                               android:hint="如有备注，请填写备注信息"
+                               android:lines="5"
+                               android:textColor="#333334"
+                               android:textSize="14dp" />
+
+                       </LinearLayout>
+                   </androidx.cardview.widget.CardView>
+               </LinearLayout>
+           </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_black_10_0"
+                android:gravity="center"
+                android:id="@+id/tv_lose_order"
+                android:text="丢单"
+                android:textColor="#D6C5B0"
+                android:textSize="17dp" />
+
+            <TextView
+                android:id="@+id/tv_save"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rect_gradient_gold_0_10"
+                android:gravity="center"
+                android:text="保存"
+                android:textColor="#603E11"
+                android:textSize="17dp" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_title_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_store_gold" />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="梅花厅一号厅"
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_top_tag_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_rect_gradient_gold_corners_90"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="3dp"
+                    android:text="意向x2"
+                    android:textColor="@color/black2"
+                    android:textSize="12dp" />
+
+
+                <TextView
+                    android:id="@+id/tv_top_tag_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/shape_rect_gradient_gold_corners_90"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="3dp"
+                    android:text="意向x2"
+                    android:textColor="@color/black2"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_top_tag_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:background="@drawable/shape_rect_gray_corners_90"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="3dp"
+                    android:text="空台"
+                    android:textColor="@color/black2"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_rest_banquet_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

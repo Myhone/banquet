@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll_data_complete_root"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="11dp"
+            android:layout_marginLeft="12dp"
+            android:background="@color/gold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:text="完成"
+            android:textColor="#333333"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#f7f7f7"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_tab_1_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tab_type_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="单数"
+                android:textColor="#333333"
+                android:textSize="12dp" />
+
+            <View
+                android:id="@+id/view_tab_type_1_line"
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="#333333" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:id="@+id/ll_tab_2_container"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_tab_type_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="营收"
+                android:textColor="#666666"
+                android:textSize="12dp" />
+
+            <View
+                android:id="@+id/view_tab_type_2_line"
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="5dp"
+                android:background="#333333" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+       <!-- <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="单位：万"
+            android:textColor="#696969"
+            android:textSize="11dp" />-->
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:src="#696969" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="桌数"
+            android:textColor="#696969"
+            android:textSize="11dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="36dp"
+            android:src="#C7A876" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:text="执行单数"
+            android:textColor="#696969"
+            android:textSize="11dp" />
+
+
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="260dp" />
+</LinearLayout>
