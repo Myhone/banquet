@@ -56,7 +56,8 @@ public class HttpURLs {
     public static final String feedInfo = BASE + "api/v1/user/feed_info";
     public static final String lostOrderInfo = BASE + "api/v1/banquet/lost_orer_info";
     public static final String saveLoseOrder = BASE + "api/v1/banquet/save_lose_order";
-    public static final String screenData1 = BASE + "api/v1/screen/data1";
+//    public static final String screenData1 = BASE + "api/v1/screen/data1";//数据大屏
+    public static final String screenData1 = BASE + "api/v1/screen2/data1";//数据大屏-七月围城专用。。
     public static final String queryDeptUserList = BASE + "api/v1/user/queryDeptUserList/";
     public static final String achievementTabList = BASE + "api/v1/achievement/tabList";
     public static final String achievementIndex = BASE + "api/v1/achievement/index";
@@ -74,4 +75,5 @@ public class HttpURLs {
     public static final String followList = BASE + "api/v1/banquetFollow/list"; //跟进记录列表
     public static final String followAdd = BASE + "api/v1/banquetFollow/add"; //新增跟进记录
     public static final String modifyHall = BASE + "api/v1/banquet/modifyhall2"; //修改包间
+    public static final String homeBackgroundImg = BASE + "api/v1/index/info"; //首页背景图
 }

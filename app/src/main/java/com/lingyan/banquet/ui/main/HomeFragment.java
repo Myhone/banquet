@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.global.Router;
 import com.lingyan.banquet.net.JsonCallback;
 import com.lingyan.banquet.ui.banquet.bean.NetBanquetChildHall;
+import com.lingyan.banquet.ui.main.bean.HomeBackgroundImgBean;
 import com.lingyan.banquet.ui.main.bean.HomeCalenderScheme;
 import com.lingyan.banquet.ui.main.bean.NetHomeBottomHallData;
 import com.lingyan.banquet.ui.main.bean.NetHomeTab;
@@ -46,6 +48,7 @@ import com.lingyan.banquet.ui.order.OrderListActivity;
 import com.lingyan.banquet.ui.main.adapter.TabAdapter;
 import com.lingyan.banquet.ui.main.bean.TabBean;
 import com.lingyan.banquet.ui.order.bean.OrderFilterCondition;
+import com.lingyan.banquet.utils.MyImageUtils;
 import com.lingyan.banquet.views.BanquetMonthView;
 import com.lingyan.banquet.views.StatisticsBarView;
 import com.lingyan.banquet.views.dialog.PickerListDialog;
@@ -366,6 +369,27 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
             getMonthData();
             getBottomHallData();
         }
+
+        getHomeBackgroundImg();
+    }
+
+    //获取首页顶部背景图
+    private void getHomeBackgroundImg() {
+        OkGo.<HomeBackgroundImgBean>post(HttpURLs.homeBackgroundImg)
+                .tag(getThisFragment())
+                .execute(new JsonCallback<HomeBackgroundImgBean>() {
+                    @Override
+                    public void onSuccess(Response<HomeBackgroundImgBean> response) {
+                        HomeBackgroundImgBean body = response.body();
+                        if (body == null) {
+                            return;
+                        }
+
+                        if (body.getData() != null && !StringUtils.isEmpty(body.getData().getBackground_url())) {
+                            MyImageUtils.display(mBinding.ivBgTop, body.getData().getBackground_url(), R.color.gold, R.color.white);
+                        }
+                    }
+                });
     }
 
     private void getTabData() {

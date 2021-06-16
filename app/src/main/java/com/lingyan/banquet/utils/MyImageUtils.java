@@ -9,7 +9,6 @@ import com.lingyan.banquet.R;
 import com.lingyan.banquet.global.HttpURLs;
 
 
-
 /**
  * Created by _hxb on 2021/2/4.
  */
@@ -20,6 +19,14 @@ public class MyImageUtils {
                 .load(string)
                 .error(R.mipmap.ic_default_error_image)
                 .placeholder(R.mipmap.ic_default_error_image)
+                .into(imageView);
+    }
+
+    public static void display(ImageView imageView, String url, int errorImg, int placeholderImg) {
+        Glide.with(Utils.getApp())
+                .load(url)
+                .error(errorImg)
+                .placeholder(placeholderImg)
                 .into(imageView);
     }
 
