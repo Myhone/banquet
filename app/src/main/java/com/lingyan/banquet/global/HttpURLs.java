@@ -56,8 +56,9 @@ public class HttpURLs {
     public static final String feedInfo = BASE + "api/v1/user/feed_info";
     public static final String lostOrderInfo = BASE + "api/v1/banquet/lost_orer_info";
     public static final String saveLoseOrder = BASE + "api/v1/banquet/save_lose_order";
-//    public static final String screenData1 = BASE + "api/v1/screen/data1";//数据大屏
-    public static final String screenData1 = BASE + "api/v1/screen2/data1";//数据大屏-七月围城专用。。
+    public static final String screenData1 = BASE + "api/v1/screen/data1";//数据大屏
+    public static final String screen2Data1 = BASE + "api/v1/screen2/data1";//数据大屏-七月围城专用。。
+    public static final String pkItem = BASE + "api/v1/screen2/pkitem";//榜单tab-七月围城专用。。
     public static final String queryDeptUserList = BASE + "api/v1/user/queryDeptUserList/";
     public static final String achievementTabList = BASE + "api/v1/achievement/tabList";
     public static final String achievementIndex = BASE + "api/v1/achievement/index";

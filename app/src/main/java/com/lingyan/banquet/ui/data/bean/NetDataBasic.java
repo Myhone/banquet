@@ -38,6 +38,7 @@ public class NetDataBasic {
 
     public static class DataBean {
         private CompleteData completeData;
+        private ExpectData expectData;
         private IncompleteData incompleteData;
         private IncreaseData increaseData;
         private List<CustomerTypeData> customerTypeData;
@@ -48,6 +49,14 @@ public class NetDataBasic {
 
         public void setCompleteData(CompleteData completeData) {
             this.completeData = completeData;
+        }
+
+        public ExpectData getExpectData() {
+            return expectData;
+        }
+
+        public void setExpectData(ExpectData expectData) {
+            this.expectData = expectData;
         }
 
         public IncompleteData getIncompleteData() {
@@ -81,6 +90,14 @@ public class NetDataBasic {
         public String balance;
         public String final_amount;
         public String table_number;
+        public String order_number;
+    }
+
+    public static class ExpectData {
+        public String income;
+        public String final_amount;
+        public String table_number;
+        public String prepare_number;
         public String order_number;
     }
 

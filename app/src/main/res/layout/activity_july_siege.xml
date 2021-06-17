@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/bg_home_top_july" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cl_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="17.5dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_title_bar_container"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+
+                <ImageView
+                    android:id="@+id/iv_title_bar_left"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="center"
+                    android:src="@mipmap/ic_back"
+                    android:tag="back" />
+
+                <ImageView
+                    android:id="@+id/tv_title_bar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/iv_title_bar_left"
+                    android:src="@mipmap/ic_title_july" />
+
+                <TextView
+                    android:id="@+id/tv_title_bar_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="#242424"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/iv_title_bar_right"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="center"
+                    android:tag="back"
+                    android:visibility="invisible" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_banquet_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_title_bar_container"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="21.5dp"
+                android:background="@drawable/shape_rect_light_gray_corners_90"
+                android:drawablePadding="3dp"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="宴会"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:drawableEndCompat="@mipmap/ic_arrow_down_black" />
+
+            <TextView
+                android:id="@+id/tv_group_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_title_bar_container"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="21.5dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/shape_rect_light_gray_corners_90"
+                android:drawablePadding="3dp"
+                android:gravity="center"
+                android:paddingLeft="16dp"
+                android:paddingTop="3dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="3dp"
+                android:text="我的/本日"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:drawableEndCompat="@mipmap/ic_arrow_down_black" />
+        </RelativeLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cl_bar">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#F7F7F7" />
+
+                <!--概况-->
+                <include
+                    android:id="@+id/ll_data_basic_root"
+                    layout="@layout/layout_data_basic_july" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f7f7f7" />
+                <!--完成-->
+                <!--  <include
+                      android:id="@+id/ll_data_complete_root"
+                      layout="@layout/layout_data_complete" />
+
+                  <View
+                      android:layout_width="match_parent"
+                      android:layout_height="10dp"
+                      android:background="#f7f7f7" />-->
+                <!--新增数据-->
+                <include
+                    android:id="@+id/ll_data_new_add_root"
+                    layout="@layout/layout_data_new_add" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f7f7f7" />
+
+
+                <!--个人pk榜-->
+                <include
+                    android:id="@+id/fl_data_pk_root"
+                    layout="@layout/layout_pk_rank_july" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f7f7f7" />
+                <!--部分pk榜-->
+                <include
+                    android:id="@+id/fl_data_pk_root_department"
+                    layout="@layout/layout_pk_rank_july" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f7f7f7" />
+                <!--全国pk榜-->
+                <include
+                    android:id="@+id/fl_data_pk_root_country"
+                    layout="@layout/layout_pk_rank_july" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f7f7f7" />
+                <!--连单王-->
+                <include
+                    android:id="@+id/fl_data_pk_root_many"
+                    layout="@layout/layout_pk_rank_july" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f7f7f7" />
+                <!--业绩目标-->
+                <include
+                    android:id="@+id/fl_data_target_root"
+                    layout="@layout/layout_target_analyze" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="#f7f7f7" />
+
+                <!--数据分析-->
+                <include
+                    android:id="@+id/fl_data_analyze_root"
+                    layout="@layout/layout_data_analyze" />
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="10dp"-->
+<!--                    android:background="#f7f7f7" />-->
+
+<!--                &lt;!&ndash;成单分析&ndash;&gt;-->
+<!--                <include-->
+<!--                    android:id="@+id/fl_data_success_root"-->
+<!--                    layout="@layout/layout_success_order_analyze" />-->
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="10dp"-->
+<!--                    android:background="#f7f7f7" />-->
+<!--                &lt;!&ndash;转化数据分析&ndash;&gt;-->
+<!--                <include-->
+<!--                    android:id="@+id/ll_data_convert_root"-->
+<!--                    layout="@layout/layout_data_convert" />-->
+
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="10dp"-->
+<!--                    android:background="#f7f7f7" />-->
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</RelativeLayout>

@@ -190,7 +190,7 @@
         android:background="#f7f7f7"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="未完成数据"
+        android:text="预计数据"
         android:textColor="#666666"
         android:textSize="12dp" />
 
@@ -266,7 +266,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="未完成单数"
+            android:text="预计单数"
             android:textColor="#999999"
             android:textSize="12dp" />
 

@@ -49,6 +49,7 @@ import com.lingyan.banquet.ui.main.adapter.TabAdapter;
 import com.lingyan.banquet.ui.main.bean.TabBean;
 import com.lingyan.banquet.ui.order.bean.OrderFilterCondition;
 import com.lingyan.banquet.utils.MyImageUtils;
+import com.lingyan.banquet.utils.StatusBarUtil;
 import com.lingyan.banquet.views.BanquetMonthView;
 import com.lingyan.banquet.views.StatisticsBarView;
 import com.lingyan.banquet.views.dialog.PickerListDialog;
@@ -113,6 +114,8 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         EventBus.getDefault().register(this);
+        StatusBarUtil.setTranslucentForImageView(getActivity(), 0, mBinding.clBar);
+
         mBinding.flTabBanquetContaienr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

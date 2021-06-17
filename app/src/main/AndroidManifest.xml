@@ -80,6 +80,8 @@
             android:name=".ui.login.LoginActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ui.data.DataHomeActivity" />
+        <activity android:name=".ui.data.july.JulySiegeActivity" />
+        <activity android:name=".ui.data.july.JulyDataFilterActivity"/>
         <activity android:name=".ui.target.TargetHomeActivity" />
         <activity
             android:name=".ui.target.TargetDetailActivity"

@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cl_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_layout"
@@ -22,43 +35,30 @@
                 android:paddingBottom="20dp">
 
                 <FrameLayout
+                    android:id="@+id/fl_top"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <ImageView
                         android:id="@+id/iv_bg_top"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="@color/gold" />
+                        android:layout_height="256dp"
+                        android:background="@color/gold"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/bg_home_top_july" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/tv_title_bar_title"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="30dp"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="宴帮帮"
-                                android:textColor="@color/white"
-                                android:textSize="20dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
-                                android:text="宴会销售好帮手"
-                                android:textColor="@color/white"
-                                android:textSize="15dp" />
-
-                        </LinearLayout>
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="60dp"
+                            android:src="@mipmap/ic_title_july_home" />
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -339,4 +339,4 @@
 
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-</FrameLayout>
+</RelativeLayout>

@@ -9,6 +9,7 @@ import com.lingyan.banquet.ui.banquet.BanquetStepManagerActivity;
 import com.lingyan.banquet.ui.banquet.ReserveHomeActivity;
 import com.lingyan.banquet.ui.celebration.CelStepManagerActivity;
 import com.lingyan.banquet.ui.data.DataHomeActivity;
+import com.lingyan.banquet.ui.data.july.JulySiegeActivity;
 import com.lingyan.banquet.ui.finance.FinanceManageActivity;
 import com.lingyan.banquet.ui.finance.FinanceOrderDetailActivity;
 import com.lingyan.banquet.ui.message.MessageDetailActivity;
@@ -78,6 +79,11 @@ public class Router {
             case "/dataScreen": {
                 //数据大屏
                 DataHomeActivity.start();
+                return true;
+            }
+            case "/julyActivity": {
+                //七月围城
+                JulySiegeActivity.start();
                 return true;
             }
             case "/examinationAndApprovalRecords": {
