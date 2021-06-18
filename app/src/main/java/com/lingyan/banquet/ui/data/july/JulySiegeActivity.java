@@ -17,7 +17,6 @@ import com.lingyan.banquet.global.BanquetCelebrationType;
 import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.global.UserInfoManager;
 import com.lingyan.banquet.net.JsonCallback;
-import com.lingyan.banquet.ui.banquet.bean.NetBanquetChildHall;
 import com.lingyan.banquet.ui.data.bean.ConditionFilter;
 import com.lingyan.banquet.utils.StatusBarUtil;
 import com.lingyan.banquet.views.dialog.PickerListDialog;
@@ -27,7 +26,6 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -157,16 +155,10 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
                             return;
                         }
 
-                        HashMap<String, String> tabList = new HashMap<>();
-                        for (PkItemBean.DataBean bean : body.getData()) {
-                            tabList.put(bean.getKey(), bean.getTitle());
-                        }
-
-
-                        mPkController.refresh(mConditionFilter, tabList, 50);
-                        mPkDepartmentController.refresh(mConditionFilter, tabList, 51);
-                        mPkCountryController.refresh(mConditionFilter, tabList, 52);
-                        mPkManyController.refresh(mConditionFilter, tabList, 53);
+                        mPkController.refresh(mConditionFilter, body, 50);
+                        mPkDepartmentController.refresh(mConditionFilter, body, 51);
+                        mPkCountryController.refresh(mConditionFilter, body, 52);
+                        mPkManyController.refresh(mConditionFilter, body, 53);
                     }
                 });
     }

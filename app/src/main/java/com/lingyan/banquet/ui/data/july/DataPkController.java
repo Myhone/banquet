@@ -25,7 +25,6 @@ import com.lzy.okgo.request.base.Request;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,15 +35,11 @@ public class DataPkController {
     //全国0/本公司1
     private int mType = 0;
     private String mTabType = "";
-    private HashMap<String, String> tabList;
+    private PkItemBean tabList;
     //公司榜单
     private PkDataBean.DataBean.DataChildBean dataGs;
     //全国榜单
     private PkDataBean.DataBean.DataChildBean dataQg;
-    //当前榜单(查看完整榜单使用)
-    private PkDataBean.DataBean.DataChildBean dataList;
-    //个人详细数据
-    private List<PkDataBean.DataBean.DataChildBean.PersonBean> data1, data2, data3, data4, income, continuation, data1_rate, data2_rate, data3_rate, income_rate;
 
     public DataPkController(LayoutPkRankJulyBinding binding, JulySiegeActivity dataHomeActivity) {
         mBinding = binding;
@@ -110,13 +105,13 @@ public class DataPkController {
 
     }
 
-    public void refresh(ConditionFilter condition, HashMap<String, String> tabList, int order) {
+    public void refresh(ConditionFilter condition, PkItemBean tabList, int order) {
         mBinding.tabLayout.removeAllTabs();
         this.tabList = tabList;
-        for (String key : tabList.keySet()) {
+        for (PkItemBean.DataBean dataBean: tabList.getData()) {
             TabLayout.Tab tab = mBinding.tabLayout.newTab();
-            tab.setTag(key);
-            tab.setText(tabList.get(key));
+            tab.setTag(dataBean.getKey());
+            tab.setText(dataBean.getTitle());
             mBinding.tabLayout.addTab(tab);
         }
 
@@ -215,48 +210,41 @@ public class DataPkController {
     }
 
     private void setData() {
+        //当前榜单(查看完整榜单使用)
+        PkDataBean.DataBean.DataChildBean dataCurrent;
+
         if (mType == 1) {
-            dataList = dataGs;//公司
+            dataCurrent = dataGs;//公司
         } else {
-            dataList = dataQg;//全国
+            dataCurrent = dataQg;//全国
         }
 
-        if (dataList == null) {
+        if (dataCurrent == null) {
             initUI();
             return;
         }
-        data1 = dataList.getData1();
-        data2 = dataList.getData2();
-        data3 = dataList.getData3();
-        data4 = dataList.getData4();
-        income = dataList.getIncome();
-        data1_rate = dataList.getData1_rate();
-        data2_rate = dataList.getData2_rate();
-        data3_rate = dataList.getData3_rate();
-        income_rate = dataList.getIncome_rate();
-        continuation = dataList.getContinuation();
 
         List<PkDataBean.DataBean.DataChildBean.PersonBean> list = new ArrayList<>();
         if ("data1".equals(mTabType)) {
-            list = data1;
+            list = dataCurrent.getData1();
         } else if ("data2".equals(mTabType)) {
-            list = data2;
+            list = dataCurrent.getData2();
         } else if ("data3".equals(mTabType)) {
-            list = data3;
+            list = dataCurrent.getData3();
         } else if ("data4".equals(mTabType)) {
-            list = data4;
+            list = dataCurrent.getData4();
         } else if ("income".equals(mTabType)) {
-            list = income;
+            list = dataCurrent.getIncome();
         } else if ("income_rate".equals(mTabType)) {
-            list = income_rate;
+            list = dataCurrent.getIncome_rate();
         } else if ("data1_rate".equals(mTabType)) {
-            list = data1_rate;
+            list = dataCurrent.getData1_rate();
         } else if ("data2_rate".equals(mTabType)) {
-            list = data2_rate;
+            list = dataCurrent.getData2_rate();
         } else if ("data3_rate".equals(mTabType)) {
-            list = data3_rate;
+            list = dataCurrent.getData3_rate();
         } else if ("continuation".equals(mTabType)) {
-            list = continuation;
+            list = dataCurrent.getContinuation();
         }
 
         if (list == null || list.size() == 0) {

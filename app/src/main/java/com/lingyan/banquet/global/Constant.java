@@ -5,4 +5,7 @@ package com.lingyan.banquet.global;
  */
 public class Constant {
 
+    public interface RankingTab{
+
+    }
 }

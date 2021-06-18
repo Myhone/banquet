@@ -20,7 +20,6 @@ import com.lingyan.banquet.utils.MyImageUtils;
 import com.lingyan.banquet.views.dialog.PickerListDialog;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -33,17 +32,15 @@ public class JulyPkListActivity extends BaseActivity {
     private LayoutPkRankJulyBinding mHeadBinding;
     private String mTabType = "";
     private List<PkDataBean.DataBean.DataChildBean.PersonBean> list;
-    private PkDataBean.DataBean.DataChildBean dataList;
     private PkDataBean.DataBean.DataChildBean dataGs;
     private PkDataBean.DataBean.DataChildBean dataQg;
-    private List<PkDataBean.DataBean.DataChildBean.PersonBean> data1, data2, data3, data4, income, continuation, data1_rate, data2_rate, data3_rate, income_rate;
-    private HashMap<String, String> tabList;
+    private PkItemBean tabList;
     private JulyPkListAdapter mAdapter;
     private String title;
     //全国0/本公司1
     private int mType = 0;
 
-    public static void start(PkDataBean.DataBean.DataChildBean dataGs, PkDataBean.DataBean.DataChildBean dataQg, HashMap<String, String> tabList, String title) {
+    public static void start(PkDataBean.DataBean.DataChildBean dataGs, PkDataBean.DataBean.DataChildBean dataQg, PkItemBean tabList, String title) {
         Intent intent = new Intent(App.sApp, JulyPkListActivity.class);
         intent.putExtra("dataGs", dataGs);
         intent.putExtra("dataQg", dataQg);
@@ -59,7 +56,7 @@ public class JulyPkListActivity extends BaseActivity {
         setContentView(mBinding.getRoot());
         dataGs = getIntent().getParcelableExtra("dataGs");
         dataQg = getIntent().getParcelableExtra("dataQg");
-        tabList = (HashMap<String, String>) getIntent().getSerializableExtra("tabList");
+        tabList = getIntent().getParcelableExtra("tabList");
         title = getIntent().getStringExtra("title");
         mHeadBinding = LayoutPkRankJulyBinding.inflate(getLayoutInflater());
         mHeadBinding.llLookList.setVisibility(View.GONE);
@@ -95,10 +92,10 @@ public class JulyPkListActivity extends BaseActivity {
             }
         });
 
-        for (String key : tabList.keySet()) {
+        for (PkItemBean.DataBean dataBean : tabList.getData()) {
             TabLayout.Tab tab = mHeadBinding.tabLayout.newTab();
-            tab.setTag(key);
-            tab.setText(tabList.get(key));
+            tab.setTag(dataBean.getKey());
+            tab.setText(dataBean.getTitle());
             mHeadBinding.tabLayout.addTab(tab);
         }
 
@@ -138,27 +135,18 @@ public class JulyPkListActivity extends BaseActivity {
     }
 
     private void refresh() {
+        PkDataBean.DataBean.DataChildBean dataCurrent;
+
         if (mType == 1) {
-            dataList = dataGs;//公司
+            dataCurrent = dataGs;//公司
         } else {
-            dataList = dataQg;//全国
+            dataCurrent = dataQg;//全国
         }
 
-        if (dataList == null) {
+        if (dataCurrent == null) {
             initUI();
             return;
         }
-
-        data1 = dataList.getData1();
-        data2 = dataList.getData2();
-        data3 = dataList.getData3();
-        data4 = dataList.getData4();
-        income = dataList.getIncome();
-        data1_rate = dataList.getData1_rate();
-        data2_rate = dataList.getData2_rate();
-        data3_rate = dataList.getData3_rate();
-        income_rate = dataList.getIncome_rate();
-        continuation = dataList.getContinuation();
 
         if ("连单王".equals(title)) {
             mHeadBinding.tabLayout.setVisibility(View.GONE);
@@ -166,25 +154,25 @@ public class JulyPkListActivity extends BaseActivity {
         }
 
         if ("data1".equals(mTabType)) {
-            list = data1;
+            list = dataCurrent.getData1();
         } else if ("data2".equals(mTabType)) {
-            list = data2;
+            list = dataCurrent.getData2();
         } else if ("data3".equals(mTabType)) {
-            list = data3;
+            list = dataCurrent.getData3();
         } else if ("data4".equals(mTabType)) {
-            list = data4;
+            list = dataCurrent.getData4();
         } else if ("income".equals(mTabType)) {
-            list = income;
+            list = dataCurrent.getIncome();
         } else if ("income_rate".equals(mTabType)) {
-            list = income_rate;
+            list = dataCurrent.getIncome_rate();
         } else if ("data1_rate".equals(mTabType)) {
-            list = data1_rate;
+            list = dataCurrent.getData1_rate();
         } else if ("data2_rate".equals(mTabType)) {
-            list = data2_rate;
+            list = dataCurrent.getData2_rate();
         } else if ("data3_rate".equals(mTabType)) {
-            list = data3_rate;
+            list = dataCurrent.getData3_rate();
         } else if ("continuation".equals(mTabType)) {
-            list = continuation;
+            list = dataCurrent.getContinuation();
         }
 
         if (list == null || list.size() == 0) {
