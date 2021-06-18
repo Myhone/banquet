@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">宴帮帮</string>
+
+    <string name="mine">我的</string>
+    <string name="department">部门</string>
+    <string name="company">全公司</string>
+
+    <!--榜单名称-->
+    <string name="ranking_title_common">PK榜</string>
+    <string name="ranking_title_personal">个人PK榜</string>
+    <string name="ranking_title_department">部门PK榜</string>
+    <string name="ranking_title_country">全国PK榜</string>
+    <string name="ranking_title_king_signed">连单王</string>
 </resources>

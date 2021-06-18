@@ -62,33 +62,24 @@ public class DataPkController {
             }
         });
 
-        binding.llLookList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //查看榜单详情
-                JulyPkListActivity.start(dataGs, dataQg, tabList, mBinding.tvTitle.getText().toString());
-            }
+        binding.llLookList.setOnClickListener(v -> {
+            //查看榜单详情
+            JulyPkListActivity.start(dataGs, dataQg, tabList, mBinding.tvTitle.getText().toString());
         });
 
-        binding.tvBanquetType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<String> list = new ArrayList<>();
-                list.add("全国");
-                list.add("本公司");
-                PickerListDialog dialog = new PickerListDialog(dataHomeActivity);
-                dialog.items(list);
-                dialog.itemSelectedCallBack(new PickerListDialog.ItemSelectedCallBack() {
-                    @Override
-                    public void onItemSelected(int position, String text, PickerListDialog dialog) {
-                        mType = position;
-                        binding.tvBanquetType.setText(text);
-                        dialog.dismiss();
-                        setData();
-                    }
-                });
-                dialog.show();
-            }
+        binding.tvBanquetType.setOnClickListener(v -> {
+            List<String> list = new ArrayList<>();
+            list.add("全国");
+            list.add("本公司");
+            PickerListDialog dialog = new PickerListDialog(dataHomeActivity);
+            dialog.items(list);
+            dialog.itemSelectedCallBack((position, text, dialog1) -> {
+                mType = position;
+                binding.tvBanquetType.setText(text);
+                dialog1.dismiss();
+                setData();
+            });
+            dialog.show();
         });
     }
 
@@ -108,7 +99,7 @@ public class DataPkController {
     public void refresh(ConditionFilter condition, PkItemBean tabList, int order) {
         mBinding.tabLayout.removeAllTabs();
         this.tabList = tabList;
-        for (PkItemBean.DataBean dataBean: tabList.getData()) {
+        for (PkItemBean.DataBean dataBean : tabList.getData()) {
             TabLayout.Tab tab = mBinding.tabLayout.newTab();
             tab.setTag(dataBean.getKey());
             tab.setText(dataBean.getTitle());
@@ -116,21 +107,21 @@ public class DataPkController {
         }
 
         if (order == 50) {
-            mBinding.tvTitle.setText("个人PK榜");
+            mBinding.tvTitle.setText(R.string.ranking_title_personal);
             mBinding.tvBanquetType.setVisibility(View.VISIBLE);
         } else if (order == 51) {
-            mBinding.tvTitle.setText("部门PK榜");
+            mBinding.tvTitle.setText(R.string.ranking_title_department);
             mBinding.tvBanquetType.setVisibility(View.VISIBLE);
         } else if (order == 52) {
-            mBinding.tvTitle.setText("全国PK榜");
+            mBinding.tvTitle.setText(R.string.ranking_title_country);
             mBinding.tvBanquetType.setVisibility(View.INVISIBLE);
         } else if (order == 53) {
-            mBinding.tvTitle.setText("连单王");
+            mBinding.tvTitle.setText(R.string.ranking_title_king_signed);
             mTabType = "continuation";
             mBinding.tvBanquetType.setVisibility(View.VISIBLE);
             mBinding.tabLayout.setVisibility(View.GONE);
         } else {
-            mBinding.tvTitle.setText("PK榜");
+            mBinding.tvTitle.setText(R.string.ranking_title_common);
             mBinding.tvBanquetType.setVisibility(View.VISIBLE);
         }
 
@@ -251,24 +242,9 @@ public class DataPkController {
             initUI();
             return;
         }
-        PkDataBean.DataBean.DataChildBean.PersonBean dto1 = CollectionUtils.find(list, new CollectionUtils.Predicate<PkDataBean.DataBean.DataChildBean.PersonBean>() {
-            @Override
-            public boolean evaluate(PkDataBean.DataBean.DataChildBean.PersonBean item) {
-                return item.getSort() == 1;
-            }
-        });
-        PkDataBean.DataBean.DataChildBean.PersonBean dto2 = CollectionUtils.find(list, new CollectionUtils.Predicate<PkDataBean.DataBean.DataChildBean.PersonBean>() {
-            @Override
-            public boolean evaluate(PkDataBean.DataBean.DataChildBean.PersonBean item) {
-                return item.getSort() == 2;
-            }
-        });
-        PkDataBean.DataBean.DataChildBean.PersonBean dto3 = CollectionUtils.find(list, new CollectionUtils.Predicate<PkDataBean.DataBean.DataChildBean.PersonBean>() {
-            @Override
-            public boolean evaluate(PkDataBean.DataBean.DataChildBean.PersonBean item) {
-                return item.getSort() == 3;
-            }
-        });
+        PkDataBean.DataBean.DataChildBean.PersonBean dto1 = CollectionUtils.find(list, item -> item.getSort() == 1);
+        PkDataBean.DataBean.DataChildBean.PersonBean dto2 = CollectionUtils.find(list, item -> item.getSort() == 2);
+        PkDataBean.DataBean.DataChildBean.PersonBean dto3 = CollectionUtils.find(list, item -> item.getSort() == 3);
 
         if (dto1 != null) {
             mBinding.tvName1.setText(dto1.getUser_name());
