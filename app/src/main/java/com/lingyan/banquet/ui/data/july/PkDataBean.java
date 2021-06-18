@@ -70,6 +70,42 @@ public class PkDataBean {
             private List<PersonBean> continuation;
             private List<PersonBean> data3;
             private List<PersonBean> data4;
+            private List<PersonBean> data1_rate;
+            private List<PersonBean> data2_rate;
+            private List<PersonBean> data3_rate;
+            private List<PersonBean> income_rate;
+
+            public List<PersonBean> getData1_rate() {
+                return data1_rate;
+            }
+
+            public void setData1_rate(List<PersonBean> data1_rate) {
+                this.data1_rate = data1_rate;
+            }
+
+            public List<PersonBean> getData2_rate() {
+                return data2_rate;
+            }
+
+            public void setData2_rate(List<PersonBean> data2_rate) {
+                this.data2_rate = data2_rate;
+            }
+
+            public List<PersonBean> getData3_rate() {
+                return data3_rate;
+            }
+
+            public void setData3_rate(List<PersonBean> data3_rate) {
+                this.data3_rate = data3_rate;
+            }
+
+            public List<PersonBean> getIncome_rate() {
+                return income_rate;
+            }
+
+            public void setIncome_rate(List<PersonBean> income_rate) {
+                this.income_rate = income_rate;
+            }
 
             public List<PersonBean> getIncome() {
                 return income;
@@ -273,6 +309,10 @@ public class PkDataBean {
                 dest.writeTypedList(this.continuation);
                 dest.writeTypedList(this.data3);
                 dest.writeTypedList(this.data4);
+                dest.writeTypedList(this.data1_rate);
+                dest.writeTypedList(this.data2_rate);
+                dest.writeTypedList(this.data3_rate);
+                dest.writeTypedList(this.income_rate);
             }
 
             public void readFromParcel(Parcel source) {
@@ -282,6 +322,10 @@ public class PkDataBean {
                 this.continuation = source.createTypedArrayList(PersonBean.CREATOR);
                 this.data3 = source.createTypedArrayList(PersonBean.CREATOR);
                 this.data4 = source.createTypedArrayList(PersonBean.CREATOR);
+                this.data1_rate = source.createTypedArrayList(PersonBean.CREATOR);
+                this.data2_rate = source.createTypedArrayList(PersonBean.CREATOR);
+                this.data3_rate = source.createTypedArrayList(PersonBean.CREATOR);
+                this.income_rate = source.createTypedArrayList(PersonBean.CREATOR);
             }
 
             public DataChildBean() {
@@ -294,6 +338,10 @@ public class PkDataBean {
                 this.continuation = in.createTypedArrayList(PersonBean.CREATOR);
                 this.data3 = in.createTypedArrayList(PersonBean.CREATOR);
                 this.data4 = in.createTypedArrayList(PersonBean.CREATOR);
+                this.data1_rate = in.createTypedArrayList(PersonBean.CREATOR);
+                this.data2_rate = in.createTypedArrayList(PersonBean.CREATOR);
+                this.data3_rate = in.createTypedArrayList(PersonBean.CREATOR);
+                this.income_rate = in.createTypedArrayList(PersonBean.CREATOR);
             }
 
             public static final Creator<DataChildBean> CREATOR = new Creator<DataChildBean>() {

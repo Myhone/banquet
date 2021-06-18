@@ -11,7 +11,7 @@
 
         <include
             android:id="@+id/ll_title_bar_root"
-            layout="@layout/layout_title_bar_no_bg_with_status_bar" />
+            layout="@layout/layout_status_bar_july_pk" />
 
 
         <androidx.recyclerview.widget.RecyclerView

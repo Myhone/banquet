@@ -17,6 +17,7 @@ import com.lingyan.banquet.base.BaseActivity;
 import com.lingyan.banquet.databinding.ActivityJulyPkListBinding;
 import com.lingyan.banquet.databinding.LayoutPkRankJulyBinding;
 import com.lingyan.banquet.utils.MyImageUtils;
+import com.lingyan.banquet.views.dialog.PickerListDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,14 +34,19 @@ public class JulyPkListActivity extends BaseActivity {
     private String mTabType = "";
     private List<PkDataBean.DataBean.DataChildBean.PersonBean> list;
     private PkDataBean.DataBean.DataChildBean dataList;
-    private List<PkDataBean.DataBean.DataChildBean.PersonBean> data1, data2, data3, data4, income, continuation;
+    private PkDataBean.DataBean.DataChildBean dataGs;
+    private PkDataBean.DataBean.DataChildBean dataQg;
+    private List<PkDataBean.DataBean.DataChildBean.PersonBean> data1, data2, data3, data4, income, continuation, data1_rate, data2_rate, data3_rate, income_rate;
     private HashMap<String, String> tabList;
     private JulyPkListAdapter mAdapter;
     private String title;
+    //全国0/本公司1
+    private int mType = 0;
 
-    public static void start(PkDataBean.DataBean.DataChildBean dataList, HashMap<String, String> tabList, String title) {
+    public static void start(PkDataBean.DataBean.DataChildBean dataGs, PkDataBean.DataBean.DataChildBean dataQg, HashMap<String, String> tabList, String title) {
         Intent intent = new Intent(App.sApp, JulyPkListActivity.class);
-        intent.putExtra("dataList", dataList);
+        intent.putExtra("dataGs", dataGs);
+        intent.putExtra("dataQg", dataQg);
         intent.putExtra("tabList", tabList);
         intent.putExtra("title", title);
         ActivityUtils.startActivity(intent);
@@ -51,7 +57,8 @@ public class JulyPkListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = ActivityJulyPkListBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        dataList = getIntent().getParcelableExtra("dataList");
+        dataGs = getIntent().getParcelableExtra("dataGs");
+        dataQg = getIntent().getParcelableExtra("dataQg");
         tabList = (HashMap<String, String>) getIntent().getSerializableExtra("tabList");
         title = getIntent().getStringExtra("title");
         mHeadBinding = LayoutPkRankJulyBinding.inflate(getLayoutInflater());
@@ -59,13 +66,16 @@ public class JulyPkListActivity extends BaseActivity {
         mHeadBinding.llPkTitle.setVisibility(View.GONE);
         mBinding.llTitleBarRoot.tvTitleBarTitle.setText(title);
 
-        initUI();
+        if ("全国PK榜".equals(title)) {
+            mBinding.llTitleBarRoot.tvBanquetType.setVisibility(View.INVISIBLE);
+        }
 
         list = new ArrayList<>();
         mAdapter = new JulyPkListAdapter(list);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.recyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(mHeadBinding.getRoot());
+        initUI();
 
         mHeadBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -91,6 +101,27 @@ public class JulyPkListActivity extends BaseActivity {
             tab.setText(tabList.get(key));
             mHeadBinding.tabLayout.addTab(tab);
         }
+
+        mBinding.llTitleBarRoot.tvBanquetType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<String> list = new ArrayList<>();
+                list.add("全国");
+                list.add("本公司");
+                PickerListDialog dialog = new PickerListDialog(JulyPkListActivity.this);
+                dialog.items(list);
+                dialog.itemSelectedCallBack(new PickerListDialog.ItemSelectedCallBack() {
+                    @Override
+                    public void onItemSelected(int position, String text, PickerListDialog dialog) {
+                        mType = position;
+                        mBinding.llTitleBarRoot.tvBanquetType.setText(text);
+                        dialog.dismiss();
+                        refresh();
+                    }
+                });
+                dialog.show();
+            }
+        });
     }
 
     private void initUI() {
@@ -103,21 +134,33 @@ public class JulyPkListActivity extends BaseActivity {
         mHeadBinding.tvCount1.setText("");
         mHeadBinding.tvCount2.setText("");
         mHeadBinding.tvCount3.setText("");
+        mAdapter.setNewData(list);
     }
 
     private void refresh() {
+        if (mType == 1) {
+            dataList = dataGs;//公司
+        } else {
+            dataList = dataQg;//全国
+        }
+
         if (dataList == null) {
             initUI();
             return;
         }
+
         data1 = dataList.getData1();
         data2 = dataList.getData2();
         data3 = dataList.getData3();
         data4 = dataList.getData4();
         income = dataList.getIncome();
+        data1_rate = dataList.getData1_rate();
+        data2_rate = dataList.getData2_rate();
+        data3_rate = dataList.getData3_rate();
+        income_rate = dataList.getIncome_rate();
         continuation = dataList.getContinuation();
 
-        if ("连单王".equals(title)){
+        if ("连单王".equals(title)) {
             mHeadBinding.tabLayout.setVisibility(View.GONE);
             mTabType = "continuation";
         }
@@ -132,8 +175,22 @@ public class JulyPkListActivity extends BaseActivity {
             list = data4;
         } else if ("income".equals(mTabType)) {
             list = income;
+        } else if ("income_rate".equals(mTabType)) {
+            list = income_rate;
+        } else if ("data1_rate".equals(mTabType)) {
+            list = data1_rate;
+        } else if ("data2_rate".equals(mTabType)) {
+            list = data2_rate;
+        } else if ("data3_rate".equals(mTabType)) {
+            list = data3_rate;
         } else if ("continuation".equals(mTabType)) {
             list = continuation;
+        }
+
+        if (list == null || list.size() == 0) {
+            list = new ArrayList<>();
+            initUI();
+            return;
         }
         mAdapter.setNewData(list);
         PkDataBean.DataBean.DataChildBean.PersonBean dto1 = CollectionUtils.find(list, new CollectionUtils.Predicate<PkDataBean.DataBean.DataChildBean.PersonBean>() {

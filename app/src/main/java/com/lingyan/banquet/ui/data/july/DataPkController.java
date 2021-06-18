@@ -44,7 +44,7 @@ public class DataPkController {
     //当前榜单(查看完整榜单使用)
     private PkDataBean.DataBean.DataChildBean dataList;
     //个人详细数据
-    private List<PkDataBean.DataBean.DataChildBean.PersonBean> data1, data2, data3, data4, income, continuation;
+    private List<PkDataBean.DataBean.DataChildBean.PersonBean> data1, data2, data3, data4, income, continuation, data1_rate, data2_rate, data3_rate, income_rate;
 
     public DataPkController(LayoutPkRankJulyBinding binding, JulySiegeActivity dataHomeActivity) {
         mBinding = binding;
@@ -71,7 +71,7 @@ public class DataPkController {
             @Override
             public void onClick(View v) {
                 //查看榜单详情
-                JulyPkListActivity.start(dataList, tabList, mBinding.tvTitle.getText().toString());
+                JulyPkListActivity.start(dataGs, dataQg, tabList, mBinding.tvTitle.getText().toString());
             }
         });
 
@@ -230,6 +230,10 @@ public class DataPkController {
         data3 = dataList.getData3();
         data4 = dataList.getData4();
         income = dataList.getIncome();
+        data1_rate = dataList.getData1_rate();
+        data2_rate = dataList.getData2_rate();
+        data3_rate = dataList.getData3_rate();
+        income_rate = dataList.getIncome_rate();
         continuation = dataList.getContinuation();
 
         List<PkDataBean.DataBean.DataChildBean.PersonBean> list = new ArrayList<>();
@@ -243,10 +247,22 @@ public class DataPkController {
             list = data4;
         } else if ("income".equals(mTabType)) {
             list = income;
+        } else if ("income_rate".equals(mTabType)) {
+            list = income_rate;
+        } else if ("data1_rate".equals(mTabType)) {
+            list = data1_rate;
+        } else if ("data2_rate".equals(mTabType)) {
+            list = data2_rate;
+        } else if ("data3_rate".equals(mTabType)) {
+            list = data3_rate;
         } else if ("continuation".equals(mTabType)) {
             list = continuation;
         }
 
+        if (list == null || list.size() == 0) {
+            initUI();
+            return;
+        }
         PkDataBean.DataBean.DataChildBean.PersonBean dto1 = CollectionUtils.find(list, new CollectionUtils.Predicate<PkDataBean.DataBean.DataChildBean.PersonBean>() {
             @Override
             public boolean evaluate(PkDataBean.DataBean.DataChildBean.PersonBean item) {

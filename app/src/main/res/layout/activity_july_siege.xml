@@ -131,12 +131,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/shape_rect_bg_white_corner_top"
                 android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="#F7F7F7" />
 
                 <!--概况-->
                 <include
@@ -219,29 +215,29 @@
                     android:id="@+id/fl_data_analyze_root"
                     layout="@layout/layout_data_analyze" />
 
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="10dp"-->
-<!--                    android:background="#f7f7f7" />-->
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="10dp"-->
+                <!--                    android:background="#f7f7f7" />-->
 
-<!--                &lt;!&ndash;成单分析&ndash;&gt;-->
-<!--                <include-->
-<!--                    android:id="@+id/fl_data_success_root"-->
-<!--                    layout="@layout/layout_success_order_analyze" />-->
+                <!--                &lt;!&ndash;成单分析&ndash;&gt;-->
+                <!--                <include-->
+                <!--                    android:id="@+id/fl_data_success_root"-->
+                <!--                    layout="@layout/layout_success_order_analyze" />-->
 
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="10dp"-->
-<!--                    android:background="#f7f7f7" />-->
-<!--                &lt;!&ndash;转化数据分析&ndash;&gt;-->
-<!--                <include-->
-<!--                    android:id="@+id/ll_data_convert_root"-->
-<!--                    layout="@layout/layout_data_convert" />-->
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="10dp"-->
+                <!--                    android:background="#f7f7f7" />-->
+                <!--                &lt;!&ndash;转化数据分析&ndash;&gt;-->
+                <!--                <include-->
+                <!--                    android:id="@+id/ll_data_convert_root"-->
+                <!--                    layout="@layout/layout_data_convert" />-->
 
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="10dp"-->
-<!--                    android:background="#f7f7f7" />-->
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="10dp"-->
+                <!--                    android:background="#f7f7f7" />-->
 
 
             </LinearLayout>

@@ -14,4 +14,5 @@
     <color name="textColorGray">#777777</color>
     <color name="textColorBlack">#3c3c3c</color>
     <color name="red">#FF0000</color>
+    <color name="transparent">#00ffffff</color>
 </resources>

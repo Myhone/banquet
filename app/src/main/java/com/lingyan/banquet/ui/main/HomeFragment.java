@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -116,6 +117,15 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
         EventBus.getDefault().register(this);
         StatusBarUtil.setTranslucentForImageView(getActivity(), 0, mBinding.clBar);
 
+        mBinding.nsHome.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > 180) {
+                    scrollY = 180;
+                }
+                StatusBarUtil.setTranslucentForImageView(getActivity(), scrollY, mBinding.clBar);
+            }
+        });
         mBinding.flTabBanquetContaienr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -389,7 +399,7 @@ public class HomeFragment extends BaseFragment implements OnRefreshListener {
                         }
 
                         if (body.getData() != null && !StringUtils.isEmpty(body.getData().getBackground_url())) {
-                            MyImageUtils.display(mBinding.ivBgTop, body.getData().getBackground_url(), R.color.gold, R.color.white);
+                            MyImageUtils.display(mBinding.ivTitle, body.getData().getBackground_url());
                         }
                     }
                 });
