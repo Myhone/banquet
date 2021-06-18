@@ -58,6 +58,7 @@ public class JulyPkListActivity extends BaseActivity {
         mHeadBinding.llLookList.setVisibility(View.GONE);
         mHeadBinding.llPkTitle.setVisibility(View.GONE);
         mBinding.llTitleBarRoot.tvTitleBarTitle.setText(title);
+
         initUI();
 
         list = new ArrayList<>();
@@ -115,6 +116,11 @@ public class JulyPkListActivity extends BaseActivity {
         data4 = dataList.getData4();
         income = dataList.getIncome();
         continuation = dataList.getContinuation();
+
+        if ("连单王".equals(title)){
+            mHeadBinding.tabLayout.setVisibility(View.GONE);
+            mTabType = "continuation";
+        }
 
         if ("data1".equals(mTabType)) {
             list = data1;

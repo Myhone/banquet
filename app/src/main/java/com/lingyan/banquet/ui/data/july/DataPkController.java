@@ -131,7 +131,9 @@ public class DataPkController {
             mBinding.tvBanquetType.setVisibility(View.INVISIBLE);
         } else if (order == 53) {
             mBinding.tvTitle.setText("连单王");
+            mTabType = "continuation";
             mBinding.tvBanquetType.setVisibility(View.VISIBLE);
+            mBinding.tabLayout.setVisibility(View.GONE);
         } else {
             mBinding.tvTitle.setText("PK榜");
             mBinding.tvBanquetType.setVisibility(View.VISIBLE);
