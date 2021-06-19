@@ -14,5 +14,8 @@
     <color name="textColorGray">#777777</color>
     <color name="textColorBlack">#3c3c3c</color>
     <color name="red">#FF0000</color>
+    <color name="red_df3a32">#df3a32</color>
     <color name="transparent">#00ffffff</color>
+    <color name="black1a">#1A1A1A</color>
+    <color name="gray99">#999999</color>
 </resources>

@@ -293,7 +293,7 @@
                             android:layout_width="11dp"
                             android:layout_height="11dp"
                             android:layout_marginLeft="30dp"
-                            android:src="@color/black2"
+                            android:src="@color/red_df3a32"
                             app:riv_corner_radius="2dp" />
 
                         <TextView

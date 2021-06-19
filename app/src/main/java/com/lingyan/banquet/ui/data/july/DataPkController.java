@@ -36,10 +36,8 @@ public class DataPkController {
     private int mType = 0;
     private String mTabType = "";
     private PkItemBean tabList;
-    //公司榜单
-    private PkDataBean.DataBean.DataChildBean dataGs;
-    //全国榜单
-    private PkDataBean.DataBean.DataChildBean dataQg;
+    //榜单
+    private PkDataBean.DataBean.DataChildBean data;
 
     public DataPkController(LayoutPkRankJulyBinding binding, JulySiegeActivity dataHomeActivity) {
         mBinding = binding;
@@ -64,23 +62,23 @@ public class DataPkController {
 
         binding.llLookList.setOnClickListener(v -> {
             //查看榜单详情
-            JulyPkListActivity.start(dataGs, dataQg, tabList, mBinding.tvTitle.getText().toString());
+            JulyPkListActivity.start(data, tabList, mBinding.tvTitle.getText().toString());
         });
 
-        binding.tvBanquetType.setOnClickListener(v -> {
-            List<String> list = new ArrayList<>();
-            list.add("全国");
-            list.add("本公司");
-            PickerListDialog dialog = new PickerListDialog(dataHomeActivity);
-            dialog.items(list);
-            dialog.itemSelectedCallBack((position, text, dialog1) -> {
-                mType = position;
-                binding.tvBanquetType.setText(text);
-                dialog1.dismiss();
-                setData();
-            });
-            dialog.show();
-        });
+//        binding.tvBanquetType.setOnClickListener(v -> {
+//            List<String> list = new ArrayList<>();
+//            list.add("全国");
+//            list.add("本公司");
+//            PickerListDialog dialog = new PickerListDialog(dataHomeActivity);
+//            dialog.items(list);
+//            dialog.itemSelectedCallBack((position, text, dialog1) -> {
+//                mType = position;
+//                binding.tvBanquetType.setText(text);
+//                dialog1.dismiss();
+//                setData();
+//            });
+//            dialog.show();
+//        });
     }
 
     private void initUI() {
@@ -96,7 +94,9 @@ public class DataPkController {
 
     }
 
-    public void refresh(ConditionFilter condition, PkItemBean tabList, int order) {
+    public void refresh(PkItemBean tabList, PkDataBean.DataBean.DataChildBean data, String title) {
+        this.data = data;
+        mBinding.tvTitle.setText(title);
         mBinding.tabLayout.removeAllTabs();
         this.tabList = tabList;
         for (PkItemBean.DataBean dataBean : tabList.getData()) {
@@ -106,136 +106,36 @@ public class DataPkController {
             mBinding.tabLayout.addTab(tab);
         }
 
-        if (order == 50) {
-            mBinding.tvTitle.setText(R.string.ranking_title_personal);
-            mBinding.tvBanquetType.setVisibility(View.VISIBLE);
-        } else if (order == 51) {
-            mBinding.tvTitle.setText(R.string.ranking_title_department);
-            mBinding.tvBanquetType.setVisibility(View.VISIBLE);
-        } else if (order == 52) {
-            mBinding.tvTitle.setText(R.string.ranking_title_country);
-            mBinding.tvBanquetType.setVisibility(View.INVISIBLE);
-        } else if (order == 53) {
-            mBinding.tvTitle.setText(R.string.ranking_title_king_signed);
-            mTabType = "continuation";
-            mBinding.tvBanquetType.setVisibility(View.VISIBLE);
-            mBinding.tabLayout.setVisibility(View.GONE);
-        } else {
-            mBinding.tvTitle.setText(R.string.ranking_title_common);
-            mBinding.tvBanquetType.setVisibility(View.VISIBLE);
-        }
-
-        String json = GsonUtils.toJson(condition);
-        JsonObject jo = (JsonObject) JsonParser.parseString(json);
-        jo.addProperty("order", order);
-        OkGo.<PkDataBean>post(HttpURLs.screen2Data1)
-                .upJson(jo.toString())
-                .execute(new Callback<PkDataBean>() {
-                    @Override
-                    public void onStart(Request<PkDataBean, ? extends Request> request) {
-                    }
-
-                    @Override
-                    public void onSuccess(Response<PkDataBean> response) {
-                    }
-
-                    @Override
-                    public void onCacheSuccess(Response<PkDataBean> response) {
-                    }
-
-                    @Override
-                    public void onError(Response<PkDataBean> response) {
-                    }
-
-                    @Override
-                    public void onFinish() {
-                        initUI();
-                        setData();
-                    }
-
-                    @Override
-                    public void uploadProgress(Progress progress) {
-                    }
-
-                    @Override
-                    public void downloadProgress(Progress progress) {
-                    }
-
-                    @Override
-                    public PkDataBean convertResponse(okhttp3.Response response) throws Throwable {
-                        Gson gson = new Gson();
-                        PkDataBean dataBean = new PkDataBean();
-                        JsonParser parser = new JsonParser();
-                        JsonElement element = parser.parse(response.body().string());
-                        if (element.isJsonObject()) {//假设最外层是object
-                            // 把JsonElement对象转换成JsonObject
-                            JsonObject JsonObject = element.getAsJsonObject();
-                            JsonElement jsonElement = JsonObject.get("data");
-                            if (jsonElement.isJsonObject()) {
-                                JsonObject JsonObject1 = jsonElement.getAsJsonObject();
-                                JsonElement jsonElementQg = JsonObject1.get("qg");
-                                if (jsonElementQg.isJsonObject()) {
-                                    dataQg = gson.fromJson(jsonElementQg, PkDataBean.DataBean.DataChildBean.class);
-                                } else if (jsonElementQg.isJsonArray()) {
-                                    Type type = new TypeToken<List<PkDataBean.DataBean.DataChildBean>>() {
-                                    }.getType();
-                                    // 把JsonElement对象转换成JsonArray
-//                                List<PkDataBean.DataBean.DataChildBean> list = gson.fromJson(jsonElement, type);
-                                    dataQg = gson.fromJson(jsonElementQg, type);
-                                }
-                                JsonElement jsonElementGs = JsonObject1.get("gs");
-                                if (jsonElementGs.isJsonObject()) {
-                                    dataGs = gson.fromJson(jsonElementGs, PkDataBean.DataBean.DataChildBean.class);
-                                } else if (jsonElementGs.isJsonArray()) {
-                                    Type type = new TypeToken<List<PkDataBean.DataBean.DataChildBean>>() {
-                                    }.getType();
-                                    // 把JsonElement对象转换成JsonArray
-//                                List<PkDataBean.DataBean.DataChildBean> list = gson.fromJson(jsonElement, type);
-                                    dataGs = gson.fromJson(jsonElementGs, type);
-                                }
-                            }
-                        }
-                        return dataBean;
-                    }
-                });
+        setData();
     }
 
     private void setData() {
-        //当前榜单(查看完整榜单使用)
-        PkDataBean.DataBean.DataChildBean dataCurrent;
-
-        if (mType == 1) {
-            dataCurrent = dataGs;//公司
-        } else {
-            dataCurrent = dataQg;//全国
-        }
-
-        if (dataCurrent == null) {
+        if (data == null) {
             initUI();
             return;
         }
 
         List<PkDataBean.DataBean.DataChildBean.PersonBean> list = new ArrayList<>();
         if ("data1".equals(mTabType)) {
-            list = dataCurrent.getData1();
+            list = data.getData1();
         } else if ("data2".equals(mTabType)) {
-            list = dataCurrent.getData2();
+            list = data.getData2();
         } else if ("data3".equals(mTabType)) {
-            list = dataCurrent.getData3();
+            list = data.getData3();
         } else if ("data4".equals(mTabType)) {
-            list = dataCurrent.getData4();
+            list = data.getData4();
         } else if ("income".equals(mTabType)) {
-            list = dataCurrent.getIncome();
+            list = data.getIncome();
         } else if ("income_rate".equals(mTabType)) {
-            list = dataCurrent.getIncome_rate();
+            list = data.getIncome_rate();
         } else if ("data1_rate".equals(mTabType)) {
-            list = dataCurrent.getData1_rate();
+            list = data.getData1_rate();
         } else if ("data2_rate".equals(mTabType)) {
-            list = dataCurrent.getData2_rate();
+            list = data.getData2_rate();
         } else if ("data3_rate".equals(mTabType)) {
-            list = dataCurrent.getData3_rate();
+            list = data.getData3_rate();
         } else if ("continuation".equals(mTabType)) {
-            list = dataCurrent.getContinuation();
+            list = data.getContinuation();
         }
 
         if (list == null || list.size() == 0) {

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.CollectionUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.lingyan.banquet.App;
@@ -32,18 +33,16 @@ public class JulyPkListActivity extends BaseActivity {
     private LayoutPkRankJulyBinding mHeadBinding;
     private String mTabType = "";
     private List<PkDataBean.DataBean.DataChildBean.PersonBean> list;
-    private PkDataBean.DataBean.DataChildBean dataGs;
-    private PkDataBean.DataBean.DataChildBean dataQg;
+    private PkDataBean.DataBean.DataChildBean data;
     private PkItemBean tabList;
     private JulyPkListAdapter mAdapter;
     private String title;
     //全国0/本公司1
-    private int mType = 0;
+//    private int mType = 0;
 
-    public static void start(PkDataBean.DataBean.DataChildBean dataGs, PkDataBean.DataBean.DataChildBean dataQg, PkItemBean tabList, String title) {
+    public static void start(PkDataBean.DataBean.DataChildBean data, PkItemBean tabList, String title) {
         Intent intent = new Intent(App.sApp, JulyPkListActivity.class);
-        intent.putExtra("dataGs", dataGs);
-        intent.putExtra("dataQg", dataQg);
+        intent.putExtra("data", data);
         intent.putExtra("tabList", tabList);
         intent.putExtra("title", title);
         ActivityUtils.startActivity(intent);
@@ -54,8 +53,7 @@ public class JulyPkListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = ActivityJulyPkListBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        dataGs = getIntent().getParcelableExtra("dataGs");
-        dataQg = getIntent().getParcelableExtra("dataQg");
+        data = getIntent().getParcelableExtra("data");
         tabList = getIntent().getParcelableExtra("tabList");
         title = getIntent().getStringExtra("title");
         mHeadBinding = LayoutPkRankJulyBinding.inflate(getLayoutInflater());
@@ -63,16 +61,25 @@ public class JulyPkListActivity extends BaseActivity {
         mHeadBinding.llPkTitle.setVisibility(View.GONE);
         mBinding.llTitleBarRoot.tvTitleBarTitle.setText(title);
 
-        if ("全国PK榜".equals(title)) {
-            mBinding.llTitleBarRoot.tvBanquetType.setVisibility(View.INVISIBLE);
-        }
-
         list = new ArrayList<>();
         mAdapter = new JulyPkListAdapter(list);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mBinding.recyclerView.setAdapter(mAdapter);
         mAdapter.addHeaderView(mHeadBinding.getRoot());
         initUI();
+
+        if ("连单王".equals(title)) {
+            mHeadBinding.llTopThree.setVisibility(View.GONE);
+            mHeadBinding.llKingSigned.setVisibility(View.VISIBLE);
+            mTabType = "continuation";
+            refresh();
+        }
+
+        if ("酒店连单王".equals(title)) {
+            mHeadBinding.llTopThree.setVisibility(View.GONE);
+            mTabType = "continuation";
+            refresh();
+        }
 
         mHeadBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -92,33 +99,34 @@ public class JulyPkListActivity extends BaseActivity {
             }
         });
 
-        for (PkItemBean.DataBean dataBean : tabList.getData()) {
-            TabLayout.Tab tab = mHeadBinding.tabLayout.newTab();
-            tab.setTag(dataBean.getKey());
-            tab.setText(dataBean.getTitle());
-            mHeadBinding.tabLayout.addTab(tab);
-        }
-
-        mBinding.llTitleBarRoot.tvBanquetType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<String> list = new ArrayList<>();
-                list.add("全国");
-                list.add("本公司");
-                PickerListDialog dialog = new PickerListDialog(JulyPkListActivity.this);
-                dialog.items(list);
-                dialog.itemSelectedCallBack(new PickerListDialog.ItemSelectedCallBack() {
-                    @Override
-                    public void onItemSelected(int position, String text, PickerListDialog dialog) {
-                        mType = position;
-                        mBinding.llTitleBarRoot.tvBanquetType.setText(text);
-                        dialog.dismiss();
-                        refresh();
-                    }
-                });
-                dialog.show();
+        if (tabList != null)
+            for (PkItemBean.DataBean dataBean : tabList.getData()) {
+                TabLayout.Tab tab = mHeadBinding.tabLayout.newTab();
+                tab.setTag(dataBean.getKey());
+                tab.setText(dataBean.getTitle());
+                mHeadBinding.tabLayout.addTab(tab);
             }
-        });
+
+//        mBinding.llTitleBarRoot.tvBanquetType.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                List<String> list = new ArrayList<>();
+//                list.add("全国");
+//                list.add("本公司");
+//                PickerListDialog dialog = new PickerListDialog(JulyPkListActivity.this);
+//                dialog.items(list);
+//                dialog.itemSelectedCallBack(new PickerListDialog.ItemSelectedCallBack() {
+//                    @Override
+//                    public void onItemSelected(int position, String text, PickerListDialog dialog) {
+//                        mType = position;
+//                        mBinding.llTitleBarRoot.tvBanquetType.setText(text);
+//                        dialog.dismiss();
+//                        refresh();
+//                    }
+//                });
+//                dialog.show();
+//            }
+//        });
     }
 
     private void initUI() {
@@ -135,44 +143,31 @@ public class JulyPkListActivity extends BaseActivity {
     }
 
     private void refresh() {
-        PkDataBean.DataBean.DataChildBean dataCurrent;
-
-        if (mType == 1) {
-            dataCurrent = dataGs;//公司
-        } else {
-            dataCurrent = dataQg;//全国
-        }
-
-        if (dataCurrent == null) {
+        if (data == null) {
             initUI();
             return;
         }
 
-        if ("连单王".equals(title)) {
-            mHeadBinding.tabLayout.setVisibility(View.GONE);
-            mTabType = "continuation";
-        }
-
         if ("data1".equals(mTabType)) {
-            list = dataCurrent.getData1();
+            list = data.getData1();
         } else if ("data2".equals(mTabType)) {
-            list = dataCurrent.getData2();
+            list = data.getData2();
         } else if ("data3".equals(mTabType)) {
-            list = dataCurrent.getData3();
+            list = data.getData3();
         } else if ("data4".equals(mTabType)) {
-            list = dataCurrent.getData4();
+            list = data.getData4();
         } else if ("income".equals(mTabType)) {
-            list = dataCurrent.getIncome();
+            list = data.getIncome();
         } else if ("income_rate".equals(mTabType)) {
-            list = dataCurrent.getIncome_rate();
+            list = data.getIncome_rate();
         } else if ("data1_rate".equals(mTabType)) {
-            list = dataCurrent.getData1_rate();
+            list = data.getData1_rate();
         } else if ("data2_rate".equals(mTabType)) {
-            list = dataCurrent.getData2_rate();
+            list = data.getData2_rate();
         } else if ("data3_rate".equals(mTabType)) {
-            list = dataCurrent.getData3_rate();
+            list = data.getData3_rate();
         } else if ("continuation".equals(mTabType)) {
-            list = dataCurrent.getContinuation();
+            list = data.getContinuation();
         }
 
         if (list == null || list.size() == 0) {

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
@@ -42,7 +41,6 @@ public class JulyDataFilterActivity extends BaseActivity {
     private ActivityJulyDataFilterBinding mBinding;
     private GroupViewUtils mGroupViewUtils;
 
-
     public static void start(AppCompatActivity activity, int code, String json) {
         Intent intent = new Intent(activity, JulyDataFilterActivity.class);
         intent.putExtra(Constant.Parameter.JSON, json);
@@ -54,11 +52,11 @@ public class JulyDataFilterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = ActivityJulyDataFilterBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        mBinding.llTitleBarRoot.tvTitleBarTitle.setText("筛选");
+        mBinding.llTitleBarRoot.tvTitleBarTitle.setText("七月围城七月红");
         Intent intent = getIntent();
         String json = intent.getStringExtra(Constant.Parameter.JSON);
-        LogUtils.i(Constant.Parameter.JSON, json);
         mConditionFilter = GsonUtils.fromJson(json, ConditionFilter.class);
+
         mBinding.tvSelectGroup.setText(getTitleDesc());
         mBinding.tvReset.setOnClickListener(v -> {
             ConditionFilter conditionFilter = new ConditionFilter();

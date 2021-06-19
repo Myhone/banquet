@@ -34,7 +34,7 @@ public class BanquetMonthView extends MonthView {
 
     private final int mGrayColor = Color.parseColor("#BDBFC2");
     private final int mBlackColor = Color.parseColor("#333333");
-    private final int mBlack2Color = Color.parseColor("#484848");
+    private final int mBlack2Color = Color.parseColor("#df3a32");
     private final int mGoldColor = Color.parseColor("#E0C488");
     private final int mBgGrayColor = Color.parseColor("#F5F5F5");
 

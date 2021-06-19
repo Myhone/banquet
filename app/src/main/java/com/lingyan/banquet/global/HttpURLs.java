@@ -11,7 +11,7 @@ public class HttpURLs {
     public static String IMAGE_BASE = SPUtils.getInstance().getString("img_url");
     public static final String login = BASE + "api/v1/login";
     public static final String upload = BASE + "api/v1/common/upload";
-    public static final String uploadAvatar= BASE + "api/v1/user/update_avatar";
+    public static final String uploadAvatar = BASE + "api/v1/user/update_avatar";
     public static final String homeTab = BASE + "api/v1/index/menu_list";
     public static final String listBanquetHall = BASE + "api/v1/banquet/listBanquetHall";
     public static final String monthIndex = BASE + "api/v1/index/month_index";
@@ -77,4 +77,5 @@ public class HttpURLs {
     public static final String followAdd = BASE + "api/v1/banquetFollow/add"; //新增跟进记录
     public static final String modifyHall = BASE + "api/v1/banquet/modifyhall2"; //修改包间
     public static final String homeBackgroundImg = BASE + "api/v1/index/info"; //首页背景图
+    public static final String todayStar = BASE + "api/v1/screen2/todaystar"; //七月围城今日明星
 }

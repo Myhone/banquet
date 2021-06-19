@@ -75,25 +75,25 @@
                     android:visibility="invisible" />
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tv_banquet_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_title_bar_container"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="21.5dp"
-                android:background="@drawable/shape_rect_light_gray_corners_90"
-                android:drawablePadding="3dp"
-                android:gravity="center"
-                android:paddingLeft="16dp"
-                android:paddingTop="3dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="3dp"
-                android:text="宴会"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:drawableEndCompat="@mipmap/ic_arrow_down_black" />
+            <!--            <TextView-->
+            <!--                android:id="@+id/tv_banquet_type"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/rl_title_bar_container"-->
+            <!--                android:layout_marginStart="12dp"-->
+            <!--                android:layout_marginTop="21.5dp"-->
+            <!--                android:background="@drawable/shape_rect_light_gray_corners_90"-->
+            <!--                android:drawablePadding="3dp"-->
+            <!--                android:gravity="center"-->
+            <!--                android:paddingLeft="16dp"-->
+            <!--                android:paddingTop="3dp"-->
+            <!--                android:paddingRight="16dp"-->
+            <!--                android:paddingBottom="3dp"-->
+            <!--                android:text="宴会"-->
+            <!--                android:textColor="@color/white"-->
+            <!--                android:textSize="12sp"-->
+            <!--                android:textStyle="bold"-->
+            <!--                app:drawableEndCompat="@mipmap/ic_arrow_down_black" />-->
 
             <TextView
                 android:id="@+id/tv_group_time"
@@ -110,7 +110,7 @@
                 android:paddingTop="3dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="3dp"
-                android:text="我的/本日"
+                android:text="今日"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textStyle="bold"
@@ -134,15 +134,86 @@
                 android:background="@drawable/shape_rect_bg_white_corner_top"
                 android:orientation="vertical">
 
-                <!--概况-->
-                <include
-                    android:id="@+id/ll_data_basic_root"
-                    layout="@layout/layout_data_basic_july" />
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="#f7f7f7" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@mipmap/bg_july_star"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"
+                        android:drawableStart="@mipmap/ic_july_star"
+                        android:drawablePadding="10dp"
+                        android:text="今日明星"
+                        android:textColor="@color/black1a"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/shape_rect_white_corners_4">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_avatar"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="15dp"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/ic_default_image"
+                            app:civ_border_color="@color/white"
+                            app:civ_border_width="1dp" />
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_10"
+                            android:layout_toEndOf="@+id/iv_avatar"
+                            android:text="陈独秀"
+                            android:textColor="@color/black1a"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tv_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_name"
+                            android:layout_marginTop="5dp"
+                            android:layout_toEndOf="@+id/iv_avatar"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="陈独秀是一朵奇葩，这一个很严肃严肃的问题，收单10000件。"
+                            android:textColor="@color/gray99"
+                            android:textSize="12sp"
+                            android:textStyle="normal" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <!--概况-->
+                <!--                <include-->
+                <!--                    android:id="@+id/ll_data_basic_root"-->
+                <!--                    layout="@layout/layout_data_basic_july" />-->
+
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="10dp"-->
+                <!--                    android:background="#f7f7f7" />-->
                 <!--完成-->
                 <!--  <include
                       android:id="@+id/ll_data_complete_root"
@@ -153,67 +224,68 @@
                       android:layout_height="10dp"
                       android:background="#f7f7f7" />-->
                 <!--新增数据-->
-                <include
-                    android:id="@+id/ll_data_new_add_root"
-                    layout="@layout/layout_data_new_add" />
+                <!--                <include-->
+                <!--                    android:id="@+id/ll_data_new_add_root"-->
+                <!--                    layout="@layout/layout_data_new_add" />-->
 
+                <!--全国pk榜-->
+                <include
+                    android:id="@+id/fl_data_pk_country"
+                    layout="@layout/layout_pk_rank_july" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:background="#f7f7f7" />
-
 
                 <!--个人pk榜-->
                 <include
-                    android:id="@+id/fl_data_pk_root"
+                    android:id="@+id/fl_data_pk_personal_qg"
                     layout="@layout/layout_pk_rank_july" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:background="#f7f7f7" />
-                <!--部分pk榜-->
+
+                <!--连单王全国-->
                 <include
-                    android:id="@+id/fl_data_pk_root_department"
-                    layout="@layout/layout_pk_rank_july" />
+                    android:id="@+id/fl_data_pk_king_signed_qg"
+                    layout="@layout/layout_king_signed" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="#f7f7f7" />
-                <!--全国pk榜-->
+                <!--部门pk榜公司-->
                 <include
-                    android:id="@+id/fl_data_pk_root_country"
+                    android:id="@+id/fl_data_pk_department_gs"
                     layout="@layout/layout_pk_rank_july" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:background="#f7f7f7" />
-                <!--连单王-->
+
+                <!--个人pk榜公司-->
                 <include
-                    android:id="@+id/fl_data_pk_root_many"
+                    android:id="@+id/fl_data_pk_personal_gs"
                     layout="@layout/layout_pk_rank_july" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
                     android:background="#f7f7f7" />
+
+                <!--连单王公司-->
+                <include
+                    android:id="@+id/fl_data_pk_king_signed_gs"
+                    layout="@layout/layout_king_signed" />
                 <!--业绩目标-->
-                <include
-                    android:id="@+id/fl_data_target_root"
-                    layout="@layout/layout_target_analyze" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="#f7f7f7" />
+                <!--                <include-->
+                <!--                    android:id="@+id/fl_data_target_root"-->
+                <!--                    layout="@layout/layout_target_analyze" />-->
 
                 <!--数据分析-->
-                <include
-                    android:id="@+id/fl_data_analyze_root"
-                    layout="@layout/layout_data_analyze" />
+                <!--                <include-->
+                <!--                    android:id="@+id/fl_data_analyze_root"-->
+                <!--                    layout="@layout/layout_data_analyze" />-->
 
                 <!--                <View-->
                 <!--                    android:layout_width="match_parent"-->
