@@ -176,6 +176,15 @@ public class PkDataBean {
                 private String long_count;
                 private int sort;
                 private String user_name;
+                private String long_user_name;
+
+                public String getLong_user_name() {
+                    return long_user_name;
+                }
+
+                public void setLong_user_name(String long_user_name) {
+                    this.long_user_name = long_user_name;
+                }
 
                 public String getAvatar() {
                     return avatar;
@@ -256,6 +265,7 @@ public class PkDataBean {
                     dest.writeString(this.long_count);
                     dest.writeInt(this.sort);
                     dest.writeString(this.user_name);
+                    dest.writeString(this.long_user_name);
                 }
 
                 public void readFromParcel(Parcel source) {
@@ -267,6 +277,7 @@ public class PkDataBean {
                     this.long_count = source.readString();
                     this.sort = source.readInt();
                     this.user_name = source.readString();
+                    this.long_user_name = source.readString();
                 }
 
                 public PersonBean() {
@@ -281,6 +292,7 @@ public class PkDataBean {
                     this.long_count = in.readString();
                     this.sort = in.readInt();
                     this.user_name = in.readString();
+                    this.long_user_name = in.readString();
                 }
 
                 public static final Creator<PersonBean> CREATOR = new Creator<PersonBean>() {

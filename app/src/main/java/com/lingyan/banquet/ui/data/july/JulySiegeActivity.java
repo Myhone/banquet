@@ -90,13 +90,13 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
         });
 
         mBinding.flDataPkKingSignedQg.tvTitle.setText("连单王");
-        mBinding.flDataPkKingSignedGs.tvTitle.setText("酒店连单王");
+        mBinding.tvTitle.setText("酒店连单王");
         mBinding.flDataPkKingSignedQg.llKingSigned.setOnClickListener(v -> {
             //查看榜单详情
             JulyPkListActivity.start(dataKingSignedQg, null, "连单王");
         });
 
-        mBinding.flDataPkKingSignedGs.llKingSigned.setOnClickListener(v -> {
+        mBinding.rlKingSignedGs.setOnClickListener(v -> {
             //查看榜单详情
             JulyPkListActivity.start(dataKingSignedGs, null, "酒店连单王");
         });

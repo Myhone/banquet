@@ -147,24 +147,24 @@ public class DataPkController {
         PkDataBean.DataBean.DataChildBean.PersonBean dto3 = CollectionUtils.find(list, item -> item.getSort() == 3);
 
         if (dto1 != null) {
-            mBinding.tvName1.setText(dto1.getUser_name());
-            mBinding.tvCount1.setText(dto1.getCount());
+            mBinding.tvName1.setText(dto1.getLong_user_name());
+            mBinding.tvCount1.setText(dto1.getLong_count());
             String avatar = dto1.getAvatar();
             if (!StringUtils.isEmpty(avatar)) {
                 MyImageUtils.displayUseImageServer(mBinding.civAvatar1, avatar);
             }
         }
         if (dto2 != null) {
-            mBinding.tvName2.setText(dto2.getUser_name());
-            mBinding.tvCount2.setText(dto2.getCount());
+            mBinding.tvName2.setText(dto2.getLong_user_name());
+            mBinding.tvCount2.setText(dto2.getLong_count());
             String avatar = dto2.getAvatar();
             if (!StringUtils.isEmpty(avatar)) {
                 MyImageUtils.displayUseImageServer(mBinding.civAvatar2, avatar);
             }
         }
         if (dto3 != null) {
-            mBinding.tvName3.setText(dto3.getUser_name());
-            mBinding.tvCount3.setText(dto3.getCount());
+            mBinding.tvName3.setText(dto3.getLong_user_name());
+            mBinding.tvCount3.setText(dto3.getLong_count());
             String avatar = dto3.getAvatar();
             if (!StringUtils.isEmpty(avatar)) {
                 MyImageUtils.displayUseImageServer(mBinding.civAvatar3, avatar);
