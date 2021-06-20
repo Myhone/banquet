@@ -31,8 +31,8 @@ public class JulyPkListAdapter extends BaseQuickAdapter<PkDataBean.DataBean.Data
 
         holder
                 .setText(R.id.tv_sort, dto.getSort() + "")
-                .setText(R.id.tv_user_name, dto.getUser_name() + "")
-                .setText(R.id.tv_count, dto.getCount() + "")
+                .setText(R.id.tv_user_name, dto.getLong_user_name() + "")
+                .setText(R.id.tv_count, dto.getLong_count() + "")
                 .setGone(R.id.word_avatar, false)
                 .setGone(R.id.civ_avatar, false)
         ;
