@@ -14,9 +14,7 @@ import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.android.material.tabs.TabLayout;
 import com.lingyan.banquet.base.BaseActivity;
 import com.lingyan.banquet.databinding.ActivityTargetHomeBinding;
@@ -30,7 +28,6 @@ import com.lingyan.banquet.ui.target.bean.NetTargetList;
 import com.lingyan.banquet.ui.target.bean.NetTargetTabList;
 import com.lingyan.banquet.views.dialog.PickerListDialog;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.Response;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -49,7 +46,7 @@ public class TargetHomeActivity extends BaseActivity implements BaseQuickAdapter
     private List<NetTargetTabList.DataDTO> mTabList;
     private NetReqTargetCondition mCondition;
     private int mCurPage;
-    private String b_type;
+    private String b_type, currentTableTitle;
 
     public static void start() {
         ActivityUtils.startActivity(TargetHomeActivity.class);
@@ -95,6 +92,7 @@ public class TargetHomeActivity extends BaseActivity implements BaseQuickAdapter
             public void onTabSelected(TabLayout.Tab tab) {
                 NetTargetTabList.DataDTO dto = mTabList.get(tab.getPosition());
                 mCondition.a_type = dto.getA_type();
+                currentTableTitle = tab.getText().toString();
                 onRefresh(mBinding.refreshLayout);
             }
 
@@ -234,11 +232,12 @@ public class TargetHomeActivity extends BaseActivity implements BaseQuickAdapter
         String deptName = dto.getDept_name();
         String avatarName = dto.getAvatar_name();
         String b_type = dto.getB_type();
-        if(ObjectUtils.isEmpty(deptName)){
-            deptName=name;
+        String rate = dto.getRate();
+        String user_number = dto.getUser_number();
+        if (ObjectUtils.isEmpty(deptName)) {
+            deptName = name;
         }
-
-        TargetDetailActivity.start(dto.getType(), dto.getId(),name,avatarName,deptName,b_type);
+        TargetDetailActivity.start(currentTableTitle, dto.getType(), dto.getId(), name, avatarName, deptName, b_type, rate, user_number);
     }
 
     @Override

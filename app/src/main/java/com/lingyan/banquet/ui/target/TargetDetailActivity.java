@@ -3,7 +3,6 @@ package com.lingyan.banquet.ui.target;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 
@@ -12,7 +11,6 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.GsonUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ThreadUtils;
 import com.blankj.utilcode.util.TimeUtils;
@@ -21,19 +19,17 @@ import com.google.android.material.tabs.TabLayout;
 import com.lingyan.banquet.App;
 import com.lingyan.banquet.base.BaseActivity;
 import com.lingyan.banquet.databinding.ActivityTargetDetailBinding;
+import com.lingyan.banquet.global.Constant;
 import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.net.JsonCallback;
 import com.lingyan.banquet.net.NetBaseResp;
 import com.lingyan.banquet.ui.target.bean.NetReqTargetDetailCondition;
 import com.lingyan.banquet.ui.target.bean.NetTargetDetail;
-import com.lingyan.banquet.ui.target.bean.NetTargetTabList;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.Response;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by _hxb on 2021/1/31.
@@ -43,9 +39,8 @@ public class TargetDetailActivity extends BaseActivity {
 
     private ActivityTargetDetailBinding mBinding;
 
-    private List<NetTargetTabList.DataDTO> mTabList;
     private NetReqTargetDetailCondition mCondition;
-    private String mType, b_type;
+    private String mType, b_type, rate, user_number;
     private String mId;
     private String mPersonName;
     private String mAvatarName;
@@ -56,14 +51,17 @@ public class TargetDetailActivity extends BaseActivity {
      * @param type 2-部门 3-员工
      * @param id
      */
-    public static void start(String type, String id, String personName, String avatarName, String departName, String b_type) {
+    public static void start(String tableTitle, String type, String id, String personName, String avatarName, String departName, String b_type, String rate, String user_number) {
         Intent intent = new Intent(App.sApp, TargetDetailActivity.class);
+        intent.putExtra(Constant.Parameter.TABLE_TITLE, tableTitle);
         intent.putExtra("type", type);
         intent.putExtra("id", id);
         intent.putExtra("personName", personName);
         intent.putExtra("avatarName", avatarName);
         intent.putExtra("departName", departName);
         intent.putExtra("b_type", b_type);
+        intent.putExtra(Constant.Parameter.RATE, rate);
+        intent.putExtra(Constant.Parameter.USER_NUMBER, user_number);
         ActivityUtils.startActivity(intent);
     }
 
@@ -73,20 +71,23 @@ public class TargetDetailActivity extends BaseActivity {
         mBinding = ActivityTargetDetailBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
         Intent intent = getIntent();
+        String tableTitle = intent.getStringExtra(Constant.Parameter.TABLE_TITLE);
         mType = intent.getStringExtra("type");
         mId = intent.getStringExtra("id");
         mPersonName = intent.getStringExtra("personName");
         mAvatarName = intent.getStringExtra("avatarName");
         mDepartName = intent.getStringExtra("departName");
         b_type = intent.getStringExtra("b_type");
+        rate = intent.getStringExtra(Constant.Parameter.RATE);
+        user_number = intent.getStringExtra(Constant.Parameter.USER_NUMBER);
 
         mBinding.llTitleBarRoot.tvTitleBarTitle.setText("目标详情");
         mCondition = new NetReqTargetDetailCondition();
         mBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                NetTargetTabList.DataDTO dto = mTabList.get(tab.getPosition());
-                mCondition.target_type = dto.getA_type();
+//                NetTargetTabList.DataDTO dto = mTabList.get(tab.getPosition());
+//                mCondition.target_type = dto.getA_type();
                 getData();
             }
 
@@ -134,28 +135,31 @@ public class TargetDetailActivity extends BaseActivity {
         mBinding.tvYear.setText(mCondition.year);
         mBinding.tvYearTitle.setText(mCondition.year);
 
-
-        OkGo.<NetTargetTabList>post(HttpURLs.achievementTabList)
-//                .cacheMode(CacheMode.IF_NONE_CACHE_REQUEST)
-                .execute(new JsonCallback<NetTargetTabList>() {
-                    @Override
-                    public void onSuccess(Response<NetTargetTabList> response) {
-                        if (ObjectUtils.isNotEmpty(mTabList)) {
-                            return;
-                        }
-                        NetTargetTabList body = response.body();
-                        mTabList = body.getData();
-                        if (ObjectUtils.isNotEmpty(mTabList)) {
-                            mBinding.tabLayout.removeAllTabs();
-                            for (NetTargetTabList.DataDTO dataDTO : mTabList) {
-                                TabLayout.Tab tab = mBinding.tabLayout.newTab();
-                                tab.setText(dataDTO.getTitle());
-                                mBinding.tabLayout.addTab(tab);
-                            }
-                        }
-
-                    }
-                });
+        mBinding.tabLayout.removeAllTabs();
+        TabLayout.Tab tab = mBinding.tabLayout.newTab();
+        tab.setText(tableTitle);
+        mBinding.tabLayout.addTab(tab);
+//        OkGo.<NetTargetTabList>post(HttpURLs.achievementTabList)
+////                .cacheMode(CacheMode.IF_NONE_CACHE_REQUEST)
+//                .execute(new JsonCallback<NetTargetTabList>() {
+//                    @Override
+//                    public void onSuccess(Response<NetTargetTabList> response) {
+//                        if (ObjectUtils.isNotEmpty(mTabList)) {
+//                            return;
+//                        }
+//                        NetTargetTabList body = response.body();
+//                        mTabList = body.getData();
+//                        if (ObjectUtils.isNotEmpty(mTabList)) {
+//                            mBinding.tabLayout.removeAllTabs();
+//                            for (NetTargetTabList.DataDTO dataDTO : mTabList) {
+//                                TabLayout.Tab tab = mBinding.tabLayout.newTab();
+//                                tab.setText(dataDTO.getTitle());
+//                                mBinding.tabLayout.addTab(tab);
+//                            }
+//                        }
+//
+//                    }
+//                });
 
     }
 
@@ -238,27 +242,29 @@ public class TargetDetailActivity extends BaseActivity {
                         mBinding.tvConfirm.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String url;
+                                String url = "";
                                 NetTargetDetail.DataDTO dto = mData;
-                                if (dto == null) {
-                                    url = HttpURLs.achievementSave;
-                                    dto = new NetTargetDetail.DataDTO();
-                                    dto.setType(mType);
-                                    dto.setTarget_type(mCondition.target_type);
-                                    dto.setYear(mBinding.tvYear.getText().toString().trim());
-
-                                    if (StringUtils.equals(mType, "2")) {
-                                        //2-部门 3-员工
-                                        dto.setDept_id(mId);
-                                    } else {
-                                        dto.setUser_id(mId);
-                                    }
-
-
-                                } else {
+                                if (Float.parseFloat(rate) >= 0 && Integer.parseInt(user_number) != 0) {
                                     url = HttpURLs.achievementUpdate;
                                     dto.setId(dto.getAchievement_id());
+                                } else {
+                                    if (Integer.parseInt(user_number) == 0) {
+                                        url = HttpURLs.achievementSave;
+                                        dto = new NetTargetDetail.DataDTO();
+
+                                        if (StringUtils.equals(mType, "2")) {
+                                            //2-部门 3-员工
+                                            dto.setDept_id(mId);
+                                        } else {
+                                            dto.setUser_id(mId);
+                                        }
+                                    }
+
                                 }
+
+                                dto.setType(mType);
+                                dto.setTarget_type(mCondition.target_type);
+                                dto.setYear(mBinding.tvYear.getText().toString().trim());
 
                                 dto.setJanuary(mBinding.tvJanuary.getText().toString().trim());
                                 dto.setFebruary(mBinding.tvFebruary.getText().toString().trim());

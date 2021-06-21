@@ -18,6 +18,7 @@ import com.lingyan.banquet.ui.data.PkListActivity;
 import com.lingyan.banquet.ui.data.bean.ConditionFilter;
 import com.lingyan.banquet.ui.data.bean.NetPkData;
 import com.lingyan.banquet.ui.data.bean.PersonBean;
+import com.lingyan.banquet.ui.data.july.PkDataBean;
 import com.lingyan.banquet.utils.MyImageUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -126,24 +127,11 @@ public class DataPkController {
                             list = data4;
                         }
 
-                        NetPkData.DataDTO.DataInfoDTO dto1 = CollectionUtils.find(list, new CollectionUtils.Predicate<NetPkData.DataDTO.DataInfoDTO>() {
-                            @Override
-                            public boolean evaluate(NetPkData.DataDTO.DataInfoDTO item) {
-                                return item.getSort() == 1;
-                            }
-                        });
-                        NetPkData.DataDTO.DataInfoDTO dto2 = CollectionUtils.find(list, new CollectionUtils.Predicate<NetPkData.DataDTO.DataInfoDTO>() {
-                            @Override
-                            public boolean evaluate(NetPkData.DataDTO.DataInfoDTO item) {
-                                return item.getSort() == 2;
-                            }
-                        });
-                        NetPkData.DataDTO.DataInfoDTO dto3 = CollectionUtils.find(list, new CollectionUtils.Predicate<NetPkData.DataDTO.DataInfoDTO>() {
-                            @Override
-                            public boolean evaluate(NetPkData.DataDTO.DataInfoDTO item) {
-                                return item.getSort() == 3;
-                            }
-                        });
+                        NetPkData.DataDTO.DataInfoDTO dto1 = list.get(0);
+                        NetPkData.DataDTO.DataInfoDTO dto2 = null;
+                        NetPkData.DataDTO.DataInfoDTO dto3 = null;
+                        if (list.size() > 1) dto2 = list.get(1);
+                        if (list.size() > 2) dto3 = list.get(2);
 
                         if (dto1 != null) {
                             mBinding.tvName1.setText(dto1.getUser_name());
@@ -151,6 +139,10 @@ public class DataPkController {
                             String avatar = dto1.getAvatar();
                             if (!StringUtils.isEmpty(avatar)) {
                                 MyImageUtils.displayUseImageServer(mBinding.civAvatar1, avatar);
+                                mBinding.tvAvatar1.setText("");
+                            } else {
+                                mBinding.civAvatar1.setImageResource(R.color.gold);
+                                mBinding.tvAvatar1.setText(dto1.getAvatar_name());
                             }
                         }
                         if (dto2 != null) {
@@ -159,6 +151,10 @@ public class DataPkController {
                             String avatar = dto2.getAvatar();
                             if (!StringUtils.isEmpty(avatar)) {
                                 MyImageUtils.displayUseImageServer(mBinding.civAvatar2, avatar);
+                                mBinding.tvAvatar2.setText("");
+                            } else {
+                                mBinding.civAvatar2.setImageResource(R.color.gold);
+                                mBinding.tvAvatar2.setText(dto2.getAvatar_name());
                             }
                         }
                         if (dto3 != null) {
@@ -167,6 +163,10 @@ public class DataPkController {
                             String avatar = dto3.getAvatar();
                             if (!StringUtils.isEmpty(avatar)) {
                                 MyImageUtils.displayUseImageServer(mBinding.civAvatar3, avatar);
+                                mBinding.tvAvatar3.setText("");
+                            } else {
+                                mBinding.civAvatar3.setImageResource(R.color.gold);
+                                mBinding.tvAvatar3.setText(dto3.getAvatar_name());
                             }
                         }
 

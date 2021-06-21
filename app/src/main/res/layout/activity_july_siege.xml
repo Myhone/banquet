@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_title_bar_container"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="21.5dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/shape_rect_light_gray_corners_90"
                 android:drawablePadding="3dp"

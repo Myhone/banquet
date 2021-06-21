@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.google.gson.Gson;
@@ -73,12 +72,6 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
         setContentView(mBinding.getRoot());
         StatusBarUtil.setTranslucentForImageView(this, 0, mBinding.clBar);
 
-        long currentTimeMills = System.currentTimeMillis();
-        if (1625068800 < currentTimeMills && currentTimeMills < 1625155200) {
-            mBinding.tvTitleBarTitle.setImageResource(R.mipmap.ic_title_july);
-        } else {
-            mBinding.tvTitleBarTitle.setImageResource(R.mipmap.ic_title_july_other);
-        }
         mBinding.tvGroupTime.setOnClickListener(v -> {
             /*int[] ints = new int[2];
             mBinding.rlConditionContainer.getLocationOnScreen(ints);
@@ -160,6 +153,13 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        long currentTimeMills = System.currentTimeMillis() / 1000;
+        if (1625068800 < currentTimeMills && currentTimeMills < 1625155200) {
+            mBinding.tvTitleBarTitle.setImageResource(R.mipmap.ic_title_july);
+        } else {
+            mBinding.tvTitleBarTitle.setImageResource(R.mipmap.ic_title_july_other);
+        }
+
         //今日明星
         getTodayStar();
         //获取榜单tab
@@ -278,22 +278,24 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
                                 if (jsonElementQg.isJsonObject()) {
                                     dataQg = gson.fromJson(jsonElementQg, PkDataBean.DataBean.DataChildBean.class);
                                 } else if (jsonElementQg.isJsonArray()) {
-                                    Type type = new TypeToken<List<PkDataBean.DataBean.DataChildBean>>() {
-                                    }.getType();
+//                                    Type type = new TypeToken<List<PkDataBean.DataBean.DataChildBean>>() {
+//                                    }.getType();
                                     // 把JsonElement对象转换成JsonArray
 //                                List<PkDataBean.DataBean.DataChildBean> list = gson.fromJson(jsonElement, type);
-                                    dataQg = gson.fromJson(jsonElementQg, type);
+//                                    dataQg = gson.fromJson(jsonElementQg, type);
                                 }
+
                                 JsonElement jsonElementGs = JsonObject1.get("gs");
                                 if (jsonElementGs.isJsonObject()) {
                                     dataGs = gson.fromJson(jsonElementGs, PkDataBean.DataBean.DataChildBean.class);
                                 } else if (jsonElementGs.isJsonArray()) {
-                                    Type type = new TypeToken<List<PkDataBean.DataBean.DataChildBean>>() {
-                                    }.getType();
+//                                    Type type = new TypeToken<List<PkDataBean.DataBean.DataChildBean>>() {
+//                                    }.getType();
                                     // 把JsonElement对象转换成JsonArray
 //                                List<PkDataBean.DataBean.DataChildBean> list = gson.fromJson(jsonElement, type);
-                                    dataGs = gson.fromJson(jsonElementGs, type);
+//                                    dataGs = gson.fromJson(jsonElementGs, type);
                                 }
+
                             }
                         }
                         return dataBean;

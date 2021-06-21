@@ -15,6 +15,9 @@ public class Constant {
         String LIMIT = "limit";
         String TIME_TYPE = "time_type";
         String RANGE = "range";
+        String RATE ="rate";
+        String USER_NUMBER = "user_number";
+        String TABLE_TITLE = "table_title";
     }
 
     /**
