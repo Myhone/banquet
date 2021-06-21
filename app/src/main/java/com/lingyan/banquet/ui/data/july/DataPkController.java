@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.blankj.utilcode.util.CollectionUtils;
 import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
@@ -142,32 +143,49 @@ public class DataPkController {
             initUI();
             return;
         }
-        PkDataBean.DataBean.DataChildBean.PersonBean dto1 = CollectionUtils.find(list, item -> item.getSort() == 1);
-        PkDataBean.DataBean.DataChildBean.PersonBean dto2 = CollectionUtils.find(list, item -> item.getSort() == 2);
-        PkDataBean.DataBean.DataChildBean.PersonBean dto3 = CollectionUtils.find(list, item -> item.getSort() == 3);
+//        PkDataBean.DataBean.DataChildBean.PersonBean dto1 = CollectionUtils.find(list, item -> item.getSort() == 1);
+//        PkDataBean.DataBean.DataChildBean.PersonBean dto2 = CollectionUtils.find(list, item -> item.getSort() == 2);
+//        PkDataBean.DataBean.DataChildBean.PersonBean dto3 = CollectionUtils.find(list, item -> item.getSort() == 3);
+        PkDataBean.DataBean.DataChildBean.PersonBean dto1 = list.get(0);
+        PkDataBean.DataBean.DataChildBean.PersonBean dto2 = null;
+        PkDataBean.DataBean.DataChildBean.PersonBean dto3 = null;
+        if (list.size() > 1) dto2 = list.get(1);
+        if (list.size() > 2) dto3 = list.get(2);
 
         if (dto1 != null) {
-            mBinding.tvName1.setText(dto1.getLong_user_name());
-            mBinding.tvCount1.setText(dto1.getLong_count());
+            mBinding.tvName1.setText(dto1.getUser_name());
+            mBinding.tvCount1.setText(dto1.getCount());
             String avatar = dto1.getAvatar();
             if (!StringUtils.isEmpty(avatar)) {
                 MyImageUtils.displayUseImageServer(mBinding.civAvatar1, avatar);
+                mBinding.tvAvatar1.setText("");
+            } else {
+                mBinding.civAvatar1.setImageResource(R.color.gold);
+                mBinding.tvAvatar1.setText(dto1.getAvatar_name());
             }
         }
         if (dto2 != null) {
-            mBinding.tvName2.setText(dto2.getLong_user_name());
-            mBinding.tvCount2.setText(dto2.getLong_count());
+            mBinding.tvName2.setText(dto2.getUser_name());
+            mBinding.tvCount2.setText(dto2.getCount());
             String avatar = dto2.getAvatar();
             if (!StringUtils.isEmpty(avatar)) {
                 MyImageUtils.displayUseImageServer(mBinding.civAvatar2, avatar);
+                mBinding.tvAvatar2.setText("");
+            } else {
+                mBinding.civAvatar2.setImageResource(R.color.gold);
+                mBinding.tvAvatar2.setText(dto2.getAvatar_name());
             }
         }
         if (dto3 != null) {
-            mBinding.tvName3.setText(dto3.getLong_user_name());
-            mBinding.tvCount3.setText(dto3.getLong_count());
+            mBinding.tvName3.setText(dto3.getUser_name());
+            mBinding.tvCount3.setText(dto3.getCount());
             String avatar = dto3.getAvatar();
             if (!StringUtils.isEmpty(avatar)) {
                 MyImageUtils.displayUseImageServer(mBinding.civAvatar3, avatar);
+                mBinding.tvAvatar3.setText("");
+            } else {
+                mBinding.civAvatar3.setImageResource(R.color.gold);
+                mBinding.tvAvatar3.setText(dto3.getAvatar_name());
             }
         }
 

@@ -106,6 +106,15 @@ public class NetTargetDetail {
         private String id;
         private String user_id;
         private String dept_id;
+        private String b_type;
+
+        public String getB_type() {
+            return b_type;
+        }
+
+        public void setB_type(String b_type) {
+            this.b_type = b_type;
+        }
 
         public String getUser_id() {
             return user_id;

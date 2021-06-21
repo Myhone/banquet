@@ -9,5 +9,6 @@ public class NetReqTargetDetailCondition {
     public String type;
     public String year;
     public String target_type;
+    public String b_type;
 
 }

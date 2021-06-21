@@ -71,6 +71,15 @@ public class NetTargetList {
         private String rate;
         private String rate_num;
         private String avatar;
+        private String b_type;
+
+        public String getB_type() {
+            return b_type;
+        }
+
+        public void setB_type(String b_type) {
+            this.b_type = b_type;
+        }
 
         public String getAvatar() {
             return avatar;

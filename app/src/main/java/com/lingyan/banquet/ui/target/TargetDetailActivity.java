@@ -45,7 +45,7 @@ public class TargetDetailActivity extends BaseActivity {
 
     private List<NetTargetTabList.DataDTO> mTabList;
     private NetReqTargetDetailCondition mCondition;
-    private String mType;
+    private String mType, b_type;
     private String mId;
     private String mPersonName;
     private String mAvatarName;
@@ -56,13 +56,14 @@ public class TargetDetailActivity extends BaseActivity {
      * @param type 2-部门 3-员工
      * @param id
      */
-    public static void start(String type, String id, String personName, String avatarName, String departName) {
+    public static void start(String type, String id, String personName, String avatarName, String departName, String b_type) {
         Intent intent = new Intent(App.sApp, TargetDetailActivity.class);
         intent.putExtra("type", type);
         intent.putExtra("id", id);
         intent.putExtra("personName", personName);
         intent.putExtra("avatarName", avatarName);
         intent.putExtra("departName", departName);
+        intent.putExtra("b_type", b_type);
         ActivityUtils.startActivity(intent);
     }
 
@@ -77,6 +78,7 @@ public class TargetDetailActivity extends BaseActivity {
         mPersonName = intent.getStringExtra("personName");
         mAvatarName = intent.getStringExtra("avatarName");
         mDepartName = intent.getStringExtra("departName");
+        b_type = intent.getStringExtra("b_type");
 
         mBinding.llTitleBarRoot.tvTitleBarTitle.setText("目标详情");
         mCondition = new NetReqTargetDetailCondition();
@@ -127,6 +129,7 @@ public class TargetDetailActivity extends BaseActivity {
         mCondition.year = Calendar.getInstance().get(Calendar.YEAR) + "";
         mCondition.obj_id = mId;
         mCondition.type = mType;
+        mCondition.b_type = b_type;
 
         mBinding.tvYear.setText(mCondition.year);
         mBinding.tvYearTitle.setText(mCondition.year);
@@ -158,6 +161,7 @@ public class TargetDetailActivity extends BaseActivity {
 
     private void getData() {
         String json = GsonUtils.toJson(mCondition);
+
         OkGo.<NetTargetDetail>post(HttpURLs.achievementInfo)
                 .upJson(json)
                 .execute(new JsonCallback<NetTargetDetail>() {
@@ -274,6 +278,7 @@ public class TargetDetailActivity extends BaseActivity {
                                 dto.setSecond_target(mBinding.tvSecondTarget.getText().toString().trim());
                                 dto.setThird_target(mBinding.tvThirdTarget.getText().toString().trim());
                                 dto.setFourth_target(mBinding.tvFourthTarget.getText().toString().trim());
+                                dto.setB_type(b_type);
                                 String toJson = GsonUtils.toJson(dto);
 
 

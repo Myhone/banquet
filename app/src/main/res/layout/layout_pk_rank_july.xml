@@ -61,7 +61,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="31dp"
+            android:layout_height="35dp"
             android:background="#f7f7f7"
             app:tabIndicatorColor="#333333"
             app:tabIndicatorFullWidth="false"
@@ -91,7 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="13dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="2dp"
                         app:cardCornerRadius="10dp">
@@ -107,13 +107,27 @@
                                 android:layout_height="3dp"
                                 android:background="#CBCBCA" />
 
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/civ_avatar_2"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:layout_marginTop="12dp"
-                                android:scaleType="centerCrop"
-                                android:src="@mipmap/ic_default_image" />
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/civ_avatar_2"
+                                    android:layout_width="34dp"
+                                    android:layout_height="34dp"
+                                    android:background="@drawable/shape_oval_gold"
+                                    android:scaleType="centerCrop" />
+
+                                <TextView
+                                    android:id="@+id/tv_avatar_2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp" />
+
+                            </RelativeLayout>
 
                             <TextView
                                 android:id="@+id/tv_name_2"
@@ -179,13 +193,26 @@
                             android:layout_height="3dp"
                             android:background="#ECC778" />
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/civ_avatar_1"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:layout_marginTop="12dp"
-                            android:scaleType="centerCrop"
-                            android:src="@mipmap/ic_default_image" />
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/civ_avatar_1"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:background="@drawable/shape_oval_gold"
+                                android:scaleType="centerCrop" />
+
+                            <TextView
+                                android:id="@+id/tv_avatar_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:textColor="@color/white"
+                                android:textSize="11sp" />
+                        </RelativeLayout>
 
                         <TextView
                             android:id="@+id/tv_name_1"
@@ -240,7 +267,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="13dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="2dp"
                         app:cardCornerRadius="10dp">
@@ -256,13 +283,26 @@
                                 android:layout_height="3dp"
                                 android:background="#E3B59E" />
 
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/civ_avatar_3"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:layout_marginTop="12dp"
-                                android:scaleType="centerCrop"
-                                android:src="@mipmap/ic_default_image" />
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/civ_avatar_3"
+                                    android:layout_width="34dp"
+                                    android:layout_height="34dp"
+                                    android:background="@drawable/shape_oval_gold"
+                                    android:scaleType="centerCrop" />
+
+                                <TextView
+                                    android:id="@+id/tv_avatar_3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp" />
+                            </RelativeLayout>
 
                             <TextView
                                 android:id="@+id/tv_name_3"

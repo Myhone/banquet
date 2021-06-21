@@ -49,6 +49,7 @@ public class TargetHomeActivity extends BaseActivity implements BaseQuickAdapter
     private List<NetTargetTabList.DataDTO> mTabList;
     private NetReqTargetCondition mCondition;
     private int mCurPage;
+    private String b_type;
 
     public static void start() {
         ActivityUtils.startActivity(TargetHomeActivity.class);
@@ -222,6 +223,7 @@ public class TargetHomeActivity extends BaseActivity implements BaseQuickAdapter
         });
 
         mAdapter.setOnLoadMoreListener(this, mBinding.recyclerView);
+
         onRefresh(mBinding.refreshLayout);
     }
 
@@ -231,11 +233,12 @@ public class TargetHomeActivity extends BaseActivity implements BaseQuickAdapter
         String name = dto.getName();
         String deptName = dto.getDept_name();
         String avatarName = dto.getAvatar_name();
+        String b_type = dto.getB_type();
         if(ObjectUtils.isEmpty(deptName)){
             deptName=name;
         }
 
-        TargetDetailActivity.start(dto.getType(), dto.getId(),name,avatarName,deptName);
+        TargetDetailActivity.start(dto.getType(), dto.getId(),name,avatarName,deptName,b_type);
     }
 
     @Override
