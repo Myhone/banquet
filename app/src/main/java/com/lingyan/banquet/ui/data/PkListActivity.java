@@ -169,6 +169,10 @@ public class PkListActivity extends BaseActivity {
                             String avatar = dto1.getAvatar();
                             if (!StringUtils.isEmpty(avatar)) {
                                 MyImageUtils.displayUseImageServer(mHeadBinding.civAvatar1, avatar);
+                                mHeadBinding.tvAvatar1.setText("");
+                            } else {
+                                mHeadBinding.civAvatar1.setImageResource(R.color.gold);
+                                mHeadBinding.tvAvatar1.setText(dto1.getAvatar_name());
                             }
                         }
                         if (dto2 != null) {
@@ -177,6 +181,10 @@ public class PkListActivity extends BaseActivity {
                             String avatar = dto2.getAvatar();
                             if (!StringUtils.isEmpty(avatar)) {
                                 MyImageUtils.displayUseImageServer(mHeadBinding.civAvatar2, avatar);
+                                mHeadBinding.tvAvatar2.setText("");
+                            } else {
+                                mHeadBinding.civAvatar2.setImageResource(R.color.gold);
+                                mHeadBinding.tvAvatar2.setText(dto2.getAvatar_name());
                             }
                         }
                         if (dto3 != null) {
@@ -185,12 +193,16 @@ public class PkListActivity extends BaseActivity {
                             String avatar = dto3.getAvatar();
                             if (!StringUtils.isEmpty(avatar)) {
                                 MyImageUtils.displayUseImageServer(mHeadBinding.civAvatar3, avatar);
+                                mHeadBinding.tvAvatar3.setText("");
+                            } else {
+                                mHeadBinding.civAvatar3.setImageResource(R.color.gold);
+                                mHeadBinding.tvAvatar3.setText(dto3.getAvatar_name());
                             }
                         }
 
                         mRecData.clear();
 
-                        if(list.size()>3){
+                        if (list.size() > 3) {
                             List<NetPkData.DataDTO.DataInfoDTO> subList = list.subList(3, list.size());
                             mRecData.addAll(subList);
                         }

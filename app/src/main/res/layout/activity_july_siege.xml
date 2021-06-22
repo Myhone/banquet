@@ -153,8 +153,8 @@
                         android:drawableStart="@mipmap/ic_july_star"
                         android:drawablePadding="10dp"
                         android:text="今日明星"
-                        android:textColor="@color/black1a"
-                        android:textSize="14sp"
+                        android:textColor="@color/red_df3a32"
+                        android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <RelativeLayout
@@ -297,7 +297,8 @@
                         android:layout_toEndOf="@+id/sign"
                         android:text="酒店连单王"
                         android:textColor="#333333"
-                        android:textSize="16dp" />
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:layout_width="wrap_content"

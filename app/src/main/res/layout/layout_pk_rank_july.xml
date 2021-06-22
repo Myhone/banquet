@@ -34,7 +34,8 @@
                 android:layout_toEndOf="@+id/sign"
                 android:text="PK榜"
                 android:textColor="#333333"
-                android:textSize="16dp" />
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
             <!--            <TextView-->
             <!--                android:id="@+id/tv_banquet_type"-->

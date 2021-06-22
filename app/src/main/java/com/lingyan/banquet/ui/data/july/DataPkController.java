@@ -1,30 +1,14 @@
 package com.lingyan.banquet.ui.data.july;
 
-import android.view.View;
+import android.content.Context;
 
-import com.blankj.utilcode.util.CollectionUtils;
-import com.blankj.utilcode.util.GsonUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.google.android.material.tabs.TabLayout;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import com.lingyan.banquet.R;
 import com.lingyan.banquet.databinding.LayoutPkRankJulyBinding;
-import com.lingyan.banquet.global.HttpURLs;
-import com.lingyan.banquet.ui.data.bean.ConditionFilter;
+import com.lingyan.banquet.global.Constant;
 import com.lingyan.banquet.utils.MyImageUtils;
-import com.lingyan.banquet.views.dialog.PickerListDialog;
-import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.Callback;
-import com.lzy.okgo.model.Progress;
-import com.lzy.okgo.model.Response;
-import com.lzy.okgo.request.base.Request;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +23,11 @@ public class DataPkController {
     private PkItemBean tabList;
     //榜单
     private PkDataBean.DataBean.DataChildBean data;
+    private Context mContext;
 
     public DataPkController(LayoutPkRankJulyBinding binding, JulySiegeActivity dataHomeActivity) {
         mBinding = binding;
+        mContext = dataHomeActivity;
 
         initUI();
 
@@ -98,6 +84,13 @@ public class DataPkController {
     public void refresh(PkItemBean tabList, PkDataBean.DataBean.DataChildBean data, String title) {
         this.data = data;
         mBinding.tvTitle.setText(title);
+        if (Constant.Str.PK_COUNTRY_QG.equals(title)
+                || Constant.Str.PK_PERSONAL_QG.equals(title)
+                || Constant.Str.PK_KING_SIGNED_QG.equals(title)) {
+            mBinding.tvTitle.setTextColor(mContext.getResources().getColor(R.color.red_df3a32));
+        } else {
+            mBinding.tvTitle.setTextColor(mContext.getResources().getColor(R.color.black_33));
+        }
         mBinding.tabLayout.removeAllTabs();
         this.tabList = tabList;
         for (PkItemBean.DataBean dataBean : tabList.getData()) {
@@ -117,25 +110,25 @@ public class DataPkController {
         }
 
         List<PkDataBean.DataBean.DataChildBean.PersonBean> list = new ArrayList<>();
-        if ("data1".equals(mTabType)) {
+        if (Constant.RankingTab.DATA1.equals(mTabType)) {
             list = data.getData1();
-        } else if ("data2".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA2.equals(mTabType)) {
             list = data.getData2();
-        } else if ("data3".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA3.equals(mTabType)) {
             list = data.getData3();
-        } else if ("data4".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA4.equals(mTabType)) {
             list = data.getData4();
-        } else if ("income".equals(mTabType)) {
+        } else if (Constant.RankingTab.INCOME.equals(mTabType)) {
             list = data.getIncome();
-        } else if ("income_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.INCOME_RATE.equals(mTabType)) {
             list = data.getIncome_rate();
-        } else if ("data1_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA1_RATE.equals(mTabType)) {
             list = data.getData1_rate();
-        } else if ("data2_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA2_RATE.equals(mTabType)) {
             list = data.getData2_rate();
-        } else if ("data3_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA3_RATE.equals(mTabType)) {
             list = data.getData3_rate();
-        } else if ("continuation".equals(mTabType)) {
+        } else if (Constant.RankingTab.CONTINUATION.equals(mTabType)) {
             list = data.getContinuation();
         }
 

@@ -23,9 +23,10 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_toEndOf="@+id/sign"
-            android:text="连单王"
-            android:textColor="#333333"
-            android:textSize="16dp" />
+            android:text="全国连单王"
+            android:textColor="@color/red_df3a32"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

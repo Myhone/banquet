@@ -40,7 +40,7 @@ public class TargetDetailActivity extends BaseActivity {
     private ActivityTargetDetailBinding mBinding;
 
     private NetReqTargetDetailCondition mCondition;
-    private String mType, b_type, rate, user_number;
+    private String mType, b_type, rate, user_number, target_type;
     private String mId;
     private String mPersonName;
     private String mAvatarName;
@@ -51,7 +51,7 @@ public class TargetDetailActivity extends BaseActivity {
      * @param type 2-部门 3-员工
      * @param id
      */
-    public static void start(String tableTitle, String type, String id, String personName, String avatarName, String departName, String b_type, String rate, String user_number) {
+    public static void start(String tableTitle, String type, String id, String personName, String avatarName, String departName, String b_type, String rate, String user_number, String target_type) {
         Intent intent = new Intent(App.sApp, TargetDetailActivity.class);
         intent.putExtra(Constant.Parameter.TABLE_TITLE, tableTitle);
         intent.putExtra("type", type);
@@ -62,6 +62,7 @@ public class TargetDetailActivity extends BaseActivity {
         intent.putExtra("b_type", b_type);
         intent.putExtra(Constant.Parameter.RATE, rate);
         intent.putExtra(Constant.Parameter.USER_NUMBER, user_number);
+        intent.putExtra(Constant.Parameter.TARGET_TYPE, target_type);
         ActivityUtils.startActivity(intent);
     }
 
@@ -80,6 +81,7 @@ public class TargetDetailActivity extends BaseActivity {
         b_type = intent.getStringExtra("b_type");
         rate = intent.getStringExtra(Constant.Parameter.RATE);
         user_number = intent.getStringExtra(Constant.Parameter.USER_NUMBER);
+        target_type = intent.getStringExtra(Constant.Parameter.TARGET_TYPE);
 
         mBinding.llTitleBarRoot.tvTitleBarTitle.setText("目标详情");
         mCondition = new NetReqTargetDetailCondition();
@@ -131,6 +133,7 @@ public class TargetDetailActivity extends BaseActivity {
         mCondition.obj_id = mId;
         mCondition.type = mType;
         mCondition.b_type = b_type;
+        mCondition.target_type = target_type;
 
         mBinding.tvYear.setText(mCondition.year);
         mBinding.tvYearTitle.setText(mCondition.year);
@@ -263,7 +266,7 @@ public class TargetDetailActivity extends BaseActivity {
                                 }
 
                                 dto.setType(mType);
-                                dto.setTarget_type(mCondition.target_type);
+                                dto.setTarget_type(target_type);
                                 dto.setYear(mBinding.tvYear.getText().toString().trim());
 
                                 dto.setJanuary(mBinding.tvJanuary.getText().toString().trim());

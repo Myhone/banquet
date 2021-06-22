@@ -2,7 +2,6 @@ package com.lingyan.banquet.ui.data.july;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +14,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 import com.lingyan.banquet.R;
 import com.lingyan.banquet.base.BaseActivity;
 import com.lingyan.banquet.databinding.ActivityJulySiegeBinding;
-import com.lingyan.banquet.databinding.LayoutKingSignedBinding;
 import com.lingyan.banquet.global.BanquetCelebrationType;
 import com.lingyan.banquet.global.Constant;
 import com.lingyan.banquet.global.HttpURLs;
@@ -28,7 +25,6 @@ import com.lingyan.banquet.net.JsonCallback;
 import com.lingyan.banquet.ui.data.bean.ConditionFilter;
 import com.lingyan.banquet.utils.MyImageUtils;
 import com.lingyan.banquet.utils.StatusBarUtil;
-import com.lingyan.banquet.views.dialog.PickerListDialog;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.Callback;
 import com.lzy.okgo.model.Progress;
@@ -37,9 +33,7 @@ import com.lzy.okgo.request.base.Request;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by _hxb on 2021/1/24.
@@ -82,16 +76,16 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
             JulyDataFilterActivity.start(getActivity(), 1, GsonUtils.toJson(mConditionFilter));
         });
 
-        mBinding.flDataPkKingSignedQg.tvTitle.setText("连单王");
-        mBinding.tvTitle.setText("酒店连单王");
+        mBinding.flDataPkKingSignedQg.tvTitle.setText(Constant.Str.PK_KING_SIGNED_QG);
+        mBinding.tvTitle.setText(Constant.Str.PK_KING_SIGNED_GS);
         mBinding.flDataPkKingSignedQg.llKingSigned.setOnClickListener(v -> {
             //查看榜单详情
-            JulyPkListActivity.start(dataKingSignedQg, null, "连单王");
+            JulyPkListActivity.start(dataKingSignedQg, null, Constant.Str.PK_KING_SIGNED_QG);
         });
 
         mBinding.rlKingSignedGs.setOnClickListener(v -> {
             //查看榜单详情
-            JulyPkListActivity.start(dataKingSignedGs, null, "酒店连单王");
+            JulyPkListActivity.start(dataKingSignedGs, null, Constant.Str.PK_KING_SIGNED_GS);
         });
 
         mBinding.refreshLayout.setOnRefreshListener(this);
@@ -239,12 +233,12 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
                     @Override
                     public void onFinish() {
                         if (order == 50) {
-                            mPkPersonalQg.refresh(tabList, dataQg, "个人PK榜");
-                            mPkPersonalGs.refresh(tabList, dataGs, "酒店个人PK榜");
+                            mPkPersonalQg.refresh(tabList, dataQg, Constant.Str.PK_PERSONAL_QG);
+                            mPkPersonalGs.refresh(tabList, dataGs, Constant.Str.PK_PERSONAL_GS);
                         } else if (order == 51) {
-                            mPkDepartmentGs.refresh(tabList, dataGs, "酒店团队PK榜");
+                            mPkDepartmentGs.refresh(tabList, dataGs, Constant.Str.PK_DEPARTMENT_GS);
                         } else if (order == 52) {
-                            mPkCountry.refresh(tabList, dataQg, "全国PK榜");
+                            mPkCountry.refresh(tabList, dataQg, Constant.Str.PK_COUNTRY_QG);
                         } else if (order == 53) {
                             //连单王
                             dataKingSignedQg = dataQg;
@@ -311,26 +305,26 @@ public class JulySiegeActivity extends BaseActivity implements OnRefreshListener
         }
         switch (requestCode) {
             case 1: {
-                String json = data.getStringExtra("json");
+                String json = data.getStringExtra(Constant.Parameter.JSON);
                 ConditionFilter filter = GsonUtils.fromJson(json, ConditionFilter.class);
                 filter.banquet_type = mConditionFilter.banquet_type;
                 mConditionFilter = filter;
                 String text = "";
 //                text += "/";
-                if (StringUtils.equals(mConditionFilter.time_type, "today")) {
+                if (StringUtils.equals(mConditionFilter.time_type, Constant.Filter.TODAY)) {
                     text = "今日";
-                } else if (StringUtils.equals(mConditionFilter.time_type, "month")) {
+                } else if (StringUtils.equals(mConditionFilter.time_type, Constant.Filter.MONTH)) {
                     text = "本月";
-                } else if (StringUtils.equals(mConditionFilter.time_type, "period0")) {
+                } else if (StringUtils.equals(mConditionFilter.time_type, Constant.Filter.PERIOD_ZERO)) {
                     text = "首爆日";
-                } else if (StringUtils.equals(mConditionFilter.time_type, "period1")) {
+                } else if (StringUtils.equals(mConditionFilter.time_type, Constant.Filter.PERIOD_ONE)) {
                     text = "第一阶段";
-                } else if (StringUtils.equals(mConditionFilter.time_type, "period2")) {
+                } else if (StringUtils.equals(mConditionFilter.time_type, Constant.Filter.PERIOD_TWO)) {
                     text = "第二阶段";
-                } else if (StringUtils.equals(mConditionFilter.time_type, "period3")) {
+                } else if (StringUtils.equals(mConditionFilter.time_type, Constant.Filter.PERIOD_THREE)) {
                     text = "第三阶段";
                 } else {
-                    mConditionFilter.time_type = "month";
+                    mConditionFilter.time_type = Constant.Filter.MONTH;
                     text = "本月";
                 }
                 mBinding.tvGroupTime.setText(text);

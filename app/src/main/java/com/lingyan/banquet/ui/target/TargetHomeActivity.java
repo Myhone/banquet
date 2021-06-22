@@ -233,11 +233,12 @@ public class TargetHomeActivity extends BaseActivity implements BaseQuickAdapter
         String avatarName = dto.getAvatar_name();
         String b_type = dto.getB_type();
         String rate = dto.getRate();
+        String target_type = mCondition.a_type;
         String user_number = dto.getUser_number();
         if (ObjectUtils.isEmpty(deptName)) {
             deptName = name;
         }
-        TargetDetailActivity.start(currentTableTitle, dto.getType(), dto.getId(), name, avatarName, deptName, b_type, rate, user_number);
+        TargetDetailActivity.start(currentTableTitle, dto.getType(), dto.getId(), name, avatarName, deptName, b_type, rate, user_number, target_type);
     }
 
     @Override

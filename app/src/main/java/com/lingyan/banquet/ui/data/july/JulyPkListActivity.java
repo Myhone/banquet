@@ -17,6 +17,7 @@ import com.lingyan.banquet.R;
 import com.lingyan.banquet.base.BaseActivity;
 import com.lingyan.banquet.databinding.ActivityJulyPkListBinding;
 import com.lingyan.banquet.databinding.LayoutPkRankJulyBinding;
+import com.lingyan.banquet.global.Constant;
 import com.lingyan.banquet.utils.MyImageUtils;
 import com.lingyan.banquet.views.dialog.PickerListDialog;
 
@@ -42,9 +43,9 @@ public class JulyPkListActivity extends BaseActivity {
 
     public static void start(PkDataBean.DataBean.DataChildBean data, PkItemBean tabList, String title) {
         Intent intent = new Intent(App.sApp, JulyPkListActivity.class);
-        intent.putExtra("data", data);
-        intent.putExtra("tabList", tabList);
-        intent.putExtra("title", title);
+        intent.putExtra(Constant.Parameter.DATA, data);
+        intent.putExtra(Constant.Parameter.TABLE_LIST, tabList);
+        intent.putExtra(Constant.Parameter.TITLE, title);
         ActivityUtils.startActivity(intent);
     }
 
@@ -53,9 +54,9 @@ public class JulyPkListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mBinding = ActivityJulyPkListBinding.inflate(getLayoutInflater());
         setContentView(mBinding.getRoot());
-        data = getIntent().getParcelableExtra("data");
-        tabList = getIntent().getParcelableExtra("tabList");
-        title = getIntent().getStringExtra("title");
+        data = getIntent().getParcelableExtra(Constant.Parameter.DATA);
+        tabList = getIntent().getParcelableExtra(Constant.Parameter.TABLE_LIST);
+        title = getIntent().getStringExtra(Constant.Parameter.TITLE);
         mHeadBinding = LayoutPkRankJulyBinding.inflate(getLayoutInflater());
         mHeadBinding.llLookList.setVisibility(View.GONE);
         mHeadBinding.llPkTitle.setVisibility(View.GONE);
@@ -68,16 +69,16 @@ public class JulyPkListActivity extends BaseActivity {
         mAdapter.addHeaderView(mHeadBinding.getRoot());
         initUI();
 
-        if ("连单王".equals(title)) {
+        if (Constant.Str.PK_KING_SIGNED_QG.equals(title)) {
             mHeadBinding.llTopThree.setVisibility(View.GONE);
             mHeadBinding.llKingSigned.setVisibility(View.VISIBLE);
-            mTabType = "continuation";
+            mTabType = Constant.RankingTab.CONTINUATION;
             refresh();
         }
 
-        if ("酒店连单王".equals(title)) {
+        if (Constant.Str.PK_KING_SIGNED_GS.equals(title)) {
             mHeadBinding.llTopThree.setVisibility(View.GONE);
-            mTabType = "continuation";
+            mTabType = Constant.RankingTab.CONTINUATION;
             refresh();
         }
 
@@ -148,25 +149,25 @@ public class JulyPkListActivity extends BaseActivity {
             return;
         }
 
-        if ("data1".equals(mTabType)) {
+        if (Constant.RankingTab.DATA1.equals(mTabType)) {
             list = data.getData1();
-        } else if ("data2".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA2.equals(mTabType)) {
             list = data.getData2();
-        } else if ("data3".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA3.equals(mTabType)) {
             list = data.getData3();
-        } else if ("data4".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA4.equals(mTabType)) {
             list = data.getData4();
-        } else if ("income".equals(mTabType)) {
+        } else if (Constant.RankingTab.INCOME.equals(mTabType)) {
             list = data.getIncome();
-        } else if ("income_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.INCOME_RATE.equals(mTabType)) {
             list = data.getIncome_rate();
-        } else if ("data1_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA1_RATE.equals(mTabType)) {
             list = data.getData1_rate();
-        } else if ("data2_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA2_RATE.equals(mTabType)) {
             list = data.getData2_rate();
-        } else if ("data3_rate".equals(mTabType)) {
+        } else if (Constant.RankingTab.DATA3_RATE.equals(mTabType)) {
             list = data.getData3_rate();
-        } else if ("continuation".equals(mTabType)) {
+        } else if (Constant.RankingTab.CONTINUATION.equals(mTabType)) {
             list = data.getContinuation();
         }
 
