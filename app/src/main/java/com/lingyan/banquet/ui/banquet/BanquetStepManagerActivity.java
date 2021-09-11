@@ -139,7 +139,7 @@ public class BanquetStepManagerActivity extends BaseActivity {
         BaseBanquetStepFragment fragment = null;
         switch (step) {
             case 1: {
-                fragment = BanquetStep1Fragment.newInstance();
+                fragment = BanquetStep2Fragment.newInstance();
                 mBinding.stepView.setStep(1);
             }
             break;

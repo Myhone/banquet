@@ -39,6 +39,7 @@ import com.lingyan.banquet.net.NetBaseResp;
 import com.lingyan.banquet.ui.banquet.bean.NetRestoreStep2;
 import com.lingyan.banquet.ui.banquet.session.IntentSessionFragment;
 import com.lingyan.banquet.ui.celebration.bean.NetCelRestoreStep4;
+import com.lingyan.banquet.ui.map.AMapActivity;
 import com.lingyan.banquet.utils.AddressUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -211,6 +212,13 @@ public class BanquetStep2Fragment extends BaseBanquetStepFragment {
             }
         });
 
+        mBinding.etAddressDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AMapActivity.start("1");
+            }
+        });
+
         mBinding.etAddressDetail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -219,6 +227,7 @@ public class BanquetStep2Fragment extends BaseBanquetStepFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mData == null) return;
                 NetRestoreStep2.DataDTO.LinkmenDTO linkmen = mData.getLinkmen();
                 linkmen.setAddress_detail(s.toString());
             }
@@ -228,7 +237,7 @@ public class BanquetStep2Fragment extends BaseBanquetStepFragment {
 
             }
         });
-        restoreDataFromNet();
+//        restoreDataFromNet();
 
     }
 

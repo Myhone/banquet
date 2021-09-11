@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -26,6 +27,7 @@
     <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
     <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS" />
+
     <uses-feature android:name="android.hardware.camera" />
     <application
         android:name=".App"
@@ -81,8 +83,8 @@
             android:launchMode="singleTask" />
         <activity android:name=".ui.data.DataHomeActivity" />
         <activity android:name=".ui.data.july.JulySiegeActivity" />
-        <activity android:name=".ui.data.july.JulyDataFilterActivity"/>
-        <activity android:name=".ui.data.july.JulyPkListActivity"/>
+        <activity android:name=".ui.data.july.JulyDataFilterActivity" />
+        <activity android:name=".ui.data.july.JulyPkListActivity" />
         <activity android:name=".ui.target.TargetHomeActivity" />
         <activity
             android:name=".ui.target.TargetDetailActivity"
@@ -101,6 +103,7 @@
         <activity android:name=".ui.data.NewAddDataListActivity" />
         <activity android:name=".ui.data.NewLockLoseListActivity" />
         <activity android:name=".ui.data.PkListActivity" />
+        <activity android:name=".ui.map.AMapActivity" />
         <activity
             android:name=".push.MyPushActivity"
             android:exported="true"
@@ -283,6 +286,11 @@
         </receiver>
         <!--魅族结束-->
         <!--友盟结束-->
+
+        <!--高德地图-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="92da03fea25da5caef79221a947165df" />
     </application>
 
 </manifest>

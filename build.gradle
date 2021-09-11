@@ -9,7 +9,7 @@ buildscript {
 //        maven { url 'https://dl.bintray.com/umsdk/release' }
         maven { url 'https://developer.huawei.com/repo/' }
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.1"
@@ -30,7 +30,7 @@ allprojects {
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url "https://jitpack.io" }
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
