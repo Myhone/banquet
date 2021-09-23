@@ -1,4 +1,4 @@
-package com.lingyan.banquet.ui.banquet.session;
+package com.lingyan.banquet.ui.order;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -6,12 +6,10 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
@@ -20,22 +18,21 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.lingyan.banquet.R;
 import com.lingyan.banquet.base.BaseFragment;
-import com.lingyan.banquet.databinding.FragmentSessionBinding;
+import com.lingyan.banquet.databinding.FragmentOrderModifyBinding;
+import com.lingyan.banquet.databinding.FragmentSignSessionBinding;
 import com.lingyan.banquet.databinding.LayoutAddRoomBinding;
 import com.lingyan.banquet.global.BanquetCelebrationType;
 import com.lingyan.banquet.global.HttpURLs;
+import com.lingyan.banquet.global.TextWatcherImpl;
 import com.lingyan.banquet.net.JsonCallback;
-import com.lingyan.banquet.ui.banquet.BanquetStepManagerActivity;
 import com.lingyan.banquet.ui.banquet.bean.NetBanquetChildHall;
 import com.lingyan.banquet.ui.banquet.bean.NetMealList;
-import com.lingyan.banquet.ui.banquet.bean.NetRestoreStep2;
-import com.lingyan.banquet.ui.banquet.bean.NetRestoreStep4;
+import com.lingyan.banquet.ui.order.bean.NetOrderModify;
 import com.lingyan.banquet.views.MyMonthView;
 import com.lingyan.banquet.views.dialog.PickerListDialog;
-import com.lingyan.banquet.views.dialog.TwoLineTabSelectDialog;
 import com.lingyan.banquet.views.dialog.SelectDayDialog;
+import com.lingyan.banquet.views.dialog.TwoLineTabSelectDialog;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
@@ -43,36 +40,81 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * 意向里面的场次
- * Created by _hxb on 2021/1/10.
+ * 修改订单页面的场次
+ * Created by wyq on 2021/9/15.
  */
 
-public class IntentSessionFragment extends BaseFragment {
-
-    private FragmentSessionBinding mBinding;
-
-    private NetRestoreStep2.DataDTO.BanquetNumDTO mDTO;
-    private List<NetMealList.DataDTO> mMealList;
+public class OrderModifyListFragment extends BaseFragment {
+    private static int mType;
     private List<NetBanquetChildHall.DataDTO> mHallList;
+    private FragmentOrderModifyBinding mBinding;
+    private NetOrderModify.DataDTO.BanquetNumDTO mDTO;
+    private List<NetMealList.DataDTO> mMealList;
     private List<String> mSelectedHall;
 
-    public static IntentSessionFragment newInstance() {
-        IntentSessionFragment fragment = new IntentSessionFragment();
+    public static OrderModifyListFragment newInstance(int type) {
+        OrderModifyListFragment fragment = new OrderModifyListFragment();
+        mType = type;
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mBinding = FragmentSessionBinding.inflate(inflater);
+        mBinding = FragmentOrderModifyBinding.inflate(inflater);
+        return mBinding.getRoot();
+    }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        if (BanquetCelebrationType.TYPE_BANQUET == mType) {
+            mBinding.llTable.setVisibility(View.VISIBLE);
+        } else {
+            mBinding.llTable.setVisibility(View.GONE);
+        }
+        mBinding.tvHallName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getHallList();
+            }
+        });
+
+        mBinding.tvSegmentType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new PickerListDialog(getActivity())
+                        .items("午餐", "晚餐")
+                        .itemSelectedCallBack(new PickerListDialog.ItemSelectedCallBack() {
+                            @Override
+                            public void onItemSelected(int position, String text, PickerListDialog dialog) {
+
+                                dialog.dismiss();
+                                String type = position == 0 ? "1" : "2";
+                                String segmentType = mDTO.getSegment_type();
+                                if (StringUtils.equals(type, segmentType)) {
+                                    return;
+                                }
+                                mDTO.setSegment_type(type);
+                                mDTO.setSegment_name(position == 0 ? "午餐" : "晚餐");
+                                mBinding.tvSegmentType.setText(position == 0 ? "午餐" : "晚餐");
+
+                                mBinding.tvHallName.setText("");
+                                mBinding.tvHallName.setTag(R.id.tv_hall_name, null);
+                                mBinding.llRoomContainer.removeAllViews();
+                                mDTO.getHall_info().clear();
+                                mDTO.getHall_id().clear();
+                            }
+                        })
+                        .show();
+            }
+        });
+
+        //场次时间
         mBinding.tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDTO == null) {
-                    return;
-                }
-
                 SelectDayDialog dayDialog = new SelectDayDialog(getActivity());
                 dayDialog.setOnDayClick(new MyMonthView.OnDayClick() {
                     @Override
@@ -101,45 +143,17 @@ public class IntentSessionFragment extends BaseFragment {
                 dayDialog.show();
             }
         });
-        mBinding.tvSegmentType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mDTO == null) {
-                    return;
-                }
-                new PickerListDialog(getActivity())
-                        .items("午餐", "晚餐")
-                        .itemSelectedCallBack(new PickerListDialog.ItemSelectedCallBack() {
-                            @Override
-                            public void onItemSelected(int position, String text, PickerListDialog dialog) {
-                                dialog.dismiss();
-                                String type = position == 0 ? "1" : "2";
-                                String segmentType = mDTO.getSegment_type();
-                                if (StringUtils.equals(type, segmentType)) {
-                                    return;
-                                }
-                                mDTO.setSegment_type(type);
-                                mDTO.setSegment_name(position == 0 ? "午餐" : "晚餐");
-                                mBinding.tvSegmentType.setText(position == 0 ? "午餐" : "晚餐");
-
-                                mBinding.tvHallName.setText("");
-                                mBinding.tvHallName.setTag(R.id.tv_hall_name, null);
-                                mBinding.llRoomContainer.removeAllViews();
-                                mDTO.getHall_info().clear();
-                                mDTO.getHall_id().clear();
-                            }
-                        })
-                        .show();
-            }
-        });
+        //套餐
         mBinding.tvMealName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mDTO == null) {
-                    return;
-                }
                 if (ObjectUtils.isEmpty(mMealList)) {
-                    OkGo.<NetMealList>post(HttpURLs.listMeal)
+                    String urlMealList = HttpURLs.listMeal;
+                    if (BanquetCelebrationType.TYPE_CELEBRATION == mType) {
+                        urlMealList = HttpURLs.listCelebration;
+                    }
+
+                    OkGo.<NetMealList>post(urlMealList)
                             .tag(getThisFragment())
 //                            .cacheMode(CacheMode.IF_NONE_CACHE_REQUEST)
                             .execute(new JsonCallback<NetMealList>() {
@@ -157,68 +171,36 @@ public class IntentSessionFragment extends BaseFragment {
 
             }
         });
-        mBinding.tvHallName.setOnClickListener(new View.OnClickListener() {
+
+
+        if (mDTO != null) {
+            changeUI();
+        }
+        //计划桌数
+        mBinding.etTableNumber.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                getHallList();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String string = s.toString();
+                mDTO.setTable_number(string);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
-        return mBinding.getRoot();
-    }
-
-    private void showSelectHallDialog() {
-        if (ObjectUtils.isEmpty(mHallList)) {
-            return;
-        }
-        //已存在的
-        List<String> existIdList = new ArrayList<>();
-        List<String> existNameList = new ArrayList<>();
-        List<NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfo = mDTO.getHall_info();
-        if (ObjectUtils.isNotEmpty(hallInfo)) {
-            for (NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO dto : hallInfo) {
-                existIdList.add(dto.getId());
-                existNameList.add(dto.getName());
-            }
-        }
-
-        TwoLineTabSelectDialog dialog = new TwoLineTabSelectDialog(getContext());
-        dialog.setSingleMode(false);
-        boolean hasData = dialog.setData(mHallList, existIdList);
-        dialog.setOnMultipleSelectListener(new TwoLineTabSelectDialog.OnMultipleSelectListener() {
+        mBinding.etPrepareNumber.addTextChangedListener(new TextWatcherImpl() {
             @Override
-            public void OnMultipleSelect(List<String> idList, List<String> nameList, TwoLineTabSelectDialog dialog) {
-                if (ObjectUtils.isEmpty(idList)) {
-                    ToastUtils.showShort("至少选择一个");
-                    return;
-                }
-                dialog.dismiss();
-                List<NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfoList = new ArrayList<>();
-
-                for (int i = 0; i < idList.size(); i++) {
-                    String id = idList.get(i);
-                    String name = nameList.get(i);
-                    NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO hallInfoDTO = new NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO();
-                    hallInfoDTO.setId(id);
-                    hallInfoDTO.setName(name);
-                    hallInfoList.add(hallInfoDTO);
-                }
-
-                List<String> hallId = mDTO.getHall_id();
-                List<NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfo = mDTO.getHall_info();
-                hallId.clear();
-                hallInfo.clear();
-                hallId.addAll(idList);
-                hallInfo.addAll(hallInfoList);
-                changeUI();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String string = s.toString();
+                mDTO.setPrepare_number(string);
             }
         });
-
-        if (hasData) {
-            dialog.show();
-        } else {
-            ToastUtils.showShort("暂无可选的宴会厅");
-        }
-
 
     }
 
@@ -246,7 +228,6 @@ public class IntentSessionFragment extends BaseFragment {
                 .show();
     }
 
-
     private LayoutAddRoomBinding addHall() {
         LayoutAddRoomBinding roomBinding = LayoutAddRoomBinding.inflate(getLayoutInflater());
         mBinding.llRoomContainer.addView(roomBinding.getRoot());
@@ -258,6 +239,7 @@ public class IntentSessionFragment extends BaseFragment {
         });
         return roomBinding;
     }
+
 
     //获取包间列表
     private void getHallList() {
@@ -303,34 +285,64 @@ public class IntentSessionFragment extends BaseFragment {
                 });
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        changeUI();
-        //计划桌数
-        mBinding.etTableNumber.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+    private void showSelectHallDialog() {
+        if (ObjectUtils.isEmpty(mHallList)) {
+            return;
+        }
+        //已存在的
+        List<String> existIdList = new ArrayList<>();
+        List<NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfo = mDTO.getHall_info();
+        if (ObjectUtils.isNotEmpty(hallInfo)) {
+            for (NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO dto : hallInfo) {
+                existIdList.add(dto.getId());
             }
+        }
 
+        TwoLineTabSelectDialog dialog = new TwoLineTabSelectDialog(getContext());
+        dialog.setSingleMode(false);
+        boolean hasData = dialog.setData(mHallList, existIdList);
+        dialog.setOnMultipleSelectListener(new TwoLineTabSelectDialog.OnMultipleSelectListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String string = s.toString();
-                mDTO.setTable_number(string);
-            }
+            public void OnMultipleSelect(List<String> idList, List<String> nameList, TwoLineTabSelectDialog dialog) {
+                if (ObjectUtils.isEmpty(idList)) {
+                    ToastUtils.showShort("至少选择一个");
+                    return;
+                }
+                dialog.dismiss();
+                List<NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfoList = new ArrayList<>();
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                for (int i = 0; i < idList.size(); i++) {
+                    String id = idList.get(i);
+                    String name = nameList.get(i);
+                    NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO hallInfoDTO = new NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO();
+                    hallInfoDTO.setId(id);
+                    hallInfoDTO.setName(name);
+                    hallInfoList.add(hallInfoDTO);
+                }
 
+                List<String> hallId = mDTO.getHall_id();
+                List<NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfo = mDTO.getHall_info();
+                hallId.clear();
+                hallInfo.clear();
+                hallId.addAll(idList);
+                hallInfo.addAll(hallInfoList);
+                changeUI();
             }
         });
+
+        if (hasData) {
+            dialog.show();
+        } else {
+            ToastUtils.showShort("暂无可选的宴会厅");
+        }
+
+
     }
 
-    public void setData(NetRestoreStep2.DataDTO.BanquetNumDTO dto) {
+    public void setData(NetOrderModify.DataDTO.BanquetNumDTO dto) {
         mDTO = dto;
         if (mDTO == null) {
-            mDTO = new NetRestoreStep2.DataDTO.BanquetNumDTO();
+            mDTO = new NetOrderModify.DataDTO.BanquetNumDTO();
         }
         mSelectedHall = mDTO.getHall_id();
         if (isResumed()) {
@@ -338,35 +350,29 @@ public class IntentSessionFragment extends BaseFragment {
         }
     }
 
-
     private void changeUI() {
-        if (mDTO != null) {
-            List<NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfoDTOList = mDTO.getHall_info();
-            List<String> hallIdList = mDTO.getHall_id();
-            mBinding.llRoomContainer.removeAllViews();
-            if (ObjectUtils.isNotEmpty(hallInfoDTOList)) {
-                for (int i = 0; i < hallInfoDTOList.size(); i++) {
-                    NetRestoreStep2.DataDTO.BanquetNumDTO.HallInfoDTO hallInfoDTO = hallInfoDTOList.get(i);
-                    if (i == 0) {
-                        mBinding.tvHallName.setText(hallInfoDTO.getName());
-                        mBinding.tvHallName.setTag(R.id.tv_hall_name, hallInfoDTO);
-                    } else {
-                        LayoutAddRoomBinding roomBinding = addHall();
-                        roomBinding.tvHallName.setTag(R.id.tv_hall_name, hallInfoDTO);
-                        roomBinding.tvHallName.setText(hallInfoDTO.getName());
-
-
-                    }
+        List<NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO> hallInfoDTOList = mDTO.getHall_info();
+        List<String> hallIdList = mDTO.getHall_id();
+        mBinding.llRoomContainer.removeAllViews();
+        if (ObjectUtils.isNotEmpty(hallInfoDTOList)) {
+            for (int i = 0; i < hallInfoDTOList.size(); i++) {
+                NetOrderModify.DataDTO.BanquetNumDTO.HallInfoDTO hallInfoDTO = hallInfoDTOList.get(i);
+                if (i == 0) {
+                    mBinding.tvHallName.setText(hallInfoDTO.getName());
+                    mBinding.tvHallName.setTag(R.id.tv_hall_name, hallInfoDTO);
+                } else {
+                    LayoutAddRoomBinding roomBinding = addHall();
+                    roomBinding.tvHallName.setTag(R.id.tv_hall_name, hallInfoDTO);
+                    roomBinding.tvHallName.setText(hallInfoDTO.getName());
                 }
             }
-            mBinding.etTableNumber.setText(mDTO.getTable_number());
-            mBinding.tvMealName.setText(mDTO.getMeal_name());
-            mBinding.tvDate.setText(mDTO.getDate());
-            mBinding.tvSegmentType.setText(mDTO.getSegment_name());
         }
 
+        mBinding.tvDate.setText(mDTO.getDate());
+        mBinding.tvMealName.setText(mDTO.getMeal_name());
+        mBinding.etTableNumber.setText(mDTO.getTable_number());
+        mBinding.tvSegmentType.setText(mDTO.getSegment_name());
+        mBinding.etPrepareNumber.setText(mDTO.getPrepare_number());
 
     }
-
-
 }

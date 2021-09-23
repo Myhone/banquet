@@ -106,6 +106,7 @@ public class NetRestoreStep4 {
         private String intent_man_name;
         private String intent_man_id;
         private String real_name;
+        private String is_pay;
 
         public String getIntent_man_name() {
             return intent_man_name;
@@ -129,6 +130,14 @@ public class NetRestoreStep4 {
 
         public void setReal_name(String real_name) {
             this.real_name = real_name;
+        }
+
+        public String getIs_pay() {
+            return is_pay;
+        }
+
+        public void setIs_pay(String is_pay) {
+            this.is_pay = is_pay;
         }
 
         private List<BanquetNumDTO> banquetNum;
@@ -393,6 +402,7 @@ public class NetRestoreStep4 {
             private String banquet_status;
             private String meal_name;
             private String segment_name;
+            private String price;
             private List<String> hall_id;
             private List<HallInfoDTO> hall_info;
 
@@ -446,6 +456,7 @@ public class NetRestoreStep4 {
             }
 
             public String getTable_number() {
+                if (StringUtils.isTrimEmpty(table_number)) table_number = "0";
                 return table_number;
             }
 
@@ -485,6 +496,14 @@ public class NetRestoreStep4 {
                 this.segment_name = segment_name;
             }
 
+            public String getPrice() {
+                if (StringUtils.isTrimEmpty(price)) price = "0";
+                return price;
+            }
+
+            public void setPrice(String price) {
+                this.price = price;
+            }
 
             public List<String> getHall_id() {
                 if (hall_id == null) {

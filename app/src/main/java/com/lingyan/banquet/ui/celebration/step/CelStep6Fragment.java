@@ -73,7 +73,7 @@ public class CelStep6Fragment extends BaseCelStepFragment {
             @Override
             public void onClick(View v) {
                 String payType = mData.getPay_type();
-                int payWay = 0;
+                int payWay = 4;
                 if (ObjectUtils.isNotEmpty(payType)) {
                     payWay = Integer.valueOf(payType.trim());
                 }
@@ -322,6 +322,13 @@ public class CelStep6Fragment extends BaseCelStepFragment {
             mBinding.llBottomStep3.setVisibility(View.VISIBLE);
         }else  if (StringUtils.equals(financeConfirmed, "3")){
             mBinding.tvTopBarDes.setText("已退款");
+        }
+
+        if (!StringUtils.isEmpty(mData.getPay_name())) {
+            mBinding.tvPayType.setText(mData.getPay_name());
+        } else {
+            mBinding.tvPayType.setText("现金支付");
+            mData.setPay_type("4");
         }
     }
 

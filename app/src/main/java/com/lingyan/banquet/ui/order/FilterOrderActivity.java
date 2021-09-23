@@ -63,7 +63,7 @@ public class FilterOrderActivity extends BaseActivity {
         mCondition = GsonUtils.fromJson(json, OrderFilterCondition.class);
         mType = mCondition.type;
         if (mType == BanquetCelebrationType.TYPE_BANQUET) {
-            mBinding.tvBanCelTitle.setText("宴会时间");
+            mBinding.tvBanCelTitle.setText("商机时间");
             mBinding.llColorSystemContainer.setVisibility(View.GONE);
         } else {
             mBinding.tvBanCelTitle.setText("庆典时间");

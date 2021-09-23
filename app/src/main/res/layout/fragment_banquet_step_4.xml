@@ -45,9 +45,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        tools:text="财务已确认"
                         android:textColor="#603E11"
-                        android:textSize="15dp" />
+                        android:textSize="15dp"
+                        tools:text="财务已确认" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -103,13 +103,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:background="@drawable/shape_rect_white_top0_bottom10"
+                            android:background="@drawable/shape_rect_white_corners_8"
                             android:orientation="vertical">
-
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-
                                 android:layout_height="50dp"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
@@ -125,18 +123,16 @@
 
 
                                 <TextView
-                                    android:layout_marginRight="15dp"
                                     android:id="@+id/tv_marketing_type"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
+                                    android:layout_marginRight="15dp"
                                     android:layout_weight="1"
+                                    android:drawableRight="@mipmap/ic_arrow_right_gray"
                                     android:gravity="start|center_vertical"
                                     android:hint="请选择优惠活动"
                                     android:textColor="#333334"
-                                    android:drawableRight="@mipmap/ic_arrow_right_gray"
                                     android:textSize="14dp" />
-
-
 
 
                             </LinearLayout>
@@ -210,120 +206,6 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginLeft="15dp"
                                     android:gravity="start|center_vertical"
-                                    android:text="签订定金"
-                                    android:textColor="#666666"
-                                    android:textSize="14dp" />
-
-                                <EditText
-                                    android:id="@+id/et_sign_money"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:background="@null"
-                                    android:gravity="start|center_vertical"
-                                    android:hint="请输入签订定金"
-                                    android:inputType="numberDecimal"
-                                    android:lines="1"
-                                    android:textColor="#333334"
-                                    android:textSize="14dp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="15dp"
-                                    android:gravity="start|center_vertical"
-                                    android:text="支付方式"
-                                    android:textColor="#666666"
-                                    android:textSize="14dp" />
-
-                                <TextView
-                                    android:id="@+id/tv_pay_type"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:layout_marginRight="15dp"
-                                    android:gravity="start|center_vertical"
-                                    android:hint="请选择支付方式"
-                                    android:textColor="#333334"
-                                    android:drawableRight="@mipmap/ic_arrow_right_gray"
-                                    android:textSize="14dp" />
-
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="15dp"
-                                    android:gravity="start|center_vertical"
-                                    android:text="收据编号"
-                                    android:textColor="#666666"
-                                    android:textSize="14dp" />
-
-                                <TextView
-                                    android:id="@+id/tv_code"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:background="@null"
-                                    android:gravity="start|center_vertical"
-                                    android:hint="系统自动生成"
-                                    android:lines="1"
-                                    android:textColor="#333334"
-                                    android:textSize="14dp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="15dp"
-                                    android:gravity="start|center_vertical"
-                                    android:text="付款时间"
-                                    android:textColor="#666666"
-                                    android:textSize="14dp" />
-
-                                <TextView
-                                    android:id="@+id/tv_pay_time"
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:gravity="start|center_vertical"
-                                    android:hint="系统自动生成"
-                                    android:textColor="#333334"
-                                    android:textSize="14dp" />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="100dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="15dp"
-                                    android:gravity="start|center_vertical"
                                     android:text="签约人"
                                     android:textColor="#666666"
                                     android:textSize="14dp" />
@@ -332,12 +214,12 @@
                                     android:id="@+id/tv_contractor_user"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
+                                    android:layout_marginRight="15dp"
                                     android:layout_weight="1"
+                                    android:drawableRight="@mipmap/ic_arrow_right_gray"
                                     android:gravity="start|center_vertical"
                                     android:hint="请选择签约人"
-                                    android:layout_marginRight="15dp"
                                     android:textColor="#333334"
-                                    android:drawableRight="@mipmap/ic_arrow_right_gray"
                                     android:textSize="14dp" />
 
 
@@ -400,6 +282,161 @@
                             </LinearLayout>
                         </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/shape_rect_white_corners_8"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:gravity="center_vertical"
+                                android:paddingStart="15dp"
+                                android:paddingEnd="15dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="是否缴纳签订定金"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold" />
+
+                                <Switch
+                                    android:id="@+id/switch_money"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="24dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="15sp"
+                                    android:thumb="@drawable/selector_thumb_check"
+                                    android:track="@drawable/selector_track_check"
+                                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_money"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="15dp"
+                                        android:gravity="start|center_vertical"
+                                        android:text="签订定金"
+                                        android:textColor="#666666"
+                                        android:textSize="14dp" />
+
+                                    <EditText
+                                        android:id="@+id/et_sign_money"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:background="@null"
+                                        android:gravity="start|center_vertical"
+                                        android:hint="请输入签订定金"
+                                        android:inputType="numberDecimal"
+                                        android:lines="1"
+                                        android:textColor="#333334"
+                                        android:textSize="14dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="15dp"
+                                        android:gravity="start|center_vertical"
+                                        android:text="支付方式"
+                                        android:textColor="#666666"
+                                        android:textSize="14dp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_pay_type"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginRight="15dp"
+                                        android:layout_weight="1"
+                                        android:drawableRight="@mipmap/ic_arrow_right_gray"
+                                        android:gravity="start|center_vertical"
+                                        android:hint="请选择支付方式"
+                                        android:textColor="#333334"
+                                        android:textSize="14dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="15dp"
+                                        android:gravity="start|center_vertical"
+                                        android:text="收据编号"
+                                        android:textColor="#666666"
+                                        android:textSize="14dp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_code"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:background="@null"
+                                        android:gravity="start|center_vertical"
+                                        android:hint="系统自动生成"
+                                        android:lines="1"
+                                        android:textColor="#333334"
+                                        android:textSize="14dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="100dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginLeft="15dp"
+                                        android:gravity="start|center_vertical"
+                                        android:text="付款时间"
+                                        android:textColor="#666666"
+                                        android:textSize="14dp" />
+
+                                    <TextView
+                                        android:id="@+id/tv_pay_time"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:gravity="start|center_vertical"
+                                        android:hint="系统自动生成"
+                                        android:textColor="#333334"
+                                        android:textSize="14dp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -452,8 +489,8 @@
             tools:visibility="visible">
 
             <TextView
-                android:layout_width="0dp"
                 android:id="@+id/tv_lose_order"
+                android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="1dp"
@@ -488,6 +525,7 @@
             tools:visibility="visible">
 
             <TextView
+                android:id="@+id/tv_lose_order_2"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
@@ -497,7 +535,6 @@
                 android:gravity="center"
                 android:text="丢单"
                 android:textColor="#D6C5B0"
-                android:id="@+id/tv_lose_order_2"
                 android:textSize="17dp" />
 
             <TextView
@@ -523,6 +560,7 @@
             tools:visibility="visible">
 
             <TextView
+                android:id="@+id/tv_lose_order_3"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
@@ -531,7 +569,6 @@
                 android:background="@drawable/shape_rect_black_10_0"
                 android:gravity="center"
                 android:text="丢单"
-                android:id="@+id/tv_lose_order_3"
                 android:textColor="#D6C5B0"
                 android:textSize="17dp" />
 

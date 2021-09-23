@@ -24,6 +24,11 @@ public class Constant {
         String DATA = "data";
     }
 
+    public interface Code{
+        int OPEN_ORDER_MODIFY_CODE_REQUEST = 1001;
+        int OPEN_ORDER_MODIFY_CODE_RESULT = 2001;
+    }
+
     /**
      * 字符串
      */

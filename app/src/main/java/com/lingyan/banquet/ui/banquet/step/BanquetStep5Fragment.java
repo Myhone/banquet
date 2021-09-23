@@ -93,10 +93,10 @@ public class BanquetStep5Fragment extends BaseBanquetStepFragment {
                         ToastUtils.showShort(String.format("请输入第%d场的确认酒水", (i + 1)));
                         return;
                     }
-                    if (StringUtils.isTrimEmpty(platformType) || StringUtils.equals(platformType, "0")) {
-                        ToastUtils.showShort(String.format("请选择第%d场的礼台类型", (i + 1)));
-                        return;
-                    }
+//                    if (StringUtils.isTrimEmpty(platformType) || StringUtils.equals(platformType, "0")) {
+//                        ToastUtils.showShort(String.format("请选择第%d场的礼台类型", (i + 1)));
+//                        return;
+//                    }
                     if (StringUtils.isTrimEmpty(confirmPlatrorm)) {
                         ToastUtils.showShort(String.format("请输入第%d场的确定台型", (i + 1)));
                         return;

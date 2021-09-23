@@ -21,11 +21,13 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.lingyan.banquet.R;
 import com.lingyan.banquet.databinding.FragmentCelStep4Binding;
+import com.lingyan.banquet.event.RefreshTotalPriceEvent;
 import com.lingyan.banquet.event.SaveReserveSuccessEvent;
 import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.net.JsonCallback;
 import com.lingyan.banquet.net.NetBaseResp;
 import com.lingyan.banquet.ui.banquet.bean.NetMarketing;
+import com.lingyan.banquet.ui.banquet.bean.NetRestoreStep4;
 import com.lingyan.banquet.ui.banquet.bean.NetSinglePersonList;
 import com.lingyan.banquet.ui.celebration.bean.NetCelRestoreStep2;
 import com.lingyan.banquet.ui.celebration.bean.NetCelRestoreStep4;
@@ -38,6 +40,8 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +74,7 @@ public class CelStep4Fragment extends BaseCelStepFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        EventBus.getDefault().register(this);
         //保存
         mBinding.tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +105,11 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                     ToastUtils.showShort("当前状态不可操作");
                     return;
                 }
-                String payType = mData.getPay_type();
-                if (StringUtils.isEmpty(payType)) {
-                    ToastUtils.showShort("请选择支付方式");
-                    return;
-                }
+//                String payType = mData.getPay_type();
+//                if (StringUtils.isEmpty(payType)) {
+//                    ToastUtils.showShort("请选择支付方式");
+//                    return;
+//                }
                 List<NetCelRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
                 if (ObjectUtils.isEmpty(list)) {
                     ToastUtils.showShort("当前状态不可操作");
@@ -134,10 +139,10 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                     }
 
                 }
-                if (StringUtils.isTrimEmpty(mBinding.etSignMoney.getText().toString())) {
-                    ToastUtils.showShort("请输入签订定金");
-                    return;
-                }
+//                if (StringUtils.isTrimEmpty(mBinding.etSignMoney.getText().toString())) {
+//                    ToastUtils.showShort("请输入签订定金");
+//                    return;
+//                }
                 if (StringUtils.isTrimEmpty(mBinding.etBudgetMoney.getText().toString())) {
                     ToastUtils.showShort("请输入预算总额");
                     return;
@@ -279,6 +284,8 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                 fragment.setData(dto);
                 list.add(dto);
                 ToastUtils.showShort("长按左边场次可删除");
+
+                clearTotalPrice();
             }
         });
         mBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -309,8 +316,31 @@ public class CelStep4Fragment extends BaseCelStepFragment {
             }
         });
 
+        mBinding.switchMoney.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                mBinding.llMoney.setVisibility(View.VISIBLE);
+                mData.setIs_pay("1");
+            } else {
+                mBinding.llMoney.setVisibility(View.GONE);
+                mData.setIs_pay("0");
+            }
+        });
         restoreDataFromNet();
 
+        mBinding.etBudgetMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTotalPrice();
+            }
+        });
+        mBinding.etBudgetMoney.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    resetTotalPrice();
+                }
+            }
+        });
     }
 
     //签约人
@@ -364,6 +394,7 @@ public class CelStep4Fragment extends BaseCelStepFragment {
 
         mBinding.etRemarks.setText(mData.getRemarks_4());
         List<NetCelRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
+        double perMoneyAll = 0;//预算总额
         if (list.size() == 0) {
             SignSessionFragment fragment = add();
             NetCelRestoreStep4.DataDTO.BanquetNumDTO dto = new NetCelRestoreStep4.DataDTO.BanquetNumDTO();
@@ -374,7 +405,9 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                 NetCelRestoreStep4.DataDTO.BanquetNumDTO dto = list.get(i);
                 SignSessionFragment fragment = add();
                 fragment.setData(dto);
+                perMoneyAll += Double.parseDouble(StringUtils.isTrimEmpty(dto.getSession_amount()) ? "0" : dto.getSession_amount()); //预算总额 = 各场次金额相加
             }
+            mBinding.etBudgetMoney.setText(String.valueOf(perMoneyAll));
         }
         String status = mData.getStatus();
         String step = mData.getStep();
@@ -399,7 +432,6 @@ public class CelStep4Fragment extends BaseCelStepFragment {
             mBinding.tvTopBarDes.setText("已退款");
         }
 
-
         String marketingTypeName = mData.getMarketing_type_name();
         if (StringUtils.isTrimEmpty(marketingTypeName)) {
             marketingTypeName = "不使用活动";
@@ -407,10 +439,22 @@ public class CelStep4Fragment extends BaseCelStepFragment {
         mBinding.tvMarketingType.setText(marketingTypeName);
 
         mBinding.etPreferentialFee.setText(mData.getPreferential_fee());
-        mBinding.etBudgetMoney.setText(mData.getBudget_money());
         mBinding.etSignMoney.setText(mData.getSign_money());
 
-        mBinding.tvPayType.setText(mData.getPay_name());
+        if ("1".equals(mData.getIs_pay())) {
+            mBinding.llMoney.setVisibility(View.VISIBLE);
+            mBinding.switchMoney.setChecked(true);
+        } else {
+            mBinding.llMoney.setVisibility(View.GONE);
+            mBinding.switchMoney.setChecked(false);
+        }
+        if (!StringUtils.isEmpty(mData.getPay_name())) {
+            mBinding.tvPayType.setText(mData.getPay_name());
+        } else {
+            mBinding.tvPayType.setText("现金支付");
+            mData.setPay_type("4");
+        }
+
         mBinding.tvCode.setText(mData.getCode());
         String payTime = mData.getPay_time();
         if (StringUtils.isTrimEmpty(payTime)) {
@@ -426,7 +470,7 @@ public class CelStep4Fragment extends BaseCelStepFragment {
 
 
         String contractorCustomer = mData.getContractor_customer();
-        if(StringUtils.isEmpty(contractorCustomer)){
+        if (StringUtils.isEmpty(contractorCustomer)) {
             mData.setContractor_customer(mData.getReal_name());
         }
 
@@ -438,6 +482,29 @@ public class CelStep4Fragment extends BaseCelStepFragment {
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshPrice(RefreshTotalPriceEvent event) {
+        clearTotalPrice();
+    }
+
+    //清空预算总额
+    private void clearTotalPrice() {
+        mBinding.etBudgetMoney.setText("");
+    }
+
+    //重新计算预估总额
+    private void resetTotalPrice() {
+        if (mData == null) return;
+        List<NetCelRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
+        double perMoneyAll = 0;//预算总额
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                NetCelRestoreStep4.DataDTO.BanquetNumDTO dto = list.get(i);
+                perMoneyAll += Double.parseDouble(dto.getSession_amount());
+            }
+            mBinding.etBudgetMoney.setText(String.valueOf(perMoneyAll));
+        }
+    }
 
     private SignSessionFragment add() {
         int tabCount = mBinding.tabLayout.getTabCount();
@@ -478,6 +545,8 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                                 for (int i = 0; i < nowCount - 1; i++) {
                                     mBinding.tabLayout.getTabAt(i).setText("第" + (i + 1) + "场");
                                 }
+
+                                clearTotalPrice();
                             }
                         })
                         .show();

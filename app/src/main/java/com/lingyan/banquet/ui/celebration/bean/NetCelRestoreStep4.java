@@ -106,6 +106,7 @@ public class NetCelRestoreStep4 {
         private String intent_man_name;
         private String intent_man_id;
         private String real_name;
+        private String is_pay;
 
         public String getIntent_man_name() {
             return intent_man_name;
@@ -131,6 +132,14 @@ public class NetCelRestoreStep4 {
             this.real_name = real_name;
         }
 
+        public String getIs_pay() {
+            return is_pay;
+        }
+
+        public void setIs_pay(String is_pay) {
+            this.is_pay = is_pay;
+        }
+
         public String getFinance_confirmed2() {
             return finance_confirmed2;
         }
@@ -140,8 +149,8 @@ public class NetCelRestoreStep4 {
         }
 
         public String getIs_lost() {
-            if(StringUtils.isEmpty(is_lost)){
-                is_lost="0";
+            if (StringUtils.isEmpty(is_lost)) {
+                is_lost = "0";
             }
             return is_lost;
         }
@@ -151,8 +160,8 @@ public class NetCelRestoreStep4 {
         }
 
         public String getIs_status() {
-            if(StringUtils.isEmpty(is_status)){
-                is_status="0";
+            if (StringUtils.isEmpty(is_status)) {
+                is_status = "0";
             }
             return is_status;
         }
@@ -180,8 +189,8 @@ public class NetCelRestoreStep4 {
         }
 
         public String getStatus() {
-            if(StringUtils.isEmpty(status)){
-                status="0";
+            if (StringUtils.isEmpty(status)) {
+                status = "0";
             }
             return status;
         }
@@ -327,8 +336,8 @@ public class NetCelRestoreStep4 {
         }
 
         public String getFinance_confirmed() {
-            if(StringUtils.isEmpty(finance_confirmed)){
-                finance_confirmed="0";
+            if (StringUtils.isEmpty(finance_confirmed)) {
+                finance_confirmed = "0";
             }
             return finance_confirmed;
         }
@@ -375,7 +384,7 @@ public class NetCelRestoreStep4 {
              */
 
             private String id = "0";
-            private String banquet_number_id="0";
+            private String banquet_number_id = "0";
             private String date;
             private String segment_type;
             private String segment_name;
@@ -405,6 +414,7 @@ public class NetCelRestoreStep4 {
             public void setHall_info(List<HallInfoDTO> hall_info) {
                 this.hall_info = hall_info;
             }
+
             public static class HallInfoDTO {
                 /**
                  * id : 9
@@ -440,6 +450,7 @@ public class NetCelRestoreStep4 {
             }
 
             public String getSession_amount() {
+                if (StringUtils.isTrimEmpty(session_amount)) session_amount = "0";
                 return session_amount;
             }
 

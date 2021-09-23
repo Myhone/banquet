@@ -499,7 +499,7 @@
                                 android:layout_marginLeft="20dp"
 
                                 android:layout_weight="1.3"
-                                android:text="宴会时间："
+                                android:text="商机时间："
                                 android:textColor="#333333"
                                 android:textSize="13dp" />
 

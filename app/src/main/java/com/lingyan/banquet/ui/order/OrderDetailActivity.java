@@ -31,6 +31,7 @@ import com.lingyan.banquet.event.ApplyRecordEvent;
 import com.lingyan.banquet.event.FollowRefreshEvent;
 import com.lingyan.banquet.event.OrderDetailRefreshEvent;
 import com.lingyan.banquet.global.BanquetCelebrationType;
+import com.lingyan.banquet.global.Constant;
 import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.net.JsonCallback;
 import com.lingyan.banquet.net.NetBaseResp;
@@ -114,6 +115,13 @@ public class OrderDetailActivity extends BaseActivity implements OnRefreshListen
             }
         });
 
+        //修改订单
+        mBinding.tvOrderModify.setOnClickListener(v -> {
+            Intent intentModify = new Intent(getContext(), OrderModifyActivity.class);
+            intentModify.putExtra("id", mId);
+            intentModify.putExtra("type", mType);
+            startActivityForResult(intentModify, Constant.Code.OPEN_ORDER_MODIFY_CODE_REQUEST);
+        });
 
         initUI();
         onRefresh(mBinding.refreshLayout);
@@ -151,6 +159,12 @@ public class OrderDetailActivity extends BaseActivity implements OnRefreshListen
                         mBinding.tvIntentManName.setText(mData.getIntent_man_name());
                         mBinding.tvFollowCount.setText(String.valueOf(mData.getFollow_time()));
 
+                        //判断是否显示修改订单按钮
+                        if ("1".equals(mData.getIs_modify_order())) {
+                            mBinding.tvOrderModify.setVisibility(View.VISIBLE);
+                        } else {
+                            mBinding.tvOrderModify.setVisibility(View.GONE);
+                        }
                         NetOrderDetail.DataDTO.LikemenDTO likemen = mData.getLikemen();
                         if (likemen != null) {
                             realName = likemen.getReal_name();

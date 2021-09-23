@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +14,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.amap.api.location.DPoint;
 import com.blankj.utilcode.util.GsonUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
@@ -21,6 +24,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.google.android.material.tabs.TabLayout;
 import com.lingyan.banquet.R;
 import com.lingyan.banquet.databinding.FragmentBanquetStep4Binding;
+import com.lingyan.banquet.event.OrderDetailRefreshEvent;
+import com.lingyan.banquet.event.RefreshTotalPriceEvent;
 import com.lingyan.banquet.event.SaveReserveSuccessEvent;
 import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.net.JsonCallback;
@@ -38,6 +43,8 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +77,7 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        EventBus.getDefault().register(this);
         //保存
         mBinding.tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,11 +108,11 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
                     ToastUtils.showShort("当前状态不可操作");
                     return;
                 }
-                String payType = mData.getPay_type();
-                if (StringUtils.isEmpty(payType)) {
-                    ToastUtils.showShort("请选择支付方式");
-                    return;
-                }
+//                String payType = mData.getPay_type();
+//                if (StringUtils.isEmpty(payType)) {
+//                    ToastUtils.showShort("请选择支付方式");
+//                    return;
+//                }
                 List<NetRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
                 if (ObjectUtils.isEmpty(list)) {
                     ToastUtils.showShort("当前状态不可操作");
@@ -143,10 +151,10 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
                     ToastUtils.showShort("请选择签约人");
                     return;
                 }
-                if (StringUtils.isTrimEmpty(mBinding.etSignMoney.getText().toString())) {
-                    ToastUtils.showShort("请输入签订定金");
-                    return;
-                }
+//                if (StringUtils.isTrimEmpty(mBinding.etSignMoney.getText().toString())) {
+//                    ToastUtils.showShort("请输入签订定金");
+//                    return;
+//                }
                 if (StringUtils.isTrimEmpty(mBinding.etBudgetMoney.getText().toString())) {
                     ToastUtils.showShort("请输入预算总额");
                     return;
@@ -185,7 +193,7 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
             @Override
             public void onClick(View v) {
                 String payType = mData.getPay_type();
-                int payWay = 0;
+                int payWay = 4;
                 if (ObjectUtils.isNotEmpty(payType)) {
                     payWay = Integer.valueOf(payType.trim());
                 }
@@ -270,6 +278,8 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
                 fragment.setData(dto);
                 list.add(dto);
                 ToastUtils.showShort("长按左边场次可删除");
+
+                clearTotalPrice();
             }
         });
         mBinding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -300,8 +310,31 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
             }
         });
 
+        mBinding.switchMoney.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                mBinding.llMoney.setVisibility(View.VISIBLE);
+                if (mData != null) mData.setIs_pay("1");
+            } else {
+                mBinding.llMoney.setVisibility(View.GONE);
+                if (mData != null) mData.setIs_pay("0");
+            }
+        });
         restoreDataFromNet();
 
+        mBinding.etBudgetMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTotalPrice();
+            }
+        });
+        mBinding.etBudgetMoney.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    resetTotalPrice();
+                }
+            }
+        });
     }
 
     @Override
@@ -372,6 +405,7 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
 
         mBinding.etRemarks.setText(mData.getRemarks_4());
         List<NetRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
+        double perMoneyAll = 0;//预算总额
         if (list.size() == 0) {
             SignSessionFragment fragment = add();
             NetRestoreStep4.DataDTO.BanquetNumDTO dto = new NetRestoreStep4.DataDTO.BanquetNumDTO();
@@ -382,7 +416,9 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
                 NetRestoreStep4.DataDTO.BanquetNumDTO dto = list.get(i);
                 SignSessionFragment fragment = add();
                 fragment.setData(dto);
+                perMoneyAll += Double.parseDouble(dto.getTable_number()) * Double.parseDouble(dto.getPrice());
             }
+            mBinding.etBudgetMoney.setText(String.valueOf(perMoneyAll));
         }
         String status = mData.getStatus();
         String step = mData.getStep();
@@ -407,7 +443,6 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
             mBinding.tvTopBarDes.setText("已退款");
         }
 
-
         String marketingTypeName = mData.getMarketing_type_name();
         if (StringUtils.isTrimEmpty(marketingTypeName)) {
             marketingTypeName = "不使用活动";
@@ -415,10 +450,21 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
         mBinding.tvMarketingType.setText(marketingTypeName);
 
         mBinding.etPreferentialFee.setText(mData.getPreferential_fee());
-        mBinding.etBudgetMoney.setText(mData.getBudget_money());
         mBinding.etSignMoney.setText(mData.getSign_money());
 
-        mBinding.tvPayType.setText(mData.getPay_name());
+        if ("1".equals(mData.getIs_pay())) {
+            mBinding.llMoney.setVisibility(View.VISIBLE);
+            mBinding.switchMoney.setChecked(true);
+        } else {
+            mBinding.llMoney.setVisibility(View.GONE);
+            mBinding.switchMoney.setChecked(false);
+        }
+        if (!StringUtils.isEmpty(mData.getPay_name())) {
+            mBinding.tvPayType.setText(mData.getPay_name());
+        } else {
+            mBinding.tvPayType.setText("现金支付");
+            mData.setPay_type("4");
+        }
         mBinding.tvCode.setText(mData.getCode());
         String payTime = mData.getPay_time();
         if (StringUtils.isTrimEmpty(payTime)) {
@@ -434,7 +480,7 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
 
 
         String contractorCustomer = mData.getContractor_customer();
-        if(StringUtils.isEmpty(contractorCustomer)){
+        if (StringUtils.isEmpty(contractorCustomer)) {
             mData.setContractor_customer(mData.getReal_name());
         }
 
@@ -446,6 +492,29 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshPrice(RefreshTotalPriceEvent event) {
+        clearTotalPrice();
+    }
+
+    //清空预算总额
+    private void clearTotalPrice() {
+        mBinding.etBudgetMoney.setText("");
+    }
+
+    //重新计算预估总额
+    private void resetTotalPrice() {
+        if (mData == null) return;
+        List<NetRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
+        double perMoneyAll = 0;//预算总额
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                NetRestoreStep4.DataDTO.BanquetNumDTO dto = list.get(i);
+                perMoneyAll += Double.parseDouble(dto.getTable_number()) * Double.parseDouble(dto.getPrice());
+            }
+            mBinding.etBudgetMoney.setText(String.valueOf(perMoneyAll));
+        }
+    }
 
     private SignSessionFragment add() {
         int tabCount = mBinding.tabLayout.getTabCount();
@@ -486,6 +555,8 @@ public class BanquetStep4Fragment extends BaseBanquetStepFragment {
                                 for (int i = 0; i < nowCount - 1; i++) {
                                     mBinding.tabLayout.getTabAt(i).setText("第" + (i + 1) + "场");
                                 }
+
+                                clearTotalPrice();
                             }
                         })
                         .show();

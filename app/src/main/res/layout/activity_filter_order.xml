@@ -605,7 +605,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:text="宴会时间"
+                    android:text="商机时间"
                     android:textColor="#333333"
                     android:textSize="15dp"
                     android:textStyle="bold" />

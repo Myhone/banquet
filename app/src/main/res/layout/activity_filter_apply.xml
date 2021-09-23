@@ -338,7 +338,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_marginBottom="15dp"
-                    android:text="宴会时间"
+                    android:text="商机时间"
                     android:textColor="#333333"
                     android:textSize="15dp"
                     android:textStyle="bold" />

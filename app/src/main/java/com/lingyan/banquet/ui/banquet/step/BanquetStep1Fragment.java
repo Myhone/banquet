@@ -77,7 +77,7 @@ public class BanquetStep1Fragment extends BaseBanquetStepFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mBinding.tvLabelTime.setText("宴会时间");
+        mBinding.tvLabelTime.setText("商机时间");
         mBinding.tvLabelSort.setText("宴会类型");
         mBinding.tvSelectSort.setHint("请选择宴会类型");
 
@@ -196,7 +196,7 @@ public class BanquetStep1Fragment extends BaseBanquetStepFragment {
                 }
 
                 NetRestoreStep1.DataDTO.LinkmenDTO linkmen = mData.getLinkmen();
-                if(StringUtils.isEmpty(linkmen.getSex())){
+                if (StringUtils.isEmpty(linkmen.getSex())) {
                     ToastUtils.showShort("请选择客户性别");
                     return;
                 }
@@ -292,6 +292,12 @@ public class BanquetStep1Fragment extends BaseBanquetStepFragment {
                             mData.setIntent_man_id(UserInfoManager.getInstance().get(UserInfoManager.ID));
                             mData.setIntent_man_name(UserInfoManager.getInstance().get(UserInfoManager.REAL_NAME));
                         }
+                        if (StringUtils.isTrimEmpty(mData.getNiche_source_id())) {
+                            mData.setNiche_source_id(UserInfoManager.getInstance().get(UserInfoManager.ID));
+                            mData.setNiche_source_name(UserInfoManager.getInstance().get(UserInfoManager.REAL_NAME));
+                        }
+                        if (StringUtils.isTrimEmpty(mData.getLinkmen().getSex()))
+                            mData.getLinkmen().setSex("1");
                         refreshUI();
 
 

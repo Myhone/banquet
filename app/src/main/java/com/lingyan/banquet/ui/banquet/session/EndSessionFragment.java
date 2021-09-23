@@ -115,6 +115,7 @@ public class EndSessionFragment extends BaseFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String string = s.toString().trim();
                 mDTO.setTable_number(string);
+                //        mBinding.etSessionAmount.setText(Integer.parseInt(string) * Integer.parseInt(mDTO.getMeal_name()));
             }
         });
         mBinding.etAddDishMoney.addTextChangedListener(new TextWatcherImpl() {
@@ -245,7 +246,7 @@ public class EndSessionFragment extends BaseFragment {
         mBinding.etAddDishMoney.setText(mDTO.getAdd_dish_money());
         mBinding.etMealLossMoney.setText(mDTO.getMeal_loss_money());
         mBinding.etWine.setText(mDTO.getWine());
-        mBinding.etSessionAmount.setText(mDTO.getSession_amount());
+        mBinding.etSessionAmount.setText(Integer.parseInt(mDTO.getTable_number()) * Integer.parseInt(mDTO.getPrice()));
         mBinding.tvSegmentType.setText(mDTO.getSegment_name());
 
     }

@@ -27,12 +27,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
                         android:background="#2F2F2E"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp">
 
@@ -40,27 +38,39 @@
                             android:id="@+id/tv_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
                             android:text="完成"
                             android:textColor="#F2DFC2"
                             android:textSize="18dp" />
 
-                        <Space
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_weight="1" />
+                        <TextView
+                            android:id="@+id/tv_order_modify"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toStartOf="@+id/tv_order_detail"
+                            android:drawableRight="@mipmap/ic_arrow_right_gold"
+                            android:drawablePadding="5dp"
+                            android:gravity="center_vertical"
+                            android:text="修改订单"
+                            android:textColor="#F2DFC2"
+                            android:textSize="13dp" />
 
                         <TextView
                             android:id="@+id/tv_order_detail"
                             android:layout_width="wrap_content"
                             android:layout_height="50dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
                             android:drawableRight="@mipmap/ic_arrow_right_gold"
                             android:drawablePadding="5dp"
-                            android:gravity="center"
+                            android:gravity="center_vertical"
                             android:text="订单详情"
                             android:textColor="#F2DFC2"
                             android:textSize="13dp" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -145,7 +155,7 @@
                                 android:layout_marginLeft="20dp"
 
                                 android:layout_weight="1.3"
-                                android:text="宴会时间："
+                                android:text="商机时间："
                                 android:textColor="#333333"
                                 android:textSize="13dp" />
 

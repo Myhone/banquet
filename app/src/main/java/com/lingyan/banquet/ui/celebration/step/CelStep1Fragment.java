@@ -78,7 +78,7 @@ public class CelStep1Fragment extends BaseCelStepFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mBinding.tvLabelTime.setText("庆典时间");
+        mBinding.tvLabelTime.setText("商机时间");
         mBinding.tvLabelSort.setText("庆典类型");
         mBinding.tvSelectSort.setHint("请选择庆典类型");
 
@@ -91,7 +91,7 @@ public class CelStep1Fragment extends BaseCelStepFragment {
                     @Override
                     public void onDayClick(Calendar c) {
                         int compare = Calendar.getInstance().compareTo(c);
-                        if(compare>0){
+                        if (compare > 0) {
                             ToastUtils.showShort("选择日期必须大于今天");
                             return;
                         }
@@ -269,6 +269,12 @@ public class CelStep1Fragment extends BaseCelStepFragment {
                             mData.setIntent_man_id(UserInfoManager.getInstance().get(UserInfoManager.ID));
                             mData.setIntent_man_name(UserInfoManager.getInstance().get(UserInfoManager.REAL_NAME));
                         }
+                        if (StringUtils.isTrimEmpty(mData.getNiche_source_id())) {
+                            mData.setNiche_source_id(UserInfoManager.getInstance().get(UserInfoManager.ID));
+                            mData.setNiche_source_name(UserInfoManager.getInstance().get(UserInfoManager.REAL_NAME));
+                        }
+                        if (StringUtils.isTrimEmpty(mData.getLinkmen().getSex()))
+                            mData.getLinkmen().setSex("1");
                         refreshUI();
 
                     }

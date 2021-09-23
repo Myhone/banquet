@@ -43,7 +43,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginLeft="15dp"
                             android:gravity="start|center_vertical"
-                            android:text="宴会时间"
+                            android:text="商机时间"
                             android:textColor="#666666"
                             android:textSize="14dp" />
 

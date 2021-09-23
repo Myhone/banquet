@@ -74,6 +74,7 @@ public class NetCelRestoreStep2 {
         private String step;
         private String remarks_2;
         private String is_click;
+        private String date;
         private LinkmenDTO linkmen;
         private String budget;
         private String plan_id_name;
@@ -171,6 +172,14 @@ public class NetCelRestoreStep2 {
             this.is_click = is_click;
         }
 
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
         public LinkmenDTO getLinkmen() {
             if (linkmen == null) {
                 linkmen = new LinkmenDTO();
@@ -234,6 +243,8 @@ public class NetCelRestoreStep2 {
             private String county_id;
             private String address;
             private String address_detail;
+            private String lng;//经度
+            private String lat;//纬度
 
             public String getProvince_id() {
                 return province_id;
@@ -273,6 +284,22 @@ public class NetCelRestoreStep2 {
 
             public void setAddress_detail(String address_detail) {
                 this.address_detail = address_detail;
+            }
+
+            public String getLng() {
+                return lng;
+            }
+
+            public void setLng(String lng) {
+                this.lng = lng;
+            }
+
+            public String getLat() {
+                return lat;
+            }
+
+            public void setLat(String lat) {
+                this.lat = lat;
             }
         }
 

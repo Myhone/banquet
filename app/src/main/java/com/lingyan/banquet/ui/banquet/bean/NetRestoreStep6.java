@@ -145,8 +145,8 @@ public class NetRestoreStep6 {
         }
 
         public String getIs_lost() {
-            if(StringUtils.isEmpty(is_lost)){
-                is_lost="0";
+            if (StringUtils.isEmpty(is_lost)) {
+                is_lost = "0";
             }
             return is_lost;
         }
@@ -172,8 +172,8 @@ public class NetRestoreStep6 {
         }
 
         public String getStatus() {
-            if(StringUtils.isEmpty(status)){
-                status="0";
+            if (StringUtils.isEmpty(status)) {
+                status = "0";
             }
             return status;
         }
@@ -231,8 +231,8 @@ public class NetRestoreStep6 {
         }
 
         public String getFinance_confirmed() {
-            if(StringUtils.isEmpty(finance_confirmed)){
-                finance_confirmed="0";
+            if (StringUtils.isEmpty(finance_confirmed)) {
+                finance_confirmed = "0";
             }
             return finance_confirmed;
         }
@@ -250,8 +250,8 @@ public class NetRestoreStep6 {
         }
 
         public String getIs_status() {
-            if(StringUtils.isEmpty(is_status)){
-                is_status="0";
+            if (StringUtils.isEmpty(is_status)) {
+                is_status = "0";
             }
             return is_status;
         }
@@ -303,6 +303,7 @@ public class NetRestoreStep6 {
             private String wine;
             private String session_amount;
             private String meal_name;
+            private String price;
             private String segment_name;
             private String domain;
             private List<String> hall_id;
@@ -396,6 +397,14 @@ public class NetRestoreStep6 {
 
             public void setMeal_name(String meal_name) {
                 this.meal_name = meal_name;
+            }
+
+            public String getPrice() {
+                return price;
+            }
+
+            public void setPrice(String price) {
+                this.price = price;
             }
 
             public String getSegment_name() {

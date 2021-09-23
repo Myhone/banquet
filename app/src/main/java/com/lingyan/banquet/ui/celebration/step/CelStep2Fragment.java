@@ -1,7 +1,10 @@
 package com.lingyan.banquet.ui.celebration.step;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,6 +31,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.Utils;
 import com.google.android.material.tabs.TabLayout;
 import com.lingyan.banquet.R;
 import com.lingyan.banquet.bean.Province;
@@ -42,6 +46,7 @@ import com.lingyan.banquet.ui.banquet.bean.NetRestoreStep5;
 import com.lingyan.banquet.ui.banquet.bean.NetSinglePersonList;
 import com.lingyan.banquet.ui.celebration.bean.NetCelRestoreStep2;
 import com.lingyan.banquet.ui.celebration.session.IntentSessionFragment;
+import com.lingyan.banquet.ui.map.AMapActivity;
 import com.lingyan.banquet.utils.AddressUtils;
 import com.lingyan.banquet.views.dialog.PersonPickerDialog;
 import com.lzy.okgo.OkGo;
@@ -52,6 +57,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 意向
@@ -71,6 +77,7 @@ public class CelStep2Fragment extends BaseCelStepFragment {
     private Province.City mCity;
     private Province.City.Area mArea;
     private NetCelRestoreStep2.DataDTO mData;
+    private boolean isOpenLocationService = false;//是否打开定位功能
 
     public static CelStep2Fragment newInstance() {
         CelStep2Fragment fragment = new CelStep2Fragment();
@@ -89,6 +96,13 @@ public class CelStep2Fragment extends BaseCelStepFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        //判断是否打开定位功能
+        LocationManager locationManager = (LocationManager) Objects.requireNonNull(getActivity()).getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            isOpenLocationService = true;
+        }
 
         mBinding.tvPlanId.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,12 +124,12 @@ public class CelStep2Fragment extends BaseCelStepFragment {
         mBinding.tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(
-                        mData==null||
-                                !StringUtils.equals(mData.getFinance_confirmed(),"0")||
-                                !StringUtils.equals(mData.getIs_status(),"0")
+                if (
+                        mData == null ||
+                                !StringUtils.equals(mData.getFinance_confirmed(), "0") ||
+                                !StringUtils.equals(mData.getIs_status(), "0")
 
-                ){
+                ) {
                     ToastUtils.showShort("当前状态不可操作");
                     return;
                 }
@@ -224,15 +238,37 @@ public class CelStep2Fragment extends BaseCelStepFragment {
         mBinding.tvAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddressPicker();
+                //若打开定位则跳转地图页
+                if (isOpenLocationService) {
+                    startAMapActivity();
+                } else {
+                    //自己选择
+                    showAddressPicker();
+                }
             }
         });
 
-        mBinding.etAddressDetail.addTextChangedListener(new TextWatcherImpl() {
+        if (isOpenLocationService) {
+            mBinding.etAddressDetail.setFocusable(false);
+            mBinding.etAddressDetail.setOnClickListener(v -> startAMapActivity());
+        }
+
+        mBinding.etAddressDetail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (mData == null) return;
                 NetCelRestoreStep2.DataDTO.LinkmenDTO linkmen = mData.getLinkmen();
                 linkmen.setAddress_detail(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         restoreDataFromNet();
@@ -266,6 +302,10 @@ public class CelStep2Fragment extends BaseCelStepFragment {
         if (ObjectUtils.isEmpty(banquetNum)) {
             IntentSessionFragment add = add();
             NetCelRestoreStep2.DataDTO.BanquetNumDTO dto = new NetCelRestoreStep2.DataDTO.BanquetNumDTO();
+            //设置默认值
+            dto.setDate(StringUtils.isEmpty(dto.getDate()) ? mData.getDate() : dto.getDate());
+            dto.setSegment_name(StringUtils.isEmpty(dto.getSegment_name()) ? "午餐" : dto.getSegment_name());
+            dto.setSegment_type(StringUtils.isEmpty(dto.getSegment_type()) ? "1" : dto.getSegment_type());
             add.setData(dto);
             banquetNum.add(dto);
         } else {
@@ -453,6 +493,16 @@ public class CelStep2Fragment extends BaseCelStepFragment {
             mPvOptions.show();
         }
     }
+
+    /**
+     * 打开地图页
+     */
+    private void startAMapActivity() {
+        Intent intent = new Intent(Utils.getApp(), AMapActivity.class);
+        intent.putExtra("id", "1");
+        startActivityForResult(intent, 1001);
+    }
+
     @Override
     public boolean canLoseOrder() {
         if (mData == null) {
@@ -468,5 +518,29 @@ public class CelStep2Fragment extends BaseCelStepFragment {
 
 
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 200) {
+            if (requestCode == 1001) {
+                String addressNameBefore = data.getStringExtra("ADDRESS_BEFORE");
+                String addressNameAfter = data.getStringExtra("ADDRESS_AFTER");
+                String cityCode = data.getStringExtra("ADDRESS_CITY_CODE");
+                String countryCode = data.getStringExtra("ADDRESS_COUNTRY_CODE");
+                String lng = data.getStringExtra("ADDRESS_LNG");
+                String lat = data.getStringExtra("ADDRESS_LAT");
+                mBinding.tvAddress.setText(addressNameBefore);
+                mBinding.etAddressDetail.setText(addressNameAfter);
+                NetCelRestoreStep2.DataDTO.LinkmenDTO linkmen = mData.getLinkmen();
+                linkmen.setCity_id(cityCode);
+                linkmen.setCounty_id(countryCode);
+                linkmen.setAddress(addressNameBefore);
+                linkmen.setAddress_detail(addressNameAfter);
+                linkmen.setLng(lng);
+                linkmen.setLat(lat);
+            }
+        }
     }
 }

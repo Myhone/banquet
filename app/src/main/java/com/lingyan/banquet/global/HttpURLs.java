@@ -7,7 +7,7 @@ import com.blankj.utilcode.util.SPUtils;
  */
 
 public class HttpURLs {
-    public static final String BASE = "http://api.yanbob.com/";
+    public static final String BASE = "http://dev.yanbob.com/";
     public static String IMAGE_BASE = SPUtils.getInstance().getString("img_url");
     public static final String login = BASE + "api/v1/login";
     public static final String upload = BASE + "api/v1/common/upload";
@@ -28,6 +28,8 @@ public class HttpURLs {
     public static final String banquetOrderList = BASE + "api/v1/banquetOrder/list";
     public static final String banquetOrderNumberList = BASE + "api/v1/banquetOrder/number_list";
     public static final String banquetOrderInfo = BASE + "api/v1/banquetOrder/info";
+    public static final String banquetModifyInfo = BASE + "api/v1/banquet/getmodifyinfo";//订单修改
+    public static final String banquetModifySave = BASE + "api/v1/banquet/savemodifyinfo";//保存订单修改
     public static final String banquetOrderNumberInfo = BASE + "api/v1/banquetOrder/number_info";
     public static final String banquetGetInfo = BASE + "api/v1/banquet/getInfo";
     public static final String listMarketing = BASE + "api/v1/banquet/listMarketing";

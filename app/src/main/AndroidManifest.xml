@@ -65,6 +65,7 @@
         <activity android:name=".ui.order.OrderListActivity" />
         <activity android:name=".ui.order.OrderDetailActivity" />
         <activity android:name=".ui.order.FilterOrderActivity" />
+        <activity android:name=".ui.order.OrderModifyActivity" />
         <activity android:name=".ui.follow.FollowDetailActivity" />
         <activity android:name=".ui.follow.AddFollowActivity" />
         <activity android:name=".ui.apply.ApplyRecordListActivity" />

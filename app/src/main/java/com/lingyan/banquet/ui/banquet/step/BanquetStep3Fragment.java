@@ -61,7 +61,7 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
             @Override
             public void onClick(View v) {
                 String payType = mData.getPay_type();
-                int payWay = 0;
+                int payWay = 4;
                 if (ObjectUtils.isNotEmpty(payType)) {
                     payWay = Integer.valueOf(payType.trim());
                 }
@@ -84,11 +84,11 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
         mBinding.llUnlockContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mData ==null
-                        ||!StringUtils.equals("0",mData.getIs_status())
-                        ||!StringUtils.equals("3",mData.getStatus())
+                if (mData == null
+                        || !StringUtils.equals("0", mData.getIs_status())
+                        || !StringUtils.equals("3", mData.getStatus())
 
-                ){
+                ) {
                     ToastUtils.showShort("当前状态不允许操作！");
                     return;
                 }
@@ -103,9 +103,9 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
             @Override
             public void onClick(View v) {
                 if (
-                        mData == null||
-                        StringUtils.equals(mData.getFinance_confirmed(), "1") ||
-                                !StringUtils.equals(mData.getIs_status(), "0")||
+                        mData == null ||
+                                StringUtils.equals(mData.getFinance_confirmed(), "1") ||
+                                !StringUtils.equals(mData.getIs_status(), "0") ||
                                 StringUtils.equals(mData.getStatus(), "6")
 
                 ) {
@@ -122,9 +122,9 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
             @Override
             public void onClick(View v) {
                 if (
-                        mData == null||
+                        mData == null ||
                                 StringUtils.equals(mData.getFinance_confirmed(), "1") ||
-                                !StringUtils.equals(mData.getIs_status(), "0")||
+                                !StringUtils.equals(mData.getIs_status(), "0") ||
                                 StringUtils.equals(mData.getStatus(), "6")
 
                 ) {
@@ -143,7 +143,7 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
                     return;
                 }
                 String payType = mData.getPay_type();
-                if(StringUtils.isEmpty(payType)){
+                if (StringUtils.isEmpty(payType)) {
                     ToastUtils.showShort("请选择支付方式");
                     return;
                 }
@@ -181,9 +181,10 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void unlock(ApplyUnlockOrderEvent event){
+    public void unlock(ApplyUnlockOrderEvent event) {
         restoreDataFromNet();
     }
+
     @Override
     public boolean canLoseOrder() {
         if (mData == null) {
@@ -255,7 +256,12 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
 
 
         mBinding.etMoney.setText(mData.getMoney());
-        mBinding.tvPayType.setText(mData.getPay_name());
+        if (!StringUtils.isEmpty(mData.getPay_name())) {
+            mBinding.tvPayType.setText(mData.getPay_name());
+        } else {
+            mBinding.tvPayType.setText("现金支付");
+            mData.setPay_type("4");
+        }
         mBinding.tvCode.setText(mData.getCode());
 
         String time = mData.getPay_time();
@@ -264,7 +270,7 @@ public class BanquetStep3Fragment extends BaseBanquetStepFragment {
         }
         mBinding.tvPayTime.setText(time);
         String payUser = mData.getPay_user();
-        if(StringUtils.isEmpty(payUser)){
+        if (StringUtils.isEmpty(payUser)) {
             mData.setPay_user(mData.getReal_name());
         }
         mBinding.etPayUser.setText(mData.getPay_user());

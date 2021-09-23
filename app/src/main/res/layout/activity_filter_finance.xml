@@ -83,7 +83,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/selector_group_tag_bg"
                         android:gravity="center"
-                        android:text="宴会时间"
+                        android:text="商机时间"
                         android:textSize="13dp" />
                 </LinearLayout>
 

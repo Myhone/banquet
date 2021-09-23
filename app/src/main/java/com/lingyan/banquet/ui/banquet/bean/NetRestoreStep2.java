@@ -70,6 +70,7 @@ public class NetRestoreStep2 {
         private String is_lost;
         private String finance_confirmed;
         private String is_status;
+        private String date;
         private LinkmenDTO linkmen;
         private List<BanquetNumDTO> banquetNum;
 
@@ -180,6 +181,14 @@ public class NetRestoreStep2 {
             this.is_click = is_click;
         }
 
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
         public LinkmenDTO getLinkmen() {
             if (linkmen == null) {
                 linkmen = new LinkmenDTO();
@@ -216,6 +225,8 @@ public class NetRestoreStep2 {
             private String county_id;
             private String address;
             private String address_detail;
+            private String lng;//经度
+            private String lat;//纬度
 
             @Override
             public String toString() {
@@ -266,6 +277,22 @@ public class NetRestoreStep2 {
 
             public void setAddress_detail(String address_detail) {
                 this.address_detail = address_detail;
+            }
+
+            public String getLng() {
+                return lng;
+            }
+
+            public void setLng(String lng) {
+                this.lng = lng;
+            }
+
+            public String getLat() {
+                return lat;
+            }
+
+            public void setLat(String lat) {
+                this.lat = lat;
             }
         }
 

@@ -206,14 +206,20 @@ public class ExecSessionFragment extends BaseFragment {
 
                 new PickerListDialog(getActivity())
                         .title("选择礼台类型")
-                        .items("单", "双")
+                        .items("单", "双", "无")
                         .itemSelectedCallBack(new PickerListDialog.ItemSelectedCallBack() {
                             @Override
                             public void onItemSelected(int position, String text, PickerListDialog dialog) {
                                 dialog.dismiss();
                                 int type = position + 1;
                                 mDTO.setPlatform_type(type + "");
-                                mBinding.tvPlatformType.setText(type == 1 ? "单" : "双");
+                                String name = "无";
+                                if (type == 1) {
+                                    name = "单";
+                                } else if (type == 2) {
+                                    name = "双";
+                                }
+                                mBinding.tvPlatformType.setText(name);
                             }
                         })
                         .show();
@@ -252,9 +258,9 @@ public class ExecSessionFragment extends BaseFragment {
                 List<String> list = mDTO.getConfirm_menu();
                 ArrayList<String> imageList = new ArrayList<>();
                 for (String s : list) {
-                    imageList.add(HttpURLs.IMAGE_BASE+s);
+                    imageList.add(HttpURLs.IMAGE_BASE + s);
                 }
-                PicListActivity.start(imageList, getThisFragment().hashCode()+1);
+                PicListActivity.start(imageList, getThisFragment().hashCode() + 1);
             }
         });
         //台型图片
@@ -264,9 +270,9 @@ public class ExecSessionFragment extends BaseFragment {
                 List<String> list = mDTO.getPaltform_pic();
                 ArrayList<String> imageList = new ArrayList<>();
                 for (String s : list) {
-                    imageList.add(HttpURLs.IMAGE_BASE+s);
+                    imageList.add(HttpURLs.IMAGE_BASE + s);
                 }
-                PicListActivity.start(imageList, getThisFragment().hashCode()+2);
+                PicListActivity.start(imageList, getThisFragment().hashCode() + 2);
             }
         });
         mBinding.tvUploadPlatform.setOnClickListener(new View.OnClickListener() {
@@ -329,9 +335,9 @@ public class ExecSessionFragment extends BaseFragment {
     public void deleteImage(DeleteImageEvent event) {
         int code = event.getCode();
         String image = MyImageUtils.getRelativePath(event.getImage());
-        if (code == getThisFragment().hashCode()+1) {
+        if (code == getThisFragment().hashCode() + 1) {
             mDTO.getConfirm_menu().remove(image);
-        } else if (code ==getThisFragment().hashCode()+ 2) {
+        } else if (code == getThisFragment().hashCode() + 2) {
             mDTO.getPaltform_pic().remove(image);
         }
 
@@ -362,7 +368,7 @@ public class ExecSessionFragment extends BaseFragment {
         } else if (StringUtils.equals(platformType, "2")) {
             platformType = "双";
         } else {
-            platformType = "";
+            platformType = "无";
         }
         mBinding.tvPlatformType.setText(platformType);
         mBinding.etConfirmPlatrorm.setText(mDTO.getConfirm_platrorm());

@@ -74,6 +74,7 @@ public class NetOrderDetail {
         private String is_yd_qd;
         private String gl_step;
         private String gl_id;
+        private String is_modify_order;
 
         private LikemenDTO likemen;
         private String Intentionality;
@@ -84,6 +85,14 @@ public class NetOrderDetail {
         private int is_modify_hall;
         private String contract_no;
         private List<NumberListDTO> number_list;
+
+        public String getIs_modify_order() {
+            return is_modify_order;
+        }
+
+        public void setIs_modify_order(String is_modify_order) {
+            this.is_modify_order = is_modify_order;
+        }
 
         public int getIs_modify_hall() {
             return is_modify_hall;

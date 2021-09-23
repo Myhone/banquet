@@ -23,6 +23,7 @@ import com.lingyan.banquet.R;
 import com.lingyan.banquet.base.BaseFragment;
 import com.lingyan.banquet.databinding.FragmentSignSessionBinding;
 import com.lingyan.banquet.databinding.LayoutAddRoomBinding;
+import com.lingyan.banquet.event.RefreshTotalPriceEvent;
 import com.lingyan.banquet.global.BanquetCelebrationType;
 import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.global.TextWatcherImpl;
@@ -38,6 +39,8 @@ import com.lingyan.banquet.views.dialog.SelectDayDialog;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -178,6 +181,8 @@ public class SignSessionFragment extends BaseFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String string = s.toString();
                 mDTO.setTable_number(string);
+                //清空预估总价
+                EventBus.getDefault().post(new RefreshTotalPriceEvent());
             }
 
             @Override
@@ -190,6 +195,8 @@ public class SignSessionFragment extends BaseFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String string = s.toString();
                 mDTO.setPrepare_number(string);
+                //清空预估总价
+                EventBus.getDefault().post(new RefreshTotalPriceEvent());
             }
         });
 
@@ -214,6 +221,9 @@ public class SignSessionFragment extends BaseFragment {
                         mBinding.tvMealName.setText(dataDTO.getName());
                         mDTO.setMeal_id(dataDTO.getId());
                         mDTO.setMeal_name(dataDTO.getName());
+                        mDTO.setPrice(dataDTO.getPrice());
+                        //清空预估总价
+                        EventBus.getDefault().post(new RefreshTotalPriceEvent());
                     }
                 })
                 .show();
