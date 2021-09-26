@@ -271,6 +271,9 @@ public class OrderModifyActivity extends BaseActivity {
                                 for (int i = 0; i < nowCount - 1; i++) {
                                     mBinding.tabLayout.getTabAt(i).setText("第" + (i + 1) + "场");
                                 }
+
+                                refreshUI();
+
                             }
                         })
                         .show();

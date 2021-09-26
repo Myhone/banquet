@@ -7,7 +7,7 @@ import com.blankj.utilcode.util.SPUtils;
  */
 
 public class HttpURLs {
-    public static final String BASE = "http://dev.yanbob.com/";
+    public static final String BASE = "http://api.yanbob.com/";
     public static String IMAGE_BASE = SPUtils.getInstance().getString("img_url");
     public static final String login = BASE + "api/v1/login";
     public static final String upload = BASE + "api/v1/common/upload";
@@ -80,4 +80,5 @@ public class HttpURLs {
     public static final String modifyHall = BASE + "api/v1/banquet/modifyhall2"; //修改包间
     public static final String homeBackgroundImg = BASE + "api/v1/index/info"; //首页背景图
     public static final String todayStar = BASE + "api/v1/screen2/todaystar"; //七月围城今日明星
+    public static final String updateApp = BASE + "api/v1/index/checkUpdate"; //检查APP版本下载
 }

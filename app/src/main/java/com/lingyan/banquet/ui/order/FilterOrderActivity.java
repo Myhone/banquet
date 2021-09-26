@@ -66,7 +66,7 @@ public class FilterOrderActivity extends BaseActivity {
             mBinding.tvBanCelTitle.setText("商机时间");
             mBinding.llColorSystemContainer.setVisibility(View.GONE);
         } else {
-            mBinding.tvBanCelTitle.setText("庆典时间");
+            mBinding.tvBanCelTitle.setText("商机时间");
             mBinding.llColorSystemContainer.setVisibility(View.VISIBLE);
         }
         mGroupViewUtils = new GroupViewUtils();

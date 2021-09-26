@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.lingyan.banquet.base.BaseFragment;
@@ -40,6 +42,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -107,15 +110,18 @@ public class EndSessionFragment extends BaseFragment {
 
             }
         });
-        refreshUI();
 
         //确定桌数
         mBinding.etTableNumber.addTextChangedListener(new TextWatcherImpl() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String string = s.toString().trim();
+                if (StringUtils.isTrimEmpty(string)) string = "0";
                 mDTO.setTable_number(string);
-                //        mBinding.etSessionAmount.setText(Integer.parseInt(string) * Integer.parseInt(mDTO.getMeal_name()));
+                //计算场次金额
+                BigDecimal tables = new BigDecimal(string);//桌数
+                BigDecimal price = new BigDecimal(mDTO.getPrice());//单价
+                mBinding.etSessionAmount.setText(tables.multiply(price).toPlainString());
             }
         });
         mBinding.etAddDishMoney.addTextChangedListener(new TextWatcherImpl() {
@@ -139,13 +145,15 @@ public class EndSessionFragment extends BaseFragment {
                 mDTO.setWine(string);
             }
         });
+
         mBinding.etSessionAmount.addTextChangedListener(new TextWatcherImpl() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String string = s.toString().trim();
+                if (StringUtils.isTrimEmpty(string)) string = "0";
                 mDTO.setSession_amount(string);
                 BanquetStep6Fragment fragment = (BanquetStep6Fragment) getParentFragment();
-                if(fragment!=null){
+                if (fragment != null) {
                     fragment.setMoney();
                 }
             }
@@ -169,6 +177,7 @@ public class EndSessionFragment extends BaseFragment {
             }
         });
 
+        refreshUI();
 
     }
 
@@ -246,7 +255,10 @@ public class EndSessionFragment extends BaseFragment {
         mBinding.etAddDishMoney.setText(mDTO.getAdd_dish_money());
         mBinding.etMealLossMoney.setText(mDTO.getMeal_loss_money());
         mBinding.etWine.setText(mDTO.getWine());
-        mBinding.etSessionAmount.setText(Integer.parseInt(mDTO.getTable_number()) * Integer.parseInt(mDTO.getPrice()));
+        //默认场次金额 = 桌数 * 套餐单价
+        BigDecimal tables = new BigDecimal(StringUtils.isTrimEmpty(mDTO.getTable_number()) ? "0": mDTO.getTable_number());//桌数
+        BigDecimal price = new BigDecimal(StringUtils.isTrimEmpty(mDTO.getPrice()) ? "0": mDTO.getPrice());//单价
+        mBinding.etSessionAmount.setText(tables.multiply(price).toPlainString());
         mBinding.tvSegmentType.setText(mDTO.getSegment_name());
 
     }

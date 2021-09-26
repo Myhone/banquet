@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.lingyan.banquet.ui.main.HomeFragment;
 import com.lingyan.banquet.ui.main.MessageFragment;
 import com.lingyan.banquet.ui.main.MineFragment;
 import com.lingyan.banquet.ui.main.bean.NetUserInfo;
+import com.lingyan.banquet.utils.CheckUpdateUtils;
 import com.lingyan.banquet.views.CircleBarView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -49,6 +51,8 @@ import java.util.List;
 
 
 public class MainActivity extends BaseActivity {
+
+    private Handler mHandler = new Handler();
 
     private ActivityMainBinding mBinding;
 
@@ -109,6 +113,9 @@ public class MainActivity extends BaseActivity {
         showPage(mDefaultIndex);
 //        new RestaurantSelectDialog(getContext()).show();
         PushDispatcher.dispatch(getIntent(), this);
+
+        //检查版本更新
+        new CheckUpdateUtils().check(false);
     }
 
 
@@ -171,7 +178,6 @@ public class MainActivity extends BaseActivity {
 
 
     private void tabUnselected(int position) {
-
     }
 
     private void tabSelected(int position) {
@@ -181,14 +187,12 @@ public class MainActivity extends BaseActivity {
     }
 
     private void tabReselected(int position) {
-
-
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        LogUtils.i("intent",intent);
+        LogUtils.i("intent", intent);
         PushDispatcher.dispatch(intent, this);
         checkNotReadCount();
     }
@@ -200,5 +204,11 @@ public class MainActivity extends BaseActivity {
             LoginActivity.start();
         }
         checkNotReadCount();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mHandler.removeCallbacksAndMessages(null);
     }
 }

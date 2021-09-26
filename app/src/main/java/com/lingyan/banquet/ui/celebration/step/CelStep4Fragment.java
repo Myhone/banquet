@@ -43,6 +43,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -173,6 +174,10 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                 mData.setSign_money(mBinding.etSignMoney.getText().toString().trim());
                 mData.setContractor_customer(customerName);
                 mData.setRemarks_4(mBinding.etRemarks.getText().toString().trim());
+                if ("0".equals(mData.getIs_pay())){
+                    mData.setPay_type("");
+                    mData.setSign_money("");
+                }
                 //保存
                 OkGo.<NetBaseResp>post(HttpURLs.saveBanquetStep4)
                         .upJson(GsonUtils.toJson(mData))
@@ -198,7 +203,7 @@ public class CelStep4Fragment extends BaseCelStepFragment {
             @Override
             public void onClick(View v) {
                 String payType = mData.getPay_type();
-                int payWay = 0;
+                int payWay = 4;
                 if (ObjectUtils.isNotEmpty(payType)) {
                     payWay = Integer.valueOf(payType.trim());
                 }
@@ -325,7 +330,6 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                 mData.setIs_pay("0");
             }
         });
-        restoreDataFromNet();
 
         mBinding.etBudgetMoney.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -333,6 +337,7 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                 resetTotalPrice();
             }
         });
+
         mBinding.etBudgetMoney.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -341,6 +346,8 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                 }
             }
         });
+
+        restoreDataFromNet();
     }
 
     //签约人
@@ -394,7 +401,7 @@ public class CelStep4Fragment extends BaseCelStepFragment {
 
         mBinding.etRemarks.setText(mData.getRemarks_4());
         List<NetCelRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
-        double perMoneyAll = 0;//预算总额
+        BigDecimal perMoneyAll = new BigDecimal("0");//预算总额
         if (list.size() == 0) {
             SignSessionFragment fragment = add();
             NetCelRestoreStep4.DataDTO.BanquetNumDTO dto = new NetCelRestoreStep4.DataDTO.BanquetNumDTO();
@@ -405,9 +412,9 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                 NetCelRestoreStep4.DataDTO.BanquetNumDTO dto = list.get(i);
                 SignSessionFragment fragment = add();
                 fragment.setData(dto);
-                perMoneyAll += Double.parseDouble(StringUtils.isTrimEmpty(dto.getSession_amount()) ? "0" : dto.getSession_amount()); //预算总额 = 各场次金额相加
+                perMoneyAll = perMoneyAll.add(new BigDecimal(StringUtils.isTrimEmpty(dto.getSession_amount()) ? "0" : dto.getSession_amount())); //预算总额 = 各场次金额相加
             }
-            mBinding.etBudgetMoney.setText(String.valueOf(perMoneyAll));
+            mBinding.etBudgetMoney.setText(perMoneyAll.toPlainString());
         }
         String status = mData.getStatus();
         String step = mData.getStep();
@@ -496,13 +503,13 @@ public class CelStep4Fragment extends BaseCelStepFragment {
     private void resetTotalPrice() {
         if (mData == null) return;
         List<NetCelRestoreStep4.DataDTO.BanquetNumDTO> list = mData.getBanquetNum();
-        double perMoneyAll = 0;//预算总额
+        BigDecimal perMoneyAll = new BigDecimal("0");//预算总额
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
                 NetCelRestoreStep4.DataDTO.BanquetNumDTO dto = list.get(i);
-                perMoneyAll += Double.parseDouble(dto.getSession_amount());
+                perMoneyAll = perMoneyAll.add(new BigDecimal(StringUtils.isTrimEmpty(dto.getSession_amount()) ? "0" : dto.getSession_amount()));
             }
-            mBinding.etBudgetMoney.setText(String.valueOf(perMoneyAll));
+            mBinding.etBudgetMoney.setText(perMoneyAll.toPlainString());
         }
     }
 
@@ -545,6 +552,8 @@ public class CelStep4Fragment extends BaseCelStepFragment {
                                 for (int i = 0; i < nowCount - 1; i++) {
                                     mBinding.tabLayout.getTabAt(i).setText("第" + (i + 1) + "场");
                                 }
+
+                                refreshUI();
 
                                 clearTotalPrice();
                             }

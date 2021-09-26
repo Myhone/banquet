@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -298,6 +299,16 @@ public class CelStep2Fragment extends BaseCelStepFragment {
         if (mData == null) {
             return;
         }
+
+        if (ObjectUtils.isNotEmpty(mFragmentList)) {
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            for (Fragment fragment : mFragmentList) {
+                transaction.remove(fragment);
+            }
+            transaction.commitAllowingStateLoss();
+            mFragmentList.clear();
+        }
+
         List<NetCelRestoreStep2.DataDTO.BanquetNumDTO> banquetNum = mData.getBanquetNum();
         if (ObjectUtils.isEmpty(banquetNum)) {
             IntentSessionFragment add = add();
@@ -370,6 +381,8 @@ public class CelStep2Fragment extends BaseCelStepFragment {
                                 for (int i = 0; i < nowCount - 1; i++) {
                                     mBinding.tabLayout.getTabAt(i).setText("第" + (i + 1) + "场");
                                 }
+
+                                refreshUI();
                             }
                         })
                         .show();

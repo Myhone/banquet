@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -308,6 +309,17 @@ public class BanquetStep2Fragment extends BaseBanquetStepFragment {
         if (mData == null) {
             return;
         }
+
+        mBinding.tabLayout.removeAllTabs();
+        if (ObjectUtils.isNotEmpty(mIntentSessionFragmentList)) {
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            for (Fragment fragment : mIntentSessionFragmentList) {
+                transaction.remove(fragment);
+            }
+            transaction.commitAllowingStateLoss();
+            mIntentSessionFragmentList.clear();
+        }
+
         List<NetRestoreStep2.DataDTO.BanquetNumDTO> banquetNum = mData.getBanquetNum();
         if (ObjectUtils.isEmpty(banquetNum)) {
             IntentSessionFragment add = add();
@@ -378,6 +390,8 @@ public class BanquetStep2Fragment extends BaseBanquetStepFragment {
                                 for (int i = 0; i < nowCount - 1; i++) {
                                     mBinding.tabLayout.getTabAt(i).setText("第" + (i + 1) + "场");
                                 }
+
+                                refreshUI();
                             }
                         })
                         .show();
