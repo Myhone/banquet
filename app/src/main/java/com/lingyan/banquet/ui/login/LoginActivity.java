@@ -1,10 +1,16 @@
 package com.lingyan.banquet.ui.login;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.ActivityUtils;
@@ -13,12 +19,14 @@ import com.blankj.utilcode.util.CacheDiskUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.SpanUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.google.gson.JsonObject;
 import com.lingyan.banquet.MainActivity;
 import com.lingyan.banquet.base.BaseActivity;
 import com.lingyan.banquet.databinding.ActivityLoginBinding;
 import com.lingyan.banquet.event.LoginEvent;
+import com.lingyan.banquet.global.Constant;
 import com.lingyan.banquet.global.HttpURLs;
 import com.lingyan.banquet.global.TextWatcherImpl;
 import com.lingyan.banquet.global.UserInfoManager;
@@ -131,6 +139,10 @@ public class LoginActivity extends BaseActivity {
                     ToastUtils.showShort("请输入密码");
                     return;
                 }
+                if (!mBinding.cbPrivacy.isChecked()) {
+                    ToastUtils.showShort("请先阅读并同意协议");
+                    return;
+                }
                 OkGo.<NetLoginReq>post(HttpURLs.login)
                         .params("username", userName)
                         .params("password", pwd)
@@ -168,24 +180,34 @@ public class LoginActivity extends BaseActivity {
                         });
             }
         });
-        mBinding.llAgreement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OkGo.<NetAgreement>post(HttpURLs.loginAgreement)
-                        .execute(new JsonCallback<NetAgreement>() {
-                            @Override
-                            public void onSuccess(Response<NetAgreement> response) {
-                                NetAgreement body = response.body();
-                                NetAgreement.DataDTO data = body.getData();
-                                if(data==null){
-                                    return;
-                                }
-                                String url = data.getUrl();
-                                WebActivity.start(url);
-                            }
-                        });
-            }
-        });
+        SpannableStringBuilder builder = new SpanUtils()
+                .append("请先阅读并同意").setForegroundColor(Color.parseColor("#999999"))
+                .append("《用户服务条款》").setForegroundColor(Color.parseColor("#2778C3")).setClickSpan(new ClickableSpan() {
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint ds) {
+
+                    }
+
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        WebActivity.start(Constant.Http.LOING_USER_AGREEMENT);
+                    }
+                })
+                .append("及").setForegroundColor(Color.parseColor("#999999"))
+                .append("《隐私政策》").setForegroundColor(Color.parseColor("#2778C3")).setClickSpan(new ClickableSpan() {
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint ds) {
+
+                    }
+
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        WebActivity.start(Constant.Http.LOING_PRIVATE_AGREEMENT);
+                    }
+                })
+                .create();
+        mBinding.tvBottomAgreement.setMovementMethod(LinkMovementMethod.getInstance());
+        mBinding.tvBottomAgreement.setText(builder);
     }
 
     @Override

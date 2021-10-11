@@ -20,4 +20,5 @@
     <color name="black2f">#2F2F2E</color>
     <color name="gray99">#999999</color>
     <color name="gray_e6">#e6e6e6</color>
+    <color name="order_type_text_unselect">#9F9F9F</color>
 </resources>

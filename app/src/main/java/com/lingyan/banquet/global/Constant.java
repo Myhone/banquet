@@ -6,6 +6,14 @@ package com.lingyan.banquet.global;
 public class Constant {
 
     /**
+     * http
+     */
+    public interface Http {
+        String LOING_USER_AGREEMENT = "http://shop.yanbob.com/banquet/serve";
+        String LOING_PRIVATE_AGREEMENT = "http://shop.yanbob.com/banquet/privacy";
+    }
+
+    /**
      * 参数
      */
     public interface Parameter {
@@ -24,7 +32,14 @@ public class Constant {
         String DATA = "data";
     }
 
-    public interface Code{
+    /**
+     * sp
+     */
+    public interface SP {
+        String IS_AGREED_PRIVACY_AGREEMENT = "is_agreed_privacy_agreement";
+    }
+
+    public interface Code {
         int OPEN_ORDER_MODIFY_CODE_REQUEST = 1001;
         int OPEN_ORDER_MODIFY_CODE_RESULT = 2001;
     }
