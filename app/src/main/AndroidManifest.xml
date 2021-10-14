@@ -37,6 +37,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Banquet"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:replace="android:icon,android:allowBackup">
 
         <provider
